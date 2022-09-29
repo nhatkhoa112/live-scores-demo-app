@@ -1,0 +1,204 @@
+
+/* COntent left & tournament */
+
+.content-left {
+    border: 1.5px solid #222;
+    border-radius: 7.5px;
+    width: 188px;
+    height: auto;
+    min-height: 680px;
+    display: block;
+    background: var(--secondary-background);
+}
+
+.content-left>.content-title {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid var(--navbar-text-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.content-left>.content-title::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-bottom: 40px solid #ffdc11;
+    border-left: 30px solid transparent;
+}
+
+.content-title>.icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-title > .icon > .fa-xmark{
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+
+.content-title>.search-form , .tourname {
+    width: calc((100% - 40px));
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 35px 0 0;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.content-title>.search-form , .tourname > .text{
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+
+.content-title>div>input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    padding: 0 35px 0 05px;
+    outline: none;
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.search-form>i {
+    position: absolute;
+    right: 18px;
+    top: 10px;
+    font-size: 20px;
+    z-index: 5;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+
+
+.content-left>.tournament-list {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    position: relative;
+    list-style-type: none;
+}
+
+.tournament-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.tournament-item.active-effect{
+    color: var(--navbar-text-color);
+    font-weight: 600;
+}
+
+
+.tournament-item > .logo {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.tournament-item > .flag>img {
+    width: 20px;
+    height: 12px;
+}
+
+.tournament-item > .cup>img {
+    width: 20px;
+    height: 20px;
+}
+
+.tournament-item > .name{
+    display:flex;
+    align-items: center;
+    width: calc(100% - 30px);
+}
+
+
+.tournament-item.active-effect > span > span.text{
+    color: var(--navbar-text-color);
+}
+
+
+
+.tournament-item > .name > .text {
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    font-size: 15px;
+    color: var(--primary-color)
+}
+
+/* Tournament by country */
+
+.tournament-by-country-list{
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    position: relative;
+    list-style-type: none;
+}
+
+
+.tournament-by-country- {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.tournament-by-country- > .logo {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.tournament-by-country- > .flag>img {
+    width: 20px;
+    height: 12px;
+}
+
+.tournament-by-country- > .cup>img {
+    width: 20px;
+    height: 20px;
+}
+
+.tournament-by-country- > .name{
+    display:flex;
+    align-items: center;
+    width: calc(100% - 30px);
+}
+
+.tournament-by-country- > .name > .text {
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+}

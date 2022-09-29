@@ -1,0 +1,12 @@
+.favorite{
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background: #111;
+    border: 1px solid #222;
+    z-index: 1;
+}
+
+.favorite > h1{
+    color: red
+}

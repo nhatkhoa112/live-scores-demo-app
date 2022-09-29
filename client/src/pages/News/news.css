@@ -1,0 +1,13 @@
+.news{
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background: var(--primary-background);
+    border: 1px solid #222;
+    z-index: 1;
+}
+
+
+.news > h1{
+    color: blue
+}

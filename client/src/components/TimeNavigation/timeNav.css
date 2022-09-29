@@ -1,0 +1,302 @@
+
+.scores-shedule-row-1 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.time-nav {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid var(--navbar-text-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.time-nav::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-bottom: 40px solid var(--navbar-text-color);
+    border-left: 30px solid transparent;
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.left-content {
+    width: calc(100% - 45px);
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.match-calender-live,
+.match-calendar-dp-trigger {
+    width: 45px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.match-calendar-dp-trigger>span>i.active-button {
+    color: var(--navbar-text-color);
+    transition: all 0.4s ease-in-out
+}
+
+.match-calender-live>span {
+    font-size: 12px;
+    background: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary-background);
+    padding: 3px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.match-calendar-dp-trigger>span>i {
+    font-size: 18px;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+
+
+.match-calender-days {
+    width: calc(100% - 45px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.match-calender-day {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.match-calender-day.day-active {
+    color: var(--navbar-text-color)
+}
+
+.match-calender-live.live-active>span {
+    color: var(--primary-background);
+    background: var(--navbar-text-color);
+}
+
+.match-calender-day>span {
+    margin: 2px 0;
+}
+
+
+.match-calender-day>.day {
+    text-transform: uppercase;
+}
+
+
+.match-calender-day>.dayutc-month {
+    font-size: 9px;
+}
+
+
+/* Calendar */
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 320px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.hide-calendar {
+    transform: translateY(-100px);
+    opacity: 0;
+    z-index: -1;
+
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__navigation {
+    position: absolute;
+    z-index: -1;
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer {
+    height: auto;
+    background: var(--primary-background);
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__weekdays {
+    background: var(--primary-background);
+    width: 100%;
+    background-color: var(--primary-background);
+    padding: 0 10px;
+    height: 38px;
+    align-items: center;
+    border: 1px solid #222;
+
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__weekdays>div>abbr {
+    color: #aaa;
+    display: flex;
+    flex: 1 1;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__days {
+    background-color: #222;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__days>button {
+    height: 30px !important;
+    color: var(--primary-color);
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background: transparent !important;
+}
+
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__days>button:hover>abbr {
+    background: var(--primary-background);
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #d10000;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    opacity: 0 ;
+    z-index: -10;
+}
+
+.react-calendar__tile--active {
+    background: transparent !important;
+}
+
+.react-calendar__tile--active>abbr {
+    background: var(--navbar-text-color) !important;
+    color: var(--primary-background) !important
+}
+
+.react-calendar__tile--now {
+    background: transparent !important;
+}
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__days>button>abbr {
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: 7px;
+    width: 28px;
+    color: #fdfdfd;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+    background: transparent;
+    transition: all 0.4s ease-in-out;
+}
+
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.react-calendar>div.react-calendar__viewContainer>div>div>div>div.react-calendar__month-view__days>button.react-calendar__tile--now>abbr {
+    color: var(--navbar-text-color);
+}
+
+
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.scores-schedule>div>div>div.left-content>button {
+    width: 100px;
+    cursor: pointer;
+}
+
+div.left-content>div.today {
+    width: 45px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #aaa;
+}
+
+div.left-content>div.today>.day {
+    font-family: "Roboto" sans-serif;
+    font-weight: 700;
+    margin: 2px 0;
+}
+
+div.left-content>div.today>.dayutc-month {
+    font-size: 9px;
+    margin: 2px 0;
+}
+
+div.left-content > div.calendar-nav-center-content{
+    width: calc(100% - 45px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.left-content > div.calendar-nav-center-content > div.month-year{
+    width: 211px;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--navbar-text-color);
+}
+
+div.month-year > span{
+    font-size: 12px;;
+    margin: 2px 0;
+}
+
+div.month-year > span.year{
+    font-size: 9px;
+}
+
+div.month-year > span.day-month-year{
+    font-size: 9px;
+    font-weight: 400;
+}
+
+
+div.left-content > div.calendar-nav-center-content > i{
+    color: var(--primary-color);
+    cursor: pointer;
+}
+

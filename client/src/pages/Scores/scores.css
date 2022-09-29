@@ -1,0 +1,306 @@
+.scores-page {
+    width: 100%;
+    background: var(--primary-background);
+    border: 1.5px solid #222;
+    z-index: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sportlist {
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.sportlist>.sportlist-item {
+    margin: 10px 5px;
+    color: var(--secondary-color);
+    padding: 6px 10px;
+    border-radius: 17.5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    border: 1.5px solid #222;
+    transition: all 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.sportlist>.sportlist-item:first-child {
+    margin-left: 0;
+}
+
+.sportlist>.sportlist-item:hover {
+    color: var(--primary-background);
+    background: var(--primary-color);
+}
+
+.sportlist>.isActive {
+    background: var(--primary-color);
+    color: var(--primary-background);
+    transition: all 0.4s ease-in-out;
+}
+
+.sportlist>.isActive:hover {
+    color: var(--primary-background);
+}
+
+.sport-scores {
+    width: 100%;
+    height: 20%;
+}
+
+.fixture-slider {
+    width: 920px;
+    position: relative;
+    height: 150px;
+    background-color: transparent;
+    position: relative;
+    padding: 10px;
+}
+
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div {
+    width: 100%;
+    height: 100%;
+}
+
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow {
+    padding-right: 12px;
+    position: absolute;
+    left: -40px;
+    width: 25px;
+    height: calc(100% - 10px);
+    background-color: var(--primary-background);
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    line-height: 7;
+    font-size: 17px;
+    transition: all 0.4s ease-in-out;
+    z-index: 11;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow:hover {
+    background: var(--navbar-text-color);
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-prev:hover::before {
+    border-right: 16px solid var(--navbar-text-color);
+    z-index: 11;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-next {
+    right: -40px;
+    left: auto;
+    z-index: 11;
+    padding-left: 12px;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0px;
+    border-top: 61px solid transparent;
+    border-right: 16px solid var(--primary-background);
+    border-bottom: 61px solid transparent;
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+}
+
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-prev:hover::before {
+    border-right: 16px solid var(--navbar-text-color);
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-next::before {
+    border-left: 16px solid var(--primary-background);
+    border-right: none;
+    left: 25px;
+    transition: all 0.4s ease-in-out;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-next:hover::before {
+    border-left: 16px solid var(--navbar-text-color);
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-prev>i {
+    font-size: 14px;
+    transition: all 0.4s ease-in-out;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-prev:hover>i {
+    color: var(--primary-background)
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list {
+    height: 100%;
+    z-index: 10;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list>div>div.slick-slide {
+    height: 100%;
+    padding: 5px 5px 12px 5px;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list>div {
+    height: 100%;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list>div>div>div {
+    height: 100%;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list>div>div.slick-slide.slick-current>div {
+    height: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+#layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-list>div>div.slick-slide>div>div.slider-layer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    --width-size: 100%;
+}
+
+div.slick-slide>div>div.slider-layer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 10px solid var(--navbar-text-color);
+}
+
+
+div.slick-slide>div>div.slider-layer>div.layer-time {
+    height: calc(100% - 84px);
+    width: 100%;
+    background: var(--primary-background);
+}
+
+
+
+div.slick-slide>div>div.slider-layer>div.layer-row-1 {
+    height: 42px;
+    width: 100%;
+    background: var(--primary-background);
+    position: relative;
+}
+
+div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 10px solid var(--primary-background);
+}
+
+
+
+div.slick-slide>div>div.slider-layer>div.layer-row-2 {
+    height: 42px;
+    width: 100%;
+    background: var(--navbar-text-color);
+
+}
+
+
+
+
+@media screen and (max-width: 1023px) {
+    .fixture-slider {
+        width: 800px;
+    }
+
+
+    div.slick-slide>div>div.slider-layer::before {
+        border-left: 120px solid transparent;
+        border-right: 120px solid transparent;
+        border-top: 10px solid var(--navbar-text-color);
+    }
+
+
+    div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
+        border-left: 120px solid transparent;
+        border-right: 120px solid transparent;       
+    }
+}
+
+
+@media screen and (max-width: 880px) {
+    .fixture-slider {
+        width: 580px;
+    }
+
+
+    div.slick-slide>div>div.slider-layer::before {
+        border-left: calc(177px/2) solid transparent;
+        border-right: calc(177px/2) solid transparent;
+        border-top: 10px solid var(--navbar-text-color);
+    }
+
+
+    div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
+        border-left: calc(177px/2) solid transparent;
+        border-right: calc(177px/2) solid transparent;    
+    }
+    
+
+}
+
+
+@media screen and (max-width: 680px) {
+    .fixture-slider {
+        width: 400px;
+    }
+
+
+    div.slick-slide>div>div.slider-layer::before {
+        border-left: calc(180px/2) solid transparent;
+        border-right: calc(180px/2) solid transparent;
+        border-top: 10px solid var(--navbar-text-color);
+    }
+
+
+
+    div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
+        border-left: calc(180px/2) solid transparent;
+        border-right: calc(180px/2) solid transparent;      
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .fixture-slider {
+        width: 260px;
+    }
+
+
+
+    div.slick-slide>div>div.slider-layer::before {
+        border-left: calc(230px/2) solid transparent;
+        border-right: calc(230px/2) solid transparent;
+        border-top: 10px solid var(--navbar-text-color);
+    }
+
+
+
+    div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
+        border-left: calc(230px/2) solid transparent;
+        border-right: calc(230px/2) solid transparent;     
+    }
+
+}

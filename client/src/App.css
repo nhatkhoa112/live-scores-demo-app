@@ -1,0 +1,42 @@
+:root{
+  --primary-color: #fdfdfd;
+  --secondary-color: #aaa;
+  --third-color: #19191B;
+  --primary-background: #191937;
+  --secondary-background: #292c31;
+  --navbar-text-color: #ffdc11;
+}
+
+#app{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: var(--primary-background);
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 78px);
+  position: relative;
+  
+}
+
+
+#layout-wrapper{
+  width: 1024px;
+  position: relative;
+  z-index: 1;
+  background: rgb(34, 33, 33);
+  min-height: calc(100vh);
+  height: auto;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+
+@media screen and (max-width: 1023px) {
+  #layout-wrapper{
+    padding-bottom: 105px;
+    min-height: 100vh;
+  }
+}

@@ -1,0 +1,27 @@
+.football-layout-container {
+    width: 100%;
+    height: auto;
+    min-height: 680px;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 3px;
+}
+
+
+
+@media screen and (max-width: 1023px) {
+    .content-left {
+        display: none
+    }
+
+    .content-center {
+        width: 100%
+    }
+
+    .content-right {
+        display: none;
+    }
+
+
+
+}
