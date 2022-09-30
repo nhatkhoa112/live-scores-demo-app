@@ -83,13 +83,28 @@ const PlayerCard = styled.span`
     `}
 `
 
+const SubPlayerCard = styled.span`
+    ${props => props.card && `
+        height: 8px;
+        width: 5px;
+        border-radius: 1.5px;
+        position: absolute;
+        background: ${props.card};
+        top: -3px;
+        right: -2px;
+        z-index: 3;
+
+    `}
+`
+
+
 const MatchLineUp = () => {
     return (
         <div className="match-line-up__container">
             <div className="match-line-up__field">
                 <img src={logo} alt="" className="background-field" />
                 <div className="home-team-line-up__container">
-                    {lineUp[0].officalPlayer.map((player) => <div className="home-player__container">
+                    {lineUp[0].officalPlayer.map((player) => <div key={player.number} className="home-player__container">
                         <div key={player.id} className="home-player__inner">
                             <div className="home-player__number">{player.number}</div>
                             <div className="home-player__name">{player.name}</div>
@@ -98,14 +113,14 @@ const MatchLineUp = () => {
                                 <i className="fa-solid fa-futbol"></i>
                             </span>}
                             {player.change && <span className="home-player__change">
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i className="fa-solid fa-arrow-down"></i>
                             </span>}
 
                         </div>
                     </div>)}
                 </div>
                 <div className="away-team-line-up__container">
-                    {lineUp[1].officalPlayer.map((player) => <div className="away-player__container">
+                    {lineUp[1].officalPlayer.map((player) => <div  key={player.number} className="away-player__container">
                         <div key={player.id} className="away-player__inner">
                             <div className="away-player__number">{player.number}</div>
                             <div className="away-player__name">{player.name}</div>
@@ -114,7 +129,7 @@ const MatchLineUp = () => {
                                 <i className="fa-solid fa-futbol"></i>
                             </span>}
                             {player.change && <span className="away-player__change">
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i className="fa-solid fa-arrow-down"></i>
                             </span>}
                         </div>
                     </div>)}
@@ -125,14 +140,67 @@ const MatchLineUp = () => {
                 <div className='subtitute-player__box'>
                     <div className="subtitute-player__inner">
                         <div className='home-subtitute-players'>
-                            {lineUp[0].subtitutePlayer.map(player => <div key={player.number} className="home-subtitute-player">
-                                <div className="home-subtitute-player__detail"></div>
+                            {lineUp[0].subtitutePlayer.map((player, index) => <div key={index} className="home-subtitute-player">
+                                <div className="home-subtitute-player__detail">
+                                    <div className="home-subtitute-player__infor">
+                                        <div className="home-subtitute-player__number">{player.number}</div>
+                                        {player.card && <SubPlayerCard card={player.cardType}></SubPlayerCard>}
+                                        {player.change && <div className="home-subtitute-player__change">
+                                            <i className="fa-solid fa-arrow-up"></i>
+                                        </div>}
+                                        {player.score !== 0 && <div className="home-subtitute-player__score">
+                                            <i className="fa-solid fa-futbol"></i>
+                                        </div>}
+                                    </div>
+                                    <div className="sub-player__name">{player.name}</div>
+                                </div>
+                                {player.change && lineUp[0].officalPlayer
+                                    .filter((changePlayer) => changePlayer.name === player.changePlayer)
+                                    .map((player, index) => <div key={index} className="change-sub-player-detail">
+                                        <div className="sub-player__name-out">{player.name}</div>
+                                        <div className="home-subtitute-player__infor">
+                                            <div className="home-subtitute-player__number">{player.number}</div>
+                                            {player.card && <SubPlayerCard card={player.cardType}></SubPlayerCard>}
+                                            {player.change && <div className="home-subtitute-player__change out">
+                                                <i className="fa-solid fa-arrow-down"></i>
+                                            </div>}
+                                            {player.score !== 0 && <div className="home-subtitute-player__score ">
+                                                <i className="fa-solid fa-futbol"></i>
+                                            </div>}
+                                        </div>
+                                    </div>)}
                             </div>)}
                         </div>
                         <div className='away-subtitute-players'>
-                            {lineUp[1].subtitutePlayer.map(player => <div key={player.number} className="away-subtitute-player">
-                                <div className="away-subtitute-player__detail"></div>
-
+                            {lineUp[1].subtitutePlayer.map((player, index) => <div key={index} className="away-subtitute-player">
+                                <div className="away-subtitute-player__detail">
+                                    <div className="away-subtitute-player__infor">
+                                        <div className="home-subtitute-player__number">{player.number}</div>
+                                        {player.card && <SubPlayerCard card={player.cardType}></SubPlayerCard>}
+                                        {player.change && <div className="away-subtitute-player__change">
+                                            <i className="fa-solid fa-arrow-up"></i>
+                                        </div>}
+                                        {player.score !== 0 && <div className="away-subtitute-player__score">
+                                            <i className="fa-solid fa-futbol"></i>
+                                        </div>}
+                                    </div>
+                                    <div className="sub-player__name">{player.name}</div>
+                                </div>
+                                {player.change && lineUp[1].officalPlayer
+                                    .filter((changePlayer) => changePlayer.name === player.changePlayer)
+                                    .map((player, index) => <div key={index} className="change-sub-player-detail">
+                                        <div className="sub-player__name-out">{player.name}</div>
+                                        <div className="home-subtitute-player__infor">
+                                            <div className="home-subtitute-player__number">{player.number}</div>
+                                            {player.card && <SubPlayerCard card={player.cardType}></SubPlayerCard>}
+                                            {player.change && <div className="home-subtitute-player__change out">
+                                                <i className="fa-solid fa-arrow-down"></i>
+                                            </div>}
+                                            {player.score !== 0 && <div className="home-subtitute-player__score ">
+                                                <i className="fa-solid fa-futbol"></i>
+                                            </div>}
+                                        </div>
+                                    </div>)}
                             </div>)}
 
                         </div>
@@ -142,7 +210,35 @@ const MatchLineUp = () => {
 
 
             </div>
-
+            <div className="subtitute-player__container">
+                <div className="subtitute-player__header">Injuries </div>
+                <div className="injury-player__container">
+                    <div className="injury-player__inner">
+                        <div className="inj-player__detail">
+                            {lineUp[0].injuries.map((player, index) => <div key={index} className="inj-player__row">
+                                <div className="inj-player__icon">
+                                    <i className="fa-sharp fa-solid fa-plus"></i>
+                                </div>
+                                <div className="inj-player__info">
+                                    <div className="inj-player__name">{player.name}</div>
+                                    <div className="inj-player__inj-type">{player.typeInjury}</div>
+                                </div>
+                            </div>)}
+                        </div>
+                        <div className="inj-player__detail">
+                            {lineUp[1].injuries.map((player, index) => <div key={index} className="inj-player__row">
+                                <div className="inj-player__icon">
+                                    <i className="fa-sharp fa-solid fa-plus"></i>
+                                </div>
+                                <div className="inj-player__info">
+                                    <div className="inj-player__name">{player.name}</div>
+                                    <div className="inj-player__inj-type">{player.typeInjury}</div>
+                                </div>
+                            </div>)}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
