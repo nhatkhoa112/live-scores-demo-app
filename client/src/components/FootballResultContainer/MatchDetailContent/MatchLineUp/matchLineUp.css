@@ -328,7 +328,6 @@
     font-size: 14px;
     line-height: 1.14285714;
     font-weight: 700;
-    margin-top: 10px;
 }
 
 .subtitute-player__box{
@@ -509,6 +508,7 @@
     border: 1px solid var(--primary-background);
     border-radius: 7.5px;
     display: flex;
+    padding: 5px 0;
 }   
 
 .inj-player__detail{

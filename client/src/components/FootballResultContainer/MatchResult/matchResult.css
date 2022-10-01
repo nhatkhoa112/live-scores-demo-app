@@ -97,6 +97,10 @@ span.team-flag > img{
     font-weight: 400;
 }
 
+.match-infor{
+    z-index: 50;
+}
+
 
 
 .match-container:hover .match-infor > div > div > span.team-name{

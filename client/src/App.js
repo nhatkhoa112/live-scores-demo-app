@@ -14,20 +14,21 @@ import TournamentDetail from './pages/Scores/Football/FootballScoresResult/Tourn
 function App() {
   return (
     <div id="app">
-      <BrowserRouter>
         <LeftSection />
         <div id="layout-wrapper" className="">
           <Navbar />
           <Routes>
-            <Route exact path="/" element={<Scores />} />
-            <Route exact path="/favorite" element={<Favorite />} />
-            <Route exact path="/news" element={<News />} />
-            <Route exact path='/football/:countryId/:tourId'  element={<TournamentDetail/>}  />]
-            <Route exact path='/football/:countryId/:tourId/:matchId'  element={<FootballMatchDetail />}  />]
+            <Route path="/">
+              <Route exact index element={<Scores />} />
+              <Route exact path="/:index" index element={<Scores />} />
+              <Route exact path="favorite" element={<Favorite />} />
+              <Route exact path="news" element={<News />} />
+              <Route exact path='football/:countryId/:tourId' element={<TournamentDetail />} />
+              <Route  path='football/:countryId/:tourId/:matchId' element={<FootballMatchDetail />} exact />
+            </Route>
           </Routes>
         </div>
         <RightSection />
-      </BrowserRouter>
     </div>
   );
 }

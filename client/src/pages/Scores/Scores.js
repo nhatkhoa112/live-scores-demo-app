@@ -5,6 +5,7 @@ import Football from './Football/Football';
 import './scores.css';
 import Tennis from './Tennis/Tennis';
 import FixtureSlider from '../../components/Slider/FixtureSlider';
+import {Link, useParams } from 'react-router-dom';
 
 
 const sportList = [
@@ -16,17 +17,18 @@ const sportList = [
 
 
 const Scores = () => {
-  const [isSportItemActive, setIsSportItemActive] = useState(0)
+  const {index} = useParams();
+  const [isSportItemActive, setIsSportItemActive] = useState(index ? parseInt(index): 0)
   return (
     <div className="scores-page">
       <div className="sportlist">
         {sportList.map((s) =>
-         <li key={s.index}
+         <Link to="/" key={s.index}
           className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
           onClick={() => setIsSportItemActive(s.index)}
         >
           {s.name}
-        </li>
+        </Link>
         )}
       </div>
      <FixtureSlider />

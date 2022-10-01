@@ -3,7 +3,6 @@ import './matchSummary.css'
 
 const MatchSummary = ({ match }) => {
   const [summaryTabShow, setSummaryTabShow] = useState(1)
-  console.log(match.summaryEvent)
   return (
     <div className='match-summary__container'>
       <div className="tabs-container summary-tabs">

@@ -208,7 +208,7 @@ div.match-result>div.home-team>div.match-team-infor>div:nth-child(2) {
 }
 
 
-div.home-team>.team-scores {
+div.home-team>.team-scores-1 {
     margin: 7px 0;
     font-size: 18px;
     font-weight: 800;
@@ -294,7 +294,7 @@ div.match-team-infor>div#name-team {
 
 }
 
-div.away-team>.team-scores {
+div.away-team>.team-scores-1 {
     margin: 7px 0;
     font-size: 18px;
     font-weight: 800;

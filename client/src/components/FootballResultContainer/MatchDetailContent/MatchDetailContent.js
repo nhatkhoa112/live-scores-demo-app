@@ -6,6 +6,7 @@ import MatchInfor from './MatchInfor/MatchInfor';
 import MatchSummary from './MatchSummary/MatchSummary';
 import MatchStats from './MatchStats/MatchStats';
 import MatchLineUp from './MatchLineUp/MatchLineUp';
+import MatchTable from './MatchTable/MatchTable';
 
 const tabs = [
     { title: "Info", index: 1 },
@@ -14,8 +15,6 @@ const tabs = [
     { title: "Line-Up", index: 4 },
     { title: "Table", index: 5 },
     { title: "H2H", index: 6 },
-
-
 ]
 
 
@@ -25,7 +24,6 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
     const [isStreamingShow, setIsStreamingShow] = useState(false)
     const [isTrackerShow, setIsTrackerShow] = useState(false)
     const [isTabActive, setIsTabActive] = useState(2)
-    console.log(match)
     return (
         <div className="content-center match-detail-content">
             <div className="tour-header">
@@ -66,7 +64,7 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
                         <div className="team-flag"><img src={match.homeTeam.flag} alt="" /></div>
                     </div>
                     {
-                        match.status !== "not yet" && <div className="team-scores">{match.homeTeam.scores}</div>
+                        match.status !== "not yet" && <div className="team-scores-1">{match.homeTeam.scores}</div>
                     }
                 </div>
                 <span>VS</span>
@@ -76,7 +74,7 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
                         <div id="name-team">{match.awayTeam.name}</div>
                     </div>
                     {
-                        match.status !== "not yet" && <div className="team-scores">{match.awayTeam.scores}</div>
+                        match.status !== "not yet" && <div className="team-scores-1">{match.awayTeam.scores}</div>
                     }
                 </div>
             </div>
@@ -101,6 +99,10 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
             {/* Match line up */}
 
             {isTabActive === 4 && <MatchLineUp match={match} />}
+
+            {/* Match line up */}
+
+            {isTabActive === 5 && <MatchTable match={match} />}
 
 
 

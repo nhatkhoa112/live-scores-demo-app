@@ -16,7 +16,7 @@ const FootballResultContainer = ({ tourId, countryId }) => {
                 <TournamentResultDay key={index} result={result}   />
             )
             }
-
+        
         </div>
     )
 }

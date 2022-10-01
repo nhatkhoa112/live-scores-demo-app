@@ -8,7 +8,7 @@ import Basketball from '../../Basketball/Basketball';
 import Tennis from '../../Tennis/Tennis';
 import FlashNews from '../ContentRightFlashNews/FlashNews';
 import MatchDetailContent from '../../../../components/FootballResultContainer/MatchDetailContent/MatchDetailContent';
-
+import {Link} from 'react-router-dom';
 
 
 const sportList = [
@@ -19,28 +19,30 @@ const sportList = [
 ]
 
 
+console.log("hello")
 
 const FootballMatchDetail = () => {
     let { countryId, tourId, matchId } = useParams();
     const [isSportItemActive, setIsSportItemActive] = useState(0);
-    const [hiddenResult, setHiddenResult] = useState(false)
-
+    const [hiddenResult, setHiddenResult] = useState(false);
 
     return (
+
         <div className="scores-page">
             <div className="sportlist">
-                {sportList.map((s) => <li key={s.index}
+                {sportList.map((s) => <Link to={`/${s.index}`} key={s.index}
                     className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
-                    onClick={() =>{ 
+                    onClick={() => {
+                        console.log(isSportItemActive)
                         setHiddenResult(true);
                         setIsSportItemActive(s.index)
                     }}
                 >
                     {s.name}
-                </li>)}
+                </Link>)}
             </div>
 
-            {hiddenResult && isSportItemActive === 0 && <Football isTimeNav={false}/>}
+            {hiddenResult && isSportItemActive === 0 && <Football isTimeNav={false} />}
             {hiddenResult && isSportItemActive === 1 && <Baseball />}
             {hiddenResult && isSportItemActive === 2 && <Basketball />}
             {hiddenResult && isSportItemActive === 3 && <Tennis />}
@@ -48,7 +50,7 @@ const FootballMatchDetail = () => {
             {!hiddenResult && (
                 <div className="football-layout-container">
                     <TournamentsContainer countryId={countryId} tourId={tourId} />
-                    <MatchDetailContent countryId={countryId} tourId={tourId} matchId={matchId}  />
+                    <MatchDetailContent countryId={countryId} tourId={tourId} matchId={matchId} />
                     <FlashNews />
                 </div>
             )}
