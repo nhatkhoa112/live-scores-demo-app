@@ -7,6 +7,7 @@ import MatchSummary from './MatchSummary/MatchSummary';
 import MatchStats from './MatchStats/MatchStats';
 import MatchLineUp from './MatchLineUp/MatchLineUp';
 import MatchTable from './MatchTable/MatchTable';
+import MatchNews from './MatchNews/MatchNews';
 
 const tabs = [
     { title: "Info", index: 1 },
@@ -14,7 +15,8 @@ const tabs = [
     { title: "Stats", index: 3 },
     { title: "Line-Up", index: 4 },
     { title: "Table", index: 5 },
-    { title: "H2H", index: 6 },
+    { title: "News", index: 6 },
+    { title: "H2H", index: 7 },
 ]
 
 
@@ -103,6 +105,10 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
             {/* Match line up */}
 
             {isTabActive === 5 && <MatchTable match={match} />}
+
+             {/* Match News */}
+
+             {isTabActive === 6 && <MatchNews match={match} />}
 
 
 

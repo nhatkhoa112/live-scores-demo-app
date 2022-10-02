@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {  Routes, Route } from 'react-router-dom'
 import Scores from './pages/Scores/Scores'
 import Navbar from './components/Navbar/Navbar'
 import LeftSection from './components/LeftSection/LeftSection';
@@ -25,6 +25,7 @@ function App() {
               <Route exact path="news" element={<News />} />
               <Route exact path='football/:countryId/:tourId' element={<TournamentDetail />} />
               <Route  path='football/:countryId/:tourId/:matchId' element={<FootballMatchDetail />} exact />
+              <Route  path='football/team/:teamId' element={<FootballMatchDetail />} exact />
             </Route>
           </Routes>
         </div>

@@ -1,0 +1,121 @@
+.match-news__container {
+    width: 100%;
+    height: auto;
+}
+
+.news-tabs__container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 27px;
+}
+
+
+.news-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 15px;
+    background: var(--primary-background);
+    font-size: 14px;
+    line-height: 1.14285714;
+    font-weight: 700;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 0 10px 0 0;
+}
+
+.news-tab:hover {
+    background: rgba(252, 220, 75, 1.2);
+    color: var(--third-color);
+}
+
+.news-tab__active {
+    background: rgba(252, 220, 75, 1);
+    color: var(--third-color);
+}
+
+.match-news__content {
+    width: 100%;
+}
+
+.match-news__inner {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+}
+
+.match-news__row {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1.5px solid var(--primary-background);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+}
+
+.match-news__row>img {
+    width: 140px;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.match-news__infor {
+    width: calc(100% - 140px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+
+}
+
+.match-news__text {
+    width: 100%;
+    height: 50px;
+    padding: 0 0 0 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.match-news__time-cate {
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.match-news__tags {
+    width: 78%;
+    height: 100%;
+    display: flex;
+    font-size: 11px;
+    color: var(--secondary-color);
+    align-items: center;
+}
+
+.match-news__tag{
+    margin: 0 4px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(25,25,27,.4);
+    border-radius: 15px;
+
+}
+
+.match-news__time {
+    width: 21%;
+    height: 100%;
+    font-size: 11px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--secondary-color);
+}
