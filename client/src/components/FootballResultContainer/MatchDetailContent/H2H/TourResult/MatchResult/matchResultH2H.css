@@ -1,0 +1,111 @@
+.match-row {
+    width: 100%;
+    height: 70px;
+    padding-bottom: 5px;
+    color: #aaa;
+    cursor: default;
+    position: relative;
+}
+
+.match-link {
+    width: 100%;
+    height: 100%;
+}
+
+.match-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    position: relative;
+    padding: 10px 0;
+    flex: 1 1;
+    text-decoration: none;
+    color: #aaa;
+    background: var(--primary-background);
+    border-radius: 7.5px;
+    margin: 3px 10px;
+    cursor: pointer;
+}
+
+.match-container:hover {
+    color: #fdfdfd;
+    background: #333;
+}
+
+.match-container>.status-time-1 {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    color: #aaa;
+    padding: 4px 0 0;
+    text-transform: uppercase;
+    font-size: 11px;
+    justify-content: space-between;
+}
+
+.match-container>.match-infor {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 41px );
+    height: 100%;
+    justify-content: center;
+    padding: 0 10px 0 0;
+}
+
+.match-infor>div {
+    width: 100%;
+    height: 20px;
+    margin: 2.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.match-infor>div>div.team-infor,
+span.team-scores {
+    display: flex;
+    align-items: center;
+    color: #fdfdfd;
+    font-weight: 700;
+    position: relative;
+    margin-right: 13px;
+}
+
+.match-infor>div>div>span.team-flag {
+    display: flex;
+    margin-right: 13px;
+    position: relative;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+}
+
+span.team-flag>img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.match-infor>div>div>span.team-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--secondary-color);
+    font-weight: 400;
+}
+
+.match-infor {
+    z-index: 50;
+}
+
+
+
+.match-container:hover .match-infor>div>div>span.team-name {
+    color: var(--primary-color);
+}
+
+

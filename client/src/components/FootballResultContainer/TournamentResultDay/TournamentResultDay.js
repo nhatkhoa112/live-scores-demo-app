@@ -3,7 +3,6 @@ import MatchResult from '../MatchResult/MatchResult';
 import {Link} from 'react-router-dom'
 import './tournamentResultDay.css'
 
-console.log("page")
 
 const TournamentResultDay = ({result}) => {
     return (

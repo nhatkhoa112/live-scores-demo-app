@@ -188,14 +188,16 @@ const news = [
 
 
 const MatchNews = ({ match }) => {
-    const [isNewsTabActive, setIsNewsTabActive] = useState(match.homeTeam.id)
+    const [isNewsTabActive, setIsNewsTabActive] = useState(1)
+    console.log(isNewsTabActive);
+    console.log(match)
     return (
         <div className='match-news__container'>
             <div className="news-tabs__container">
-                <div onClick={() => setIsNewsTabActive(match.homeTeam.id)} className={isNewsTabActive === match.homeTeam.id ? "news-tab news-tab__active" : "news-tab"}>{match.homeTeam.name}</div>
-                <div onClick={() => setIsNewsTabActive(match.awayTeam.id)} className={isNewsTabActive === match.awayTeam.id ? "news-tab news-tab__active" : "news-tab"}>{match.awayTeam.name}</div>
+                <div onClick={() => setIsNewsTabActive(1)} className={isNewsTabActive === 1 ? "news-tab news-tab__active" : "news-tab"}>{match.homeTeam.name}</div>
+                <div onClick={() => setIsNewsTabActive(2)} className={isNewsTabActive === 2 ? "news-tab news-tab__active" : "news-tab"}>{match.awayTeam.name}</div>
             </div>
-            {isNewsTabActive === match.homeTeam.id && <div className='match-news__content'>
+            {isNewsTabActive === 1 && <div className='match-news__content'>
                 <div className="match-news__inner">
                     {news[0].news.map(news =>
                     (<div key={news.id} className="match-news__row">
@@ -217,7 +219,7 @@ const MatchNews = ({ match }) => {
                     )}
                 </div>
             </div>}
-            {isNewsTabActive === match.awayTeam.id && <div className='match-news__content'>
+            {isNewsTabActive === 2 && <div className='match-news__content'>
                 <div className="match-news__inner">
                     {news[1].news.map(news =>
                     (<div key={news.id} className="match-news__row">
