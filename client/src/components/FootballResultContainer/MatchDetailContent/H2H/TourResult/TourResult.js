@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import './tourResult.css'
 import MatchResultH2H from './MatchResult/MatchResultH2H';
 

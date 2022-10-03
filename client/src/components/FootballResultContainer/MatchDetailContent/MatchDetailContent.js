@@ -103,9 +103,9 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
 
             {isTabActive === 4 && <MatchLineUp match={match} />}
 
-            {/* Match line up */}
+            {/* Match ttable */}
 
-            {isTabActive === 5 && <MatchTable match={match} />}
+            {isTabActive === 5 && <MatchTable match={match} tourId={tourId} />}
 
             {/* Match News */}
 

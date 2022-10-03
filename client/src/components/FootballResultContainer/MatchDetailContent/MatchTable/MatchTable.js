@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './matchTable.css'
 import { teams } from '../../../../utils/table'
+import {Link} from 'react-router-dom'
 
 
 
@@ -12,8 +13,9 @@ const tabs = [
 
 
 
-const MatchTable = ({ match }) => {
+const MatchTable = ({ match, tourId }) => {
   const [isTableTabActive, setIsTableTabActive] = useState(1);
+  console.log(match)
   return (
     <div className="match-table__container">
       <div className="table-tabs__container">
@@ -68,8 +70,8 @@ const MatchTable = ({ match }) => {
                   .map((team, index) => <tr key={team.teamId} className={(team.name === match.homeTeam.name || team.name === match.awayTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
                     <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                     <th className="league-table__tab text-thin table-team__infor" >
-                      <div className="table-team__flag"><img src={team.flag} alt="" /></div>
-                      <div className="table-team__name">{team.name}</div>
+                      <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
+                      <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                     </th>
                     <th className="league-table__tab table-disable text-thin" >
                       {team.played}

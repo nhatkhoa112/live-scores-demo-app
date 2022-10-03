@@ -1,0 +1,109 @@
+
+.match-detail-content {
+    height: auto;
+}
+
+.content-center>div.team-header {
+    width: 100%;
+    height: 40px;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.team-header>div.team-infor {
+    width: calc(100% - 100px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+div.team-infor>.team-flag {
+    width: 25px;
+    height:25px;
+    margin-right: 13px;
+
+}
+
+div.team-infor>.team-flag>img {
+    width: 100%;
+    height: 100%;
+}
+
+
+div.team-infor>.team-infor {
+    width: calc(100% - 20px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.team-infor>.team-infor>.team-name {
+    color: var(--primary-color);
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    margin: 1.5px 0;
+}
+
+
+div.team-infor > .team-infor > .country__name{
+    color: var(--secondary-color);
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 9px
+}
+
+
+
+.tabs-container {
+    width: 100%;
+    height: 45px;
+    padding: 12px 0;
+    border: 1.5px solid #222;
+}
+
+.border-bottom{
+    border: none;
+    border-bottom: 1.5px solid var(--primary-background)
+}
+
+
+.tabs-container>.tab-inner {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.tab {
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.14285714;
+    font-weight: 700;
+    margin: 2px 1px 2px 15px;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+}
+
+.tab-active {
+    color: var(--navbar-text-color);
+}
+
+.tab-hover:hover{
+    color: #ccc
+}
+
+.tab-active:hover{
+    color: var(--navbar-text-color);
+}
+

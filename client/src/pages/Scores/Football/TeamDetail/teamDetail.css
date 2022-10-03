@@ -1,0 +1,7 @@
+.content-center {
+    border: 1.5px solid #222;
+    width: calc(1024px - 188px - 315px - 30px);
+    height: auto;
+    border-radius: 7.5px;
+    background: var(--secondary-background);
+}

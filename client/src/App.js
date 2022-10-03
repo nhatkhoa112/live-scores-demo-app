@@ -8,6 +8,7 @@ import Favorite from './pages/Favorite/Favorite';
 import News from './pages/News/News'
 import FootballMatchDetail from './pages/Scores/Football/FootballMatchDetail/FootballMatchDetail';
 import TournamentDetail from './pages/Scores/Football/FootballScoresResult/TournamentDetail';
+import TeamDetail from './pages/Scores/Football/TeamDetail/TeamDetail';
 
 
 
@@ -25,7 +26,7 @@ function App() {
               <Route exact path="news" element={<News />} />
               <Route exact path='football/:countryId/:tourId' element={<TournamentDetail />} />
               <Route  path='football/:countryId/:tourId/:matchId' element={<FootballMatchDetail />} exact />
-              <Route  path='football/team/:teamId' element={<FootballMatchDetail />} exact />
+              <Route  path='football/team/:tourId/:teamId' element={ <TeamDetail />} exact />
             </Route>
           </Routes>
         </div>
