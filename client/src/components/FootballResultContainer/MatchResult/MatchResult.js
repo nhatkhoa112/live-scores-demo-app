@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import './matchResult.css';
-import {Link} from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 
 
 const MatchResult = ({ match, result }) => {
+    console.log(match)
+
     const [isFavoriteChoose, setIsFavoriteChoose] = useState(false)
     return (
         <div className="match-row" key={match.matchId}>
@@ -13,7 +14,7 @@ const MatchResult = ({ match, result }) => {
                     <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} className="status-time">
                         {match.status === 'fulltime' ? "FT" : match.status === 'not yet' ? match.time : 'Live'}
                     </Link>
-                    <Link  to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} onClick={() => console.log("click")} className="match-infor">
+                    <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} onClick={() => console.log("click")} className="match-infor">
                         <div className="home-team">
                             <div className="team-infor">
                                 <span className="team-flag"><img src={match.homeTeam.flag} alt="" /></span>
