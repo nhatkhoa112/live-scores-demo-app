@@ -9,7 +9,7 @@ let results = [
         name: "Premier League 21/22",
         country: "England",
         flag: "https://static.livescore.com/i2/fh/england.jpg",
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: '2022',
@@ -45,7 +45,7 @@ let results = [
         name: "Premier League 20/21",
         country: "England",
         flag: "https://static.livescore.com/i2/fh/england.jpg",
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: '2021',
@@ -81,7 +81,7 @@ let results = [
         name: "EFL Cup 20/21",
         country: "England",
         flag: "https://static.livescore.com/i2/fh/england.jpg",
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: '2020',
@@ -103,7 +103,7 @@ let results = [
         name: "Premier League 20/21",
         country: "England",
         flag: "https://static.livescore.com/i2/fh/england.jpg",
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: '2020',

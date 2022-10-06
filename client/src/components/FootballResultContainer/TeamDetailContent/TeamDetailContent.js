@@ -45,7 +45,7 @@ const TeamDetailContent = () => {
                 </div>
             </div>
 
-            {isTabActive === 1 && <TeamOverview team={team} />}
+            {isTabActive === 1 && <TeamOverview team={team} setIsTabActive={setIsTabActive} />}
             {isTabActive === 2 && <TeamMatches team={team} />}
             {isTabActive === 3 && <TeamTable team={team} />}
             {isTabActive === 4 && <TeamNews team={team} />}

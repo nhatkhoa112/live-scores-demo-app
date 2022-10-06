@@ -15,7 +15,6 @@ const tabs = [
 
 const MatchTable = ({ match, tourId }) => {
   const [isTableTabActive, setIsTableTabActive] = useState(1);
-  console.log(match)
   return (
     <div className="match-table__container">
       <div className="table-tabs__container">

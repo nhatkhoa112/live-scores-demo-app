@@ -6,7 +6,7 @@
         flag: "https://static.livescore.com/i2/fh/spain.jpg",
         tournament: "LaLiga Smartbank",
         tourId: 2,
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: 'September 22, 2022' ,
@@ -64,7 +64,7 @@
         flag: "https://static.livescore.com/i2/fh/spain.jpg",
         tournament: "LaLiga Santander",
         tourId: 1,
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: 'September 22, 2022' ,
@@ -106,7 +106,7 @@
         flag: "https://static.livescore.com/i2/fh/england.jpg",
         tournament: "Premire League",
         tourId: 1,
-        matchs: [
+        matches: [
             {
                 matchId: 1,
                 date: 'September 22, 2022' ,

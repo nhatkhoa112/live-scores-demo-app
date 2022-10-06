@@ -19,7 +19,6 @@ const sportList = [
 ]
 
 
-console.log("hello")
 
 const FootballMatchDetail = () => {
     let { countryId, tourId, matchId } = useParams();
@@ -33,7 +32,6 @@ const FootballMatchDetail = () => {
                 {sportList.map((s) => <Link to={`/${s.index}`} key={s.index}
                     className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
                     onClick={() => {
-                        console.log(isSportItemActive)
                         setHiddenResult(true);
                         setIsSportItemActive(s.index)
                     }}

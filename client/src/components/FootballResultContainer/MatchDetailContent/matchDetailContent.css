@@ -187,7 +187,7 @@ div.home-team>.match-team-infor {
 
 }
 
-#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.home-team>div.match-team-infor>div:nth-child(1) {
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.home-team>.match-team-infor>div:nth-child(1) {
     margin: 0px 10px;
     text-transform: uppercase;
     font-family: "Roboto", sans-serif;
@@ -197,11 +197,11 @@ div.home-team>.match-team-infor {
 }
 
 
-div.match-result>div.home-team>div.match-team-infor>div:nth-child(2) {
+div.match-result>div.home-team>.match-team-infor>div:nth-child(2) {
     margin: 0px 10px
 }
 
-#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.home-team>div.match-team-infor>div>img {
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.home-team>.match-team-infor>div>img {
     width: 40px;
     height: 40px;
 
@@ -255,7 +255,7 @@ div.match-result>div.away-team::before {
     border-bottom: 65px solid transparent;
 }
 
-div.away-team>div.match-team-infor {
+div.away-team>.match-team-infor {
     width: 120%;
     height: 40px;
     margin: 7px 0;
@@ -265,18 +265,18 @@ div.away-team>div.match-team-infor {
     transform: translateX(-15px);
 }
 
-div.match-team-infor>div.team-flag {
+.match-team-infor>div.team-flag {
     margin: 0px 10px
 }
 
-#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.away-team>div.match-team-infor>div#flag-team {
+#layout-wrapper>div.scores-page>div.football-layout-container>div.content-center.match-detail-content>div.match-result>div.away-team>.match-team-infor>div#flag-team {
     display: flex;
     align-items: center;
     margin: 0px 10px
 }
 
 
-div.match-team-infor>div#flag-team>img {
+.match-team-infor>div#flag-team>img {
     width: 40px;
     height: 40px;
     display: flex;
@@ -284,7 +284,7 @@ div.match-team-infor>div#flag-team>img {
 }
 
 
-div.match-team-infor>div#name-team {
+.match-team-infor>div#name-team {
     margin: 0px 10px;
     text-transform: uppercase;
     font-family: "Roboto", sans-serif;

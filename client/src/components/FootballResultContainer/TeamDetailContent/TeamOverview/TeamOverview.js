@@ -94,7 +94,7 @@ let news = [
   },]
 
 
-const TeamOverview = ({ team }) => {
+const TeamOverview = ({ team, setIsTabActive }) => {
   return (
     <div className='team-overview__container'>
       <div className="team-overview__scoreboard">
@@ -122,15 +122,15 @@ const TeamOverview = ({ team }) => {
       </div>
       <div className="team-overview__results">
         <div className="results__title">Form</div>
-        {matches.map((match) => <MatchResult match={match} result={result} />)}
-        <button className="results__see-all">See All</button>
+        {matches.map((match, index) => <MatchResult key={index} match={match} result={result} />)}
+        <button onClick={() => setIsTabActive(2)} className="results__see-all">See All</button>
       </div>
       <div className="team-overview__news">
         <div className="results__title">News</div>
         <div className="news__inner">
           {news.map(news => <News key={news.id} news={news} />)}
-          <button className="results__see-all">See All</button>
         </div>
+        <button onClick={() => setIsTabActive(4)} className="results__see-all width-100">See All</button>
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 
 const MatchResult = ({ match, result }) => {
-    console.log(match)
 
     const [isFavoriteChoose, setIsFavoriteChoose] = useState(false)
     return (
@@ -12,7 +11,8 @@ const MatchResult = ({ match, result }) => {
             <div className="match-link">
                 <div className="match-container">
                     <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} className="status-time">
-                        {match.status === 'fulltime' ? "FT" : match.status === 'not yet' ? match.time : 'Live'}
+                        <span>{match.status === "not yet" && match.day}</span>
+                        <span>{match.status === 'fulltime' ? "FT" : match.status === 'not yet' ? match.time : 'Live'}</span>
                     </Link>
                     <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} onClick={() => console.log("click")} className="match-infor">
                         <div className="home-team">

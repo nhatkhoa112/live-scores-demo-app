@@ -37,16 +37,22 @@
 }
 
 .match-container>.status-time {
-    width: 36px;
+    width: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    font-size: 08px;
     position: relative;
     color: #aaa;
     padding: 4px 0 0;
     text-transform: uppercase;
     font-size: 11px;
     justify-content: space-between;
+}
+
+.match-container>.status-time > span{
+    margin: 2px 0;
 }
 
 .match-container>.match-infor {

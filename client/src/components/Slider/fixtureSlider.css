@@ -196,7 +196,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
     bottom: -10px;
     border-left: 85px solid transparent;
     border-right: 85px solid transparent;
-    border-top: 10px solid var(--primary-background);
+    border-top: 10px solid var(--secondary-background);
 }
 
 

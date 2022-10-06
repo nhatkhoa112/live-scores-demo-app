@@ -9,6 +9,7 @@ import MatchLineUp from './MatchLineUp/MatchLineUp';
 import MatchTable from './MatchTable/MatchTable';
 import MatchNews from './MatchNews/MatchNews';
 import MatchH2H from './H2H/MatchH2H';
+import {Link} from 'react-router-dom'
 
 const tabs = [
     { title: "Info", index: 1 },
@@ -23,7 +24,7 @@ const tabs = [
 
 const MatchDetailContent = ({ tourId, countryId, matchId }) => {
     const tour = results.find((result => result.countryId === parseInt(countryId) && result.tourId === parseInt(tourId)));
-    const match = tour.matchs.find(match => match.matchId === parseInt(matchId))
+    const match = tour.matches.find(match => match.matchId === parseInt(matchId))
     const [isStreamingShow, setIsStreamingShow] = useState(false)
     const [isTrackerShow, setIsTrackerShow] = useState(false)
     const [isTabActive, setIsTabActive] = useState(2)
@@ -62,20 +63,20 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
             </div>}
             <div className="match-result">
                 <div className="home-team">
-                    <div className="match-team-infor">
+                    <Link to="/football/team/1/13" className="match-team-infor">
                         <div className="team-name">{match.homeTeam.name}</div>
                         <div className="team-flag"><img src={match.homeTeam.flag} alt="" /></div>
-                    </div>
+                    </Link>
                     {
                         match.status !== "not yet" && <div className="team-scores-1">{match.homeTeam.scores}</div>
                     }
                 </div>
                 <span>VS</span>
                 <div className="away-team">
-                    <div className="match-team-infor">
+                    <Link to="/football/team/1/13" className="match-team-infor">
                         <div id="flag-team"><img src={match.awayTeam.flag} alt="" /></div>
                         <div id="name-team">{match.awayTeam.name}</div>
-                    </div>
+                    </Link>
                     {
                         match.status !== "not yet" && <div className="team-scores-1">{match.awayTeam.scores}</div>
                     }

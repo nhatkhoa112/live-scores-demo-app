@@ -5,7 +5,7 @@ import MatchResultH2H from './MatchResult/MatchResultH2H';
 
 const TourResult = ({ result }) => {
     return (
-        <div className="tournament-matchs-in-day">
+        <div className="tournament-matches-in-day">
             {
                 result && <div className="tour-header" >
                     <div className="tour-header-link">
@@ -19,8 +19,8 @@ const TourResult = ({ result }) => {
                 </div>
             }
 
-           { result && <div className="tour-matchs">
-                {result.matchs.map((match, index) =>
+           { result && <div className="tour-matches">
+                {result.matches.map((match, index) =>
                     <MatchResultH2H key={index} match={match} result={result} />
                 )}
             </div>}

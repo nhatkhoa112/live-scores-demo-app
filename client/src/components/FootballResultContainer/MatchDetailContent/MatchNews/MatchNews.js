@@ -190,8 +190,6 @@ const news = [
 
 const MatchNews = ({ match }) => {
     const [isNewsTabActive, setIsNewsTabActive] = useState(1)
-    console.log(isNewsTabActive);
-    console.log(match)
     return (
         <div className='match-news__container'>
             <div className="news-tabs__container">

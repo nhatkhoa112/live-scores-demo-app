@@ -1,6 +1,96 @@
-.team-matches__container{
+.team-matches__container {
     width: 100%;
     height: auto;
     min-height: 200px;
-    background: blue;
+}
+
+.tour-choose {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+}
+
+
+.fixtures__container {
+    width: 100%;
+    height: auto;
+}
+
+
+.tour__row {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.tour__row-icon>i {
+    color: var(--primary-color);
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.tour__row-text {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.dark-mask {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: var(--secondary-background);
+    opacity: 0.8;
+    transition: all .5s ease 0s;
+    z-index: 800;
+}
+
+.tour-dropdown-menu {
+    position: absolute;
+    z-index: 801;
+    top: 50px;
+    width: auto;
+    height: auto;
+    background: var(--third-color);
+    border-radius: 7.5px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.tour-choose__row {
+    width: auto;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    color: var(--secondary-background);
+    padding: 2px 80px 2px 15px;
+    cursor: pointer;
+}
+
+.tour-choose__row>img {
+    width: 20px;
+    height: 13px;
+    margin-right: 10px;
+}
+
+.tour-choose__row:first-child>img {
+    height: 20px !important;
+}
+
+.tour-choose__row>span {
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.4s ease-in-out;
+    color: var(--primary-color)
+}
+
+.tour-choose__row>span:hover {
+    color: var(--navbar-text-color);
 }

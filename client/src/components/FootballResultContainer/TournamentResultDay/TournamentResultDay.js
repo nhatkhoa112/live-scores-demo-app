@@ -6,7 +6,7 @@ import './tournamentResultDay.css'
 
 const TournamentResultDay = ({result}) => {
     return (
-        <div className="tournament-matchs-in-day">
+        <div className="tournament-matches-in-day">
             <div className="tour-header" >
                 <Link to={`/football/${result.countryId}/${result.tourId}`} className="tour-header-link">
                     <div className="country-flag"><img src={result.flag} alt="" /></div>
@@ -17,9 +17,9 @@ const TournamentResultDay = ({result}) => {
                 </Link>
                 <div className="wrappe-icon" ><i className="fa-solid fa-chevron-right"></i></div>
             </div>
-            <div className="tour-matchs">
-                {result.matchs.map((match) =>
-                    <MatchResult key={match.matchId}  match={match} result={result} />
+            <div className="tour-matches">
+                {result.matches.map((match, index) =>
+                    <MatchResult key={index}  match={match} result={result} />
                     )}
             </div>
         </div>
