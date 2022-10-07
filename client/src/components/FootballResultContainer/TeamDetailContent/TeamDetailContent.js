@@ -4,10 +4,9 @@ import { teams } from '../../../utils/table'
 import { useParams } from 'react-router-dom'
 import TeamOverview from './TeamOverview/TeamOverview'
 import TeamMatches from './TeamMatches/TeamMatches'
-import TeamTable from './TeamTable/TeamTable'
 import TeamNews from './TeamNews/TeamNews'
 import TeamPlayerStars from './TeamPlayerStars/TeamPlayerStars'
-
+import MatchTable from '../MatchDetailContent/MatchTable/MatchTable'
 
 const tabs = [
     { title: "Overview", index: 1 },
@@ -24,7 +23,7 @@ const TeamDetailContent = () => {
     const [isTabActive, setIsTabActive] = useState(1)
     let team;
     team = parseInt(tourId) === 1 ? teams.find((team) => team.teamId === parseInt(teamId)) : teams[12]
-
+    console.log(team)
 
     return (
         <div className="content-center team-detail-content">
@@ -45,9 +44,9 @@ const TeamDetailContent = () => {
                 </div>
             </div>
 
-            {isTabActive === 1 && <TeamOverview team={team} setIsTabActive={setIsTabActive} />}
+            {isTabActive === 1 && <TeamOverview team={team}  />}
             {isTabActive === 2 && <TeamMatches team={team} />}
-            {isTabActive === 3 && <TeamTable team={team} />}
+            {isTabActive === 3 && <MatchTable propsTeam={team} tourId={1}  setIsTabActive={setIsTabActive}  />}
             {isTabActive === 4 && <TeamNews team={team} />}
             {isTabActive === 5 && <TeamPlayerStars team={team} />}
 

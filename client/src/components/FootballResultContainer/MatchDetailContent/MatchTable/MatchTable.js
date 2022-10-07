@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './matchTable.css'
 import { teams } from '../../../../utils/table'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
@@ -13,10 +13,11 @@ const tabs = [
 
 
 
-const MatchTable = ({ match, tourId }) => {
+const MatchTable = ({ match, tourId, propsTeam,  setIsTabActive  }) => {
   const [isTableTabActive, setIsTableTabActive] = useState(1);
   return (
     <div className="match-table__container">
+
       <div className="table-tabs__container">
         {tabs.map(tab => <div key={tab.id} onClick={() => setIsTableTabActive(tab.id)} className={isTableTabActive === tab.id ? "table-tab table-tab__active" : "table-tab"}>{tab.title}</div>)}
       </div>
@@ -66,11 +67,11 @@ const MatchTable = ({ match, tourId }) => {
             <tbody>
               {
                 teams.sort((a, b) => b.goalsDiff - a.goalsDiff).sort((a, b) => b.points - a.points)
-                  .map((team, index) => <tr key={team.teamId} className={(team.name === match.homeTeam.name || team.name === match.awayTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
+                  .map((team, index) => <tr key={team.teamId} className={((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || team.name === propsTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
                     <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                     <th className="league-table__tab text-thin table-team__infor" >
-                      <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
-                      <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
+                      <Link onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
+                      <Link  onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                     </th>
                     <th className="league-table__tab table-disable text-thin" >
                       {team.played}
@@ -148,11 +149,14 @@ const MatchTable = ({ match, tourId }) => {
             <tbody>
               {
                 teams.sort((a, b) => b.goalsDiffHome - a.goalsDiffHome).sort((a, b) => b.pointsHome - a.pointsHome)
-                  .map((team, index) => <tr key={team.teamId} className={(team.name === match.homeTeam.name || team.name === match.awayTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
+                  .map((team, index) =>
+                   <tr key={team.teamId} 
+                   className={((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || team.name === propsTeam.name)  ? "leaguge-table__row text-bold" : "leaguge-table__row"}
+                   >
                     <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                     <th className="league-table__tab text-thin table-team__infor" >
-                      <div className="table-team__flag"><img src={team.flag} alt="" /></div>
-                      <div className="table-team__name">{team.name}</div>
+                      <Link  onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
+                      <Link  onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                     </th>
                     <th className="league-table__tab table-disable text-thin" >
                       {team.playedHome}
@@ -230,11 +234,11 @@ const MatchTable = ({ match, tourId }) => {
             <tbody>
               {
                 teams.sort((a, b) => b.goalsDiffHome - a.goalsDiffHome).sort((a, b) => b.pointsAway - a.pointsAway)
-                  .map((team, index) => <tr key={team.teamId} className={(team.name === match.homeTeam.name || team.name === match.awayTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
+                  .map((team, index) => <tr key={team.teamId} className={((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || team.name === propsTeam.name) ? "leaguge-table__row text-bold" : "leaguge-table__row"}>
                     <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                     <th className="league-table__tab text-thin table-team__infor" >
-                      <div className="table-team__flag"><img src={team.flag} alt="" /></div>
-                      <div className="table-team__name">{team.name}</div>
+                      <Link  onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
+                      <Link  onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                     </th>
                     <th className="league-table__tab table-disable text-thin" >
                       {team.playedAway}

@@ -163,6 +163,14 @@ tbody {
     color: var(--primary-color);
 }
 
+.text-bold > th > a {
+    font-weight: 700;
+}
+
+.text-bold > th > div.table-team__name{
+    font-weight: 700;
+}
+
 .text-bold {
     font-weight: 700;
     color: var(--primary-color);
