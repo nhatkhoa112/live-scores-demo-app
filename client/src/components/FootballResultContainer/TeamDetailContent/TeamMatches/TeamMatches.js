@@ -203,6 +203,236 @@ const fixtures = [
       },
     ]
   }
+]
+
+
+const results = [
+  {
+    country: "England",
+    countryId: 1,
+    flag: "https://static.livescore.com/i2/fh/england.jpg",
+    tournament: "Premire League",
+    tourId: 1,
+    matches: [
+      {
+        status: "fulltime",
+        matchId: 1,
+        day: " 10 Aug",
+        time: "01:00",
+        homeTeam: {
+          scores: 1,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        awayTeam: {
+          scores: 0,
+          name: "Manchester United",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/10260.png"
+        }
+      },
+      {
+        status: "fulltime",
+        matchId: 2,
+        day: " 15 Aug",
+        time: "23:30",
+        awayTeam: {
+          scores: 4,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 3,
+          name: "Tottenham Hotspur",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8586.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 3,
+        day: " 20 Aug",
+        time: "01:30",
+        awayTeam: {
+          scores: 2,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 1,
+          name: "Newcastle United",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/10261.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 4,
+        day: " 22 Aug",
+        time: "21:00",
+        homeTeam: {
+          scores: 1,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        awayTeam: {
+          scores: 1,
+          name: "Crystal Palace",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/9826.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 5,
+        day: " 29 Aug",
+        time: "23:30",
+        awayTeam: {
+          scores: 2,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 0,
+          name: "Fulham",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 5,
+        day: " 06 Sep",
+        time: "00:30",
+        awayTeam: {
+          scores: 0,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 1,
+          name: "Leicester City",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
+        }
+      },
+    ]
+  }, {
+    country: "England",
+    countryId: 1,
+    flag: "https://static.livescore.com/i2/fh/england.jpg",
+    tournament: "EFL Cup",
+    tourId: 4,
+    matches: [
+      {
+        status: "fulltime",
+        matchId: 1,
+        day: " 09 Sep",
+        time: "02:45",
+        awayTeam: {
+          scores: 0,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 0,
+          name: "AFC Bournemouth",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
+        }
+      }
+    ]
+  },
+  {
+    country: "England",
+    countryId: 1,
+    flag: "https://static.livescore.com/i2/fh/england.jpg",
+    tournament: "Premire League",
+    tourId: 1,
+    matches: [
+      {
+        status: "fulltime",
+        matchId: 1,
+        day: " 12 Sep",
+        time: "22:00",
+        awayTeam: {
+          scores: 2,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 2,
+          name: "AFC Bournemouth",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
+        }
+      },
+      {
+        status: "fulltime",
+        matchId: 2,
+        day: " 26 Sep",
+        time: "22:30",
+        homeTeam: {
+          scores: 1,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        awayTeam: {
+          scores: 0,
+          name: "Wolverhampton Wanderers",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8602.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 3,
+        day: " 31 Sep",
+        time: "22:00",
+        awayTeam: {
+          scores: 2,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 1,
+          name: "Mancester City",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8556.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 4,
+        day: " 02 Oct",
+        time: "22:00",
+        homeTeam: {
+          scores: 4,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        awayTeam: {
+          scores: 2,
+          name: "Brighton & Hove Albion",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/10204.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 5,
+        day: " 07 Oct",
+        time: "23:30",
+        awayTeam: {
+          scores: 3,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 1,
+          name: "Fulham",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
+        }
+      }, {
+        status: "fulltime",
+        matchId: 5,
+        day: " 07 Oct",
+        time: "00:30",
+        awayTeam: {
+          scores: 2,
+          name: "Everton",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
+        },
+        homeTeam: {
+          scores: 3,
+          name: "Leicester City",
+          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
+        }
+      },
+    ]
+  }
 
 ]
 
@@ -271,6 +501,19 @@ const TeamMatches = () => {
         }
 
         {!tourChoose.chooseString && fixtures.map((result, index) =>
+          <TournamentResultDay key={index} result={result} />
+        )
+        }
+      </div>}
+
+
+      {isTabActive === 2 && < div className='fixtures__container'>
+        {tourChoose.chooseString && results.filter((fixture) => fixture.tournament === tourChoose.chooseString).map((result, index) =>
+          <TournamentResultDay key={index} result={result} />
+        )
+        }
+
+        {!tourChoose.chooseString && results.map((result, index) =>
           <TournamentResultDay key={index} result={result} />
         )
         }
