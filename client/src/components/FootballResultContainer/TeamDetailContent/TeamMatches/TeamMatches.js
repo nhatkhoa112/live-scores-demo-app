@@ -457,17 +457,17 @@ const tours = [
 ]
 
 
-const TeamMatches = () => {
-  const [isTabActive, setIsTabActive] = useState(1)
+const TeamMatches = ({isMatchesTabActive, setIsMatchesTabActive}) => {
   const [tourChoose, setTourChoose] = useState(tours[0])
   const [darkMarkShow, setDarkMarkShow] = useState(false)
+  console.log(isMatchesTabActive)
   console.log(tourChoose)
   return (
     <div className='team-matches__container'>
       <div className="tabs-container summary-tabs">
         <div className="tab-inner summary-tab__inner">
-          <div onClick={() => setIsTabActive(1)} className={isTabActive === 1 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Fixtures</div>
-          <div onClick={() => setIsTabActive(2)} className={isTabActive === 2 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Results</div>
+          <div onClick={() => setIsMatchesTabActive(1)} className={isMatchesTabActive === 1 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Fixtures</div>
+          <div onClick={() => setIsMatchesTabActive(2)} className={isMatchesTabActive === 2 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Results</div>
         </div>
       </div>
 
@@ -494,7 +494,7 @@ const TeamMatches = () => {
       </div>
 
 
-      {isTabActive === 1 && < div className='fixtures__container'>
+      {isMatchesTabActive === 1 && < div className='fixtures__container'>
         {tourChoose.chooseString && fixtures.filter((fixture) => fixture.tournament === tourChoose.chooseString).map((result, index) =>
           <TournamentResultDay key={index} result={result} />
         )
@@ -507,7 +507,7 @@ const TeamMatches = () => {
       </div>}
 
 
-      {isTabActive === 2 && < div className='fixtures__container'>
+      {isMatchesTabActive === 2 && < div className='fixtures__container'>
         {tourChoose.chooseString && results.filter((fixture) => fixture.tournament === tourChoose.chooseString).map((result, index) =>
           <TournamentResultDay key={index} result={result} />
         )

@@ -80,6 +80,11 @@
     position: relative;
     margin-right: 13px;
 }
+
+.text-center{
+    text-align: center;
+}
+
 .match-infor > div > div > span.team-flag{
     display: flex;
     margin-right: 13px;

@@ -112,7 +112,6 @@
                 date: 'September 22, 2022' ,
                 status: "fulltime",
                 time: "14:00",
-                day: "21 sep 2022",
                 stadium: "Goodison Park",
                 tiket: 39298,
                 referee: "Michael Oliver (England)",
@@ -341,7 +340,6 @@
         },
         {
             matchId: 3,
-            date: 'September 22, 2022' ,
             status: "fulltime",
             time: '18:30',
             homeTeam: {

@@ -20,6 +20,7 @@ const tabs = [
 
 const TeamDetailContent = () => {
     const { teamId, tourId } = useParams();
+    const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isTabActive, setIsTabActive] = useState(1)
     let team;
     team = parseInt(tourId) === 1 ? teams.find((team) => team.teamId === parseInt(teamId)) : teams[12]
@@ -44,9 +45,9 @@ const TeamDetailContent = () => {
                 </div>
             </div>
 
-            {isTabActive === 1 && <TeamOverview team={team}  />}
-            {isTabActive === 2 && <TeamMatches team={team} />}
-            {isTabActive === 3 && <MatchTable propsTeam={team} tourId={1}  setIsTabActive={setIsTabActive}  />}
+            {isTabActive === 1 && <TeamOverview setIsMatchesTabActive={setIsMatchesTabActive} team={team} setIsTabActive={setIsTabActive} />}
+            {isTabActive === 2 && <TeamMatches isTabActive={isTabActive} isMatchesTabActive={isMatchesTabActive} setIsMatchesTabActive={setIsMatchesTabActive} team={team} />}
+            {isTabActive === 3 && <MatchTable propsTeam={team} tourId={1} setIsTabActive={setIsTabActive} />}
             {isTabActive === 4 && <TeamNews team={team} />}
             {isTabActive === 5 && <TeamPlayerStars team={team} />}
 

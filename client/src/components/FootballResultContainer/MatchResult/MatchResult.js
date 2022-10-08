@@ -11,7 +11,7 @@ const MatchResult = ({ match, result }) => {
             <div className="match-link">
                 <div className="match-container">
                     <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} className="status-time">
-                        <span>{match.day && match.day}</span>
+                        <span className="text-center">{match.day && match.day}</span>
                         <span>{match.status === 'fulltime' ? "FT" : match.status === 'not yet' ? match.time : 'Live'}</span>
                     </Link>
                     <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} onClick={() => console.log("click")} className="match-infor">
