@@ -460,8 +460,6 @@ const tours = [
 const TeamMatches = ({isMatchesTabActive, setIsMatchesTabActive}) => {
   const [tourChoose, setTourChoose] = useState(tours[0])
   const [darkMarkShow, setDarkMarkShow] = useState(false)
-  console.log(isMatchesTabActive)
-  console.log(tourChoose)
   return (
     <div className='team-matches__container'>
       <div className="tabs-container summary-tabs">
