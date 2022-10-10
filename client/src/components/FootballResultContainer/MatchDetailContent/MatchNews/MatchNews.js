@@ -198,15 +198,15 @@ const MatchNews = ({ match }) => {
             </div>
             {isNewsTabActive === 1 && <div className='match-news__content'>
                 <div className="match-news__inner">
-                    {news[0].news.map(news =>
-                        <News news={news} />
+                    {news[0].news.map((news, index) =>
+                        <News key={index} news={news} />
                     )}
                 </div>
             </div>}
             {isNewsTabActive === 2 && <div className='match-news__content'>
                 <div className="match-news__inner">
-                    {news[1].news.map(news =>
-                    (<div key={news.id} className="match-news__row">
+                    {news[1].news.map((news, index) =>
+                    (<div key={index} className="match-news__row">
                         <img src={news.img} alt="" />
                         <div className='match-news__infor'>
                             <div className='match-news__text'>
@@ -214,7 +214,7 @@ const MatchNews = ({ match }) => {
                             </div>
                             <div className="match-news__time-cate">
                                 <div className="match-news__tags">
-                                    {news.tags.map(tag => <div key={tag.id} className="match-news__tag">{tag.title}</div>)}
+                                    {news.tags.map((tag,index) => <div key={index} className="match-news__tag">{tag.title}</div>)}
                                 </div>
                                 <div className="match-news__time">
                                     {moment((news.time.getFullYear()).toString() + (news.time.getMonth() < 10 ? ("0" + (news.time.getMonth()).toString()) : (news.time.getMonth()).toString()) + (news.time.getDate() < 10 ? ("0" + (news.time.getDate()).toString()) : (news.time.getDate()).toString())).startOf('days').fromNow()}

@@ -2,11 +2,12 @@ import React from 'react'
 import './teamOverview.css'
 import MatchResult from '../../MatchResult/MatchResult'
 import News from '../../MatchDetailContent/News/News'
-
+import {Link} from 'react-router-dom'
 
 let awayTeam = {
   flag: "https://lsm-static-prod.livescore.com/high/enet/10260.png",
-  name: "Manchester United"
+  name: "Manchester United",
+  teamId: 5,
 }
 
 let result = {
@@ -103,8 +104,8 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive }) => {
       <div className="team-overview__next">
         <div className="team-overview__next-inner">
           <div className="next__home">
-            <div className="next__home-flag"><img src={team.flag} alt="" /></div>
-            <div className="next__home-name">{team.name}</div>
+            <Link to={`/football/team/1/${team.teamId}`} className="next__home-flag"><img src={team.flag} alt="" /></Link>
+            <Link to={`/football/team/1/${team.teamId}`} className="next__home-name">{team.name}</Link>
           </div>
           <div className="next__infor">
             <div className="next__infor-time">
@@ -115,8 +116,8 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive }) => {
             <div className="next__infor-place">Goodison Park</div>
           </div>
           <div className="next__away">
-            <div className="next__away-flag"><img src={awayTeam.flag} alt="" /></div>
-            <div className="next__away-name">{awayTeam.name}</div>
+            <Link  to={`/football/team/1/${awayTeam.teamId}`} className="next__away-flag"><img src={awayTeam.flag} alt="" /></Link>
+            <Link to={`/football/team/1/${awayTeam.teamId}`} className="next__away-name">{awayTeam.name}</Link>
           </div>
         </div>
       </div>

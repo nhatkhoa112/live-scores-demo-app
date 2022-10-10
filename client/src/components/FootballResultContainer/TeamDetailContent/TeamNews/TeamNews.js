@@ -192,8 +192,8 @@ const TeamNews = () => {
     <div className='match-news__container'>
       <div className='match-news__content'>
         <div className="match-news__inner">
-          {news[0].news.map(news =>
-            <News news={news} />
+          {news[0].news.map((news,index) =>
+            <News key={index}  news={news} />
           )}
         </div>
       </div>
