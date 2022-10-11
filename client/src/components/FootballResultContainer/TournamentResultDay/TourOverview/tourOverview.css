@@ -1,0 +1,27 @@
+.tour-matches {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+}
+
+.tour-match__header{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 18px 0 15px ;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.tour-match__header > span.tour-match__header-icon > i {
+    color:var(--primary-color);
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.tour-match__header > span.tour-match__header-icon > i:hover{
+    color: var(--navbar-text-color);
+}

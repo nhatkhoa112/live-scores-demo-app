@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import MatchResult from '../MatchResult/MatchResult';
 import { Link } from 'react-router-dom'
 import './tournamentResultDay.css'
+import TourOverview from './TourOverview/TourOverview';
+import TourMatches from './TourMatches/TourMatches';
 
 const tabs = [
     {
@@ -42,13 +44,13 @@ const TournamentResultDay = ({ result, overview }) => {
             }
 
 
-            { overview && isTabActive === 1 && <div className="tour-matches">
-                {result.matches.map((match, index) =>
-                    <MatchResult key={index} match={match} result={result} />
-                )}
-            </div>}
+            {overview && isTabActive === 1 && <TourOverview result={result}  />}
 
-            { !overview && <div className="tour-matches">
+            {overview && isTabActive === 2 && <TourMatches result={result} />}
+
+
+
+            {!overview && <div className="tour-matches">
                 {result.matches.map((match, index) =>
                     <MatchResult key={index} match={match} result={result} />
                 )}
