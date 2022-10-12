@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import './tournamentResultDay.css'
 import TourOverview from './TourOverview/TourOverview';
 import TourMatches from './TourMatches/TourMatches';
+import MatchTable from '../MatchDetailContent/MatchTable/MatchTable';
 
 const tabs = [
     {
@@ -20,8 +21,9 @@ const tabs = [
     }
 ]
 
-const TournamentResultDay = ({ result, overview }) => {
+const TournamentResultDay = ({ result, overview, }) => {
     const [isTabActive, setIsTabActive] = useState(1)
+    const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isFavotite, setIsFavorite] = useState(false)
     return (
         <div className="tournament-matches-in-day">
@@ -44,9 +46,11 @@ const TournamentResultDay = ({ result, overview }) => {
             }
 
 
-            {overview && isTabActive === 1 && <TourOverview result={result}  />}
+            {overview && isTabActive === 1 && <TourOverview result={result} setIsTabActive={setIsTabActive} setIsMatchesTabActive={setIsMatchesTabActive} />}
 
-            {overview && isTabActive === 2 && <TourMatches result={result} />}
+            {overview && isTabActive === 2 && <TourMatches result={result} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive} />}
+
+            {overview && isTabActive === 3 && <MatchTable  />}
 
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TournamentsContainer from '../ContentLeftTournament/TournamentsContainer';
 import './tournamentDetail.css'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Football from '../Football';
 import Baseball from '../../Baseball/Baseball';
 import Basketball from '../../Basketball/Basketball';
@@ -30,7 +30,7 @@ const TournamentDetail = () => {
     return (
         <div className="scores-page">
             <div className="sportlist">
-                {sportList.map((s) => <li key={s.index}
+                {sportList.map((s) =>  <Link to={`/${s.index}`}  key={s.index}
                     className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
                     onClick={() =>{ 
                         setHiddenResult(true);
@@ -39,7 +39,7 @@ const TournamentDetail = () => {
                     }}
                 >
                     {s.name}
-                </li>)}
+                </Link>)}
             </div>
 
             {hiddenResult && isSportItemActive === 0 && <Football isTimeNav={false}/>}

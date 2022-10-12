@@ -14,6 +14,11 @@
     font-size: 14px;
     font-weight: 600;
     color: var(--secondary-color);
+    position: relative;
+}
+
+.tour-match__header:nth-child(1){
+   top: -10px;
 }
 
 .tour-match__header > span.tour-match__header-icon > i {

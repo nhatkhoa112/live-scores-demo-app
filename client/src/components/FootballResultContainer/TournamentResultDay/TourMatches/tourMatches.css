@@ -1,0 +1,14 @@
+.tour-matches__container{
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+}
+
+
+.tour-tabs__container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
