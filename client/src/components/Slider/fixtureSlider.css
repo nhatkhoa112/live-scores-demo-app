@@ -61,11 +61,13 @@
 
 
 #layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-prev:hover::before {
-    border-right: 16px solid var(--secondary-background);
+    border-right: 16px solid var(--navbar-text-color);
 }
 
+
+
 #layout-wrapper>div.scores-page>div.fixture-slider>div>div.slick-arrow.slick-next::before {
-    border-left: 16px solid var(--primary-background);
+    border-left: 16px solid var(--secondary-background);
     border-right: none;
     left: 25px;
     transition: all 0.4s ease-in-out;

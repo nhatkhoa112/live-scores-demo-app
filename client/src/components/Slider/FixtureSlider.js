@@ -9,7 +9,7 @@ const settings = {
     autoplay: true,
     slidesToScroll: 1,
     slidesToShow: 5,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
     speed: 2000,
     infinite: true,
     responsive: [

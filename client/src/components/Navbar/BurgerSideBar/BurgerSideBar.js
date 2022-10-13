@@ -15,16 +15,18 @@ const sidebarItems = [
     { title: "Privacy Notice", icon: faLock }
 ]
 
-export const BurgerSideBar = ({ isBurgerActive, setIsBurgerActive }) => {
+export const BurgerSideBar = ({ isBurgerActive, setIsBurgerActive, setIsMaskShow }) => {
 
 
     return (
         <div className='burger-sidebar'>
-            <div onClick={() => setIsBurgerActive(false)} className={isBurgerActive ? 'burger-sidebar-mask' : 'burger-sidebar-mask hide-mask'}></div>
             <div className={isBurgerActive ? 'burger-sidebar-body ' : 'burger-sidebar-body hide-sidebar-body'}>
                 <div className="burger-sidebar-content">
                     <div className="logo-icon">
-                        <FontAwesomeIcon icon={faXmark} onClick={() => setIsBurgerActive(false)} />
+                        <FontAwesomeIcon icon={faXmark} onClick={() => {
+                            setIsMaskShow(false)
+                            setIsBurgerActive(false)
+                        }} />
                         <div className='sidebar-col'>
                             <div className='sidebar-logo-banner'>
                                 <div className='sidebar-logo-img'>
