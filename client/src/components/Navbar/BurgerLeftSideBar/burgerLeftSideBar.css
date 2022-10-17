@@ -135,3 +135,11 @@ span.country__name > span.country__text{
 span.country__name > span.country__text:hover{
     color: var(--primary-color) ;
 }
+
+@media screen and (max-width: 480px) {
+    #layout-wrapper > div.navbar > div.burger-left-sidebar > div > div.sportlist.sportlist-border-bottom > a{
+        font-size: 11px !important;
+
+    }
+    
+}

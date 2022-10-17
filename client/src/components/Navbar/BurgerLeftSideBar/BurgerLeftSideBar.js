@@ -14,10 +14,12 @@ const sportList = [
 ]
 
 
+
 export const BurgerLeftSideBar = ({ isBurgerLeftActive, setIsBurgerLeftActive, setIsMaskShow }) => {
     const [isSportItemActive, setIsSportItemActive] = useState(0)
-    const [tournamentQuery, setTournamentQuery] = useState('')
     const [tournamentSelect, setTournamentSelect] = useState('')
+
+    console.log(tournamentSelect)
 
 
 
@@ -28,7 +30,10 @@ export const BurgerLeftSideBar = ({ isBurgerLeftActive, setIsBurgerLeftActive, s
                     {sportList.map((s) =>
                         <Link to="/" key={s.index}
                             className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
-                            onClick={() => setIsSportItemActive(s.index)}
+                            onClick={() => { 
+                                setIsSportItemActive(s.index) 
+                                setTournamentSelect("")
+                            }}
                         >
                             {s.name}
                         </Link>
@@ -44,11 +49,32 @@ export const BurgerLeftSideBar = ({ isBurgerLeftActive, setIsBurgerLeftActive, s
                 {isSportItemActive === 0 && <div className="tour-lists">
                     <div className="tour-lists__inner">
                         {
-                            countries.map((country, index) => <div key={index} className="country-row">
+                            Object.keys(tournamentSelect).length === 0 && countries.map((country, index) => <div key={index} className="country-row">
                                 <span className={country.typeImage === 'flag' ? 'country__logo country__flag' : 'country__logo  country__cup'}><img className='country__image' src={country.image} alt="" /></span>
-                                <span className="country__name"><span className="country__text">{country.name}</span></span>
+                                <span onClick={() => {
+                                    setTournamentSelect(country)
+                                }} className="country__name"><span className="country__text">{country.name}</span></span>
                             </div>)
 
+                        }
+
+                        {
+                            Object.keys(tournamentSelect).length !== 0 && (<div className="tournament-by-country-list">
+                                {
+                                    tournamentSelect.content.map((tournament) => {
+                                        return (<Link to={`/football/${tournamentSelect.countryId}/${tournament.id}`} onClick={() => {
+                                            setIsBurgerLeftActive(false)
+                                            setIsMaskShow(false)
+                                            setTournamentSelect("")
+                                        }} className="tournament-item" key={tournament.id}>
+                                            <span className={tournamentSelect.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={tournamentSelect.image} alt="" /></span>
+                                            <span className="name"><span className="text">{tournament.tourName}</span></span>
+                                        </Link>
+                                        )
+                                    })
+                                }
+
+                            </div>)
                         }
                     </div>
                 </div>}

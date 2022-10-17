@@ -65,11 +65,12 @@
 .logo-banner-img {
     width: 34%;
     height: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
 .logo-banner-img>img {
-    width: 100%;
     height: 100%;
     transform: rotate(-15deg);
 }
@@ -250,7 +251,7 @@
 
 
 .burger-menu {
-    width: 8%;
+    width: 40px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -301,7 +302,7 @@
 
     
     .responsive-icon__1023{
-        width: 8%;
+        width: 40px;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -309,6 +310,10 @@
         justify-content: center;
         font-size: 22px;
         color: var(--primary-color);
+    }
+
+    #layout-wrapper > div.navbar > div.navbar-row > div.navbar-col.col-2{
+        width: calc(100% - 100px)
     }
     
 }

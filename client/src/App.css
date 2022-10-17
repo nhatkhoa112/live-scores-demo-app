@@ -38,5 +38,6 @@ a{
   #layout-wrapper{
     padding-bottom: 105px;
     min-height: 100vh;
+    width: 100%;
   }
 }

@@ -176,7 +176,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-1.home-team>.home-team-scores
     margin: 0 5px;
     font-family: 'Roboto', sans-serif;
     width: 32px;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
@@ -220,7 +220,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-content,
     justify-content: center;
     align-items: center;
     position: relative;
-    top:5px;
+    top: 5px;
 }
 
 div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-content>img {
@@ -237,7 +237,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-scores>p {
     margin: 0 5px;
     font-family: 'Roboto', sans-serif;
     width: 32px;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
@@ -250,15 +250,15 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-scores>p {
 
 
     div.slick-slide>div>div.slider-layer::before {
-        border-left: 120px solid transparent;
-        border-right: 120px solid transparent;
+        border-left: 125px solid transparent;
+        border-right: 125px solid transparent;
         border-top: 10px solid var(--navbar-text-color);
     }
 
 
     div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
-        border-left: 120px solid transparent;
-        border-right: 120px solid transparent;
+        border-left: 125px solid transparent;
+        border-right: 125px solid transparent;
     }
 }
 
@@ -303,6 +303,14 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-scores>p {
         border-left: calc(180px/2) solid transparent;
         border-right: calc(180px/2) solid transparent;
     }
+
+    .slick-arrow.slick-next {
+        right: -30px !important;
+    }
+
+    .slick-arrow.slick-prev {
+        left: -30px !important;
+    }
 }
 
 
@@ -310,6 +318,8 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2>.away-team-scores>p {
     .fixture-slider {
         width: 260px;
     }
+
+
 
 
 

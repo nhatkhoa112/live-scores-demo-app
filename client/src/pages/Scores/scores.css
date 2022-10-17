@@ -236,7 +236,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2 {
 
     div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
         border-left: 120px solid transparent;
-        border-right: 120px solid transparent;       
+        border-right: 120px solid transparent;
     }
 }
 
@@ -256,9 +256,9 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2 {
 
     div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
         border-left: calc(177px/2) solid transparent;
-        border-right: calc(177px/2) solid transparent;    
+        border-right: calc(177px/2) solid transparent;
     }
-    
+
 
 }
 
@@ -279,7 +279,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2 {
 
     div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
         border-left: calc(180px/2) solid transparent;
-        border-right: calc(180px/2) solid transparent;      
+        border-right: calc(180px/2) solid transparent;
     }
 }
 
@@ -289,6 +289,14 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2 {
         width: 260px;
     }
 
+
+    #layout-wrapper>div.scores-page>div.sportlist{
+        justify-content: center;
+    }
+
+    #layout-wrapper>div.scores-page>div.sportlist>a.sportlist-item {
+        font-size: 12px;
+    }
 
 
     div.slick-slide>div>div.slider-layer::before {
@@ -301,7 +309,7 @@ div.slick-slide>div>div.slider-layer>div.layer-row-2 {
 
     div.slick-slide>div>div.slider-layer>div.layer-row-1::before {
         border-left: calc(230px/2) solid transparent;
-        border-right: calc(230px/2) solid transparent;     
+        border-right: calc(230px/2) solid transparent;
     }
 
 }
