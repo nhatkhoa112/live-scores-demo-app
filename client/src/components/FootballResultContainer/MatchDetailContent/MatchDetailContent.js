@@ -96,8 +96,8 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
                 </div>
             </div>
             <div className="tabs-container">
-                <div className='tab-inner'>
-                    {tabs.map((tab) => <div onClick={() => setIsTabActive(tab.index)} key={tab.index} className={tab.index === isTabActive ? "tab tab-active" : "tab"}>{tab.title}</div>)}
+                <div className='tab-inner overflow-x'>
+                    {tabs.map((tab) => <div onClick={() => setIsTabActive(tab.index)} key={tab.index} className={tab.index === isTabActive ? "tab tab-active " : "tab "}>{tab.title}</div>)}
                 </div>
             </div>
 

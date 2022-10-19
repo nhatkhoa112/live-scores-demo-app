@@ -315,6 +315,10 @@ div.away-team>.team-scores-1 {
     align-items: center;
 }
 
+.overflow-x{
+    overflow-x: auto;
+}
+
 .tab {
     color: #aaa;
     cursor: pointer;
@@ -457,8 +461,8 @@ div.away-team>.team-scores-1 {
 
 
 @media screen and (max-width: 1023px) {
-    .match-detail-content {
+    /* .match-detail-content {
         width: 80% !important;
-    }
+    } */
 
 }
