@@ -47,12 +47,22 @@ const TableAll = ({ teams, match, propsTeam, mini }) => {
                     {
                         mini && teams.sort((a, b) => b.goalsDiff - a.goalsDiff).sort((a, b) => b.points - a.points)
                             .map((team, index) =>
-                                index< 5 && <tr key={team.teamId} className={
+                                (index < 5 || index > 16) && <tr key={team.teamId} className={
                                     ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || (propsTeam && team.name === propsTeam.name))
                                         ? "leaguge-table__row text-bold" :
                                         "leaguge-table__row"}>
-                                    <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
-                                    <th className="league-table__tab text-thin table-team__infor" >
+                                    <th className={index < 4 ? "league-table__tab text-thin table-team__position c1-tour" : index === 4 ? "league-table__tab text-thin table-team__position europaleague-tour" : index > 16 ? "league-table__tab text-thin table-team__position relegation" : "league-table__tab text-thin table-team__position"}>
+                                        <span className="league-table__tab-index">{index + 1}</span>
+                                        {
+                                            index < 4 && <span className="league-table__tab-tag">Champions League</span>
+                                        }
+                                        {
+                                            index === 4 && <span className="league-table__tab-tag">Europa League</span>
+                                        }
+                                        {
+                                            index > 16 && <span className="league-table__tab-tag">Relegation</span>
+                                        }
+                                    </th>                                    <th className="league-table__tab text-thin table-team__infor" >
                                         <div className="table-team__flag"><img src={team.flag} alt="" /></div>
                                         <div className="table-team__name">{team.name}</div>
                                     </th>
@@ -83,14 +93,25 @@ const TableAll = ({ teams, match, propsTeam, mini }) => {
                                 </tr>)
                     }
 
-{
+                    {
                         !mini && teams.sort((a, b) => b.goalsDiff - a.goalsDiff).sort((a, b) => b.points - a.points)
                             .map((team, index) =>
                                 <tr key={team.teamId} className={
                                     ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || (propsTeam && team.name === propsTeam.name))
                                         ? "leaguge-table__row text-bold" :
                                         "leaguge-table__row"}>
-                                    <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
+                                    <th className={index < 4 ? "league-table__tab text-thin table-team__position c1-tour" : index === 4 ? "league-table__tab text-thin table-team__position europaleague-tour" : index > 16 ? "league-table__tab text-thin table-team__position relegation" : "league-table__tab text-thin table-team__position"}>
+                                        <span className="league-table__tab-index">{index + 1}</span>
+                                        {
+                                            index < 4 && <span className="league-table__tab-tag">Champions League</span>
+                                        }
+                                        {
+                                            index === 4 && <span className="league-table__tab-tag">Europa League</span>
+                                        }
+                                        {
+                                            index > 16 && <span className="league-table__tab-tag">Relegation</span>
+                                        }
+                                    </th>
                                     <th className="league-table__tab text-thin table-team__infor" >
                                         <div className="table-team__flag"><img src={team.flag} alt="" /></div>
                                         <div className="table-team__name">{team.name}</div>

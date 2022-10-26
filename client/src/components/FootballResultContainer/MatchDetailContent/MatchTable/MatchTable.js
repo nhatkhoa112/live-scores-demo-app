@@ -20,16 +20,16 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
   return (
     <div className="match-table__container">
 
-      { !mini && <div className="table-tabs__container">
+      {!mini && <div className="table-tabs__container">
         {tabs.map(tab => <div key={tab.id} onClick={() => setIsTableTabActive(tab.id)} className={isTableTabActive === tab.id ? "table-tab table-tab__active" : "table-tab"}>{tab.title}</div>)}
       </div>}
 
       {/* Table All */}
       {
-        isTableTabActive === 1 &&  <TableAll teams={teams} match={match} propsTeam={propsTeam} mini={mini} />
+        isTableTabActive === 1 && <TableAll teams={teams} match={match} propsTeam={propsTeam} mini={mini} />
       }
 
-    
+
       {
         isTableTabActive === 2 && <div className="table-all__container">
           <table width="100%" className="table-all__inner">
@@ -75,12 +75,12 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
               {
                 teams.sort((a, b) => b.goalsDiffHome - a.goalsDiffHome).sort((a, b) => b.pointsHome - a.pointsHome)
                   .map((team, index) =>
-                    <tr 
-                    key={team.teamId}
+                    <tr
+                      key={team.teamId}
                       className={
-                        ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name))  || (propsTeam && team.name === propsTeam.name))
-                        ?  "leaguge-table__row text-bold" : 
-                        "leaguge-table__row"}>
+                        ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || (propsTeam && team.name === propsTeam.name))
+                          ? "leaguge-table__row text-bold" :
+                          "leaguge-table__row"}>
                       <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                       <th className="league-table__tab text-thin table-team__infor" >
                         <Link onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
@@ -161,11 +161,11 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
             <tbody>
               {
                 teams.sort((a, b) => b.goalsDiffHome - a.goalsDiffHome).sort((a, b) => b.pointsAway - a.pointsAway)
-                  .map((team, index) => <tr key={team.teamId} 
-                  className={
-                    ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name))  || (propsTeam && team.name === propsTeam.name))
-                    ?  "leaguge-table__row text-bold" : 
-                    "leaguge-table__row"}>
+                  .map((team, index) => <tr key={team.teamId}
+                    className={
+                      ((match && (team.name === match.homeTeam.name || team.name === match.awayTeam.name)) || (propsTeam && team.name === propsTeam.name))
+                        ? "leaguge-table__row text-bold" :
+                        "leaguge-table__row"}>
                     <th className="league-table__tab text-thin table-team__position">{index + 1}</th>
                     <th className="league-table__tab text-thin table-team__infor" >
                       <Link onClick={() => setIsTabActive(1)} to={`/football/team/${tourId}/${team.teamId}`} className="table-team__flag"><img src={team.flag} alt="" /></Link>
@@ -200,7 +200,7 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
             </tbody>
           </table>
         </div>
-      } 
+      }
 
 
     </div>
