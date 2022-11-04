@@ -9,12 +9,12 @@ const FootballResultContainer = ({ tourId, countryId,  }) => {
         <div className='fb-result-container'>
             <div className="tour-results__overview">
                 {tourId && countryId && results.filter((result) => result.tourId === parseInt(tourId) && result.countryId === parseInt(countryId)).map((result, index) =>
-                    <TournamentResultDay key={index} result={result} overview={1} />
+                    <TournamentResultDay key={index} result={result} overview={1} tourId={tourId} />
                 )
                 }
 
                 {!tourId && !countryId && results.map((result, index) =>
-                <TournamentResultDay key={index} result={result} />
+                <TournamentResultDay key={index} result={result} tourId={tourId} />
                 )
                 }
             </div>

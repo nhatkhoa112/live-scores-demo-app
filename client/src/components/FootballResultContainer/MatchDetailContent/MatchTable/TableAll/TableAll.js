@@ -1,7 +1,8 @@
 import React from 'react'
 import './tableAll.css'
+import {Link} from 'react-router-dom'
 
-const TableAll = ({ teams, match, propsTeam, mini }) => {
+const TableAll = ({ teams, match, propsTeam, mini, tourId }) => {
     return (
         <div className="table-all__container">
             <table width="100%" className="table-all__inner">
@@ -64,7 +65,7 @@ const TableAll = ({ teams, match, propsTeam, mini }) => {
                                         }
                                     </th>                                    <th className="league-table__tab text-thin table-team__infor" >
                                         <div className="table-team__flag"><img src={team.flag} alt="" /></div>
-                                        <div className="table-team__name">{team.name}</div>
+                                        <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                                     </th>
                                     <th className="league-table__tab table-disable text-thin" >
                                         {team.played}
@@ -114,7 +115,7 @@ const TableAll = ({ teams, match, propsTeam, mini }) => {
                                     </th>
                                     <th className="league-table__tab text-thin table-team__infor" >
                                         <div className="table-team__flag"><img src={team.flag} alt="" /></div>
-                                        <div className="table-team__name">{team.name}</div>
+                                        <Link to={`/football/team/${tourId}/${team.teamId}`} className="table-team__name">{team.name}</Link>
                                     </th>
                                     <th className="league-table__tab table-disable text-thin" >
                                         {team.played}

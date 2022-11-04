@@ -141,6 +141,13 @@ span.league-table__tab-tag::before{
     display: flex;
 }
 
+
+.relegation:hover > span.league-table__tab-tag{
+    display: flex;
+}
+
+
+
 .league-table__tab:nth-child(1) {
     width: 50px;
 }

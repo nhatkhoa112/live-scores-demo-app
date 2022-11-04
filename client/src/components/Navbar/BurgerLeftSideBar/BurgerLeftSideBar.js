@@ -19,7 +19,6 @@ export const BurgerLeftSideBar = ({ isBurgerLeftActive, setIsBurgerLeftActive, s
     const [isSportItemActive, setIsSportItemActive] = useState(0)
     const [tournamentSelect, setTournamentSelect] = useState('')
 
-    console.log(tournamentSelect)
 
 
 

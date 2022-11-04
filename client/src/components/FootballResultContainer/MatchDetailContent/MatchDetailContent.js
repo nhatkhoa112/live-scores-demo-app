@@ -25,8 +25,6 @@ const tabs = [
 
 
 const MatchDetailContent = ({ tourId, countryId, matchId }) => {
-
-
     const tour = results.find((result => result.countryId === parseInt(countryId) && result.tourId === parseInt(tourId)));
     const match = tour.matches.find(match => match.matchId === parseInt(matchId))
     const [isStreamingShow, setIsStreamingShow] = useState(false)
@@ -34,7 +32,7 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
     const [isTabActive, setIsTabActive] = useState(2)
     let homeTeam = teams.find(team => team.name === match.homeTeam.name) || teams[13]
     let awayTeam = teams.find(team => team.name === match.awayTeam.name) || teams[18]
-
+    
 
 
     return (

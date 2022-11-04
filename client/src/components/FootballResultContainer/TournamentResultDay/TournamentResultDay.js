@@ -21,7 +21,7 @@ const tabs = [
     }
 ]
 
-const TournamentResultDay = ({ result, overview, }) => {
+const TournamentResultDay = ({ result, overview, tourId  }) => {
     const [isTabActive, setIsTabActive] = useState(1)
     const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isFavotite, setIsFavorite] = useState(false)
@@ -46,11 +46,12 @@ const TournamentResultDay = ({ result, overview, }) => {
             }
 
 
+
             {overview && isTabActive === 1 && <TourOverview result={result} setIsTabActive={setIsTabActive} setIsMatchesTabActive={setIsMatchesTabActive} />}
 
-            {overview && isTabActive === 2 && <TourMatches result={result} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive} />}
+            {overview && isTabActive === 2 && <TourMatches result={result} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive}  />}
 
-            {overview && isTabActive === 3 && <MatchTable  />}
+            {overview && isTabActive === 3 && <MatchTable  tourId={tourId} />}
 
 
 

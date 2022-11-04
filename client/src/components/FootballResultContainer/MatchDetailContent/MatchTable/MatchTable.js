@@ -16,7 +16,6 @@ const tabs = [
 
 const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
   const [isTableTabActive, setIsTableTabActive] = useState(1);
-  console.log(match)
   return (
     <div className="match-table__container">
 
@@ -26,7 +25,7 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
 
       {/* Table All */}
       {
-        isTableTabActive === 1 && <TableAll teams={teams} match={match} propsTeam={propsTeam} mini={mini} />
+        isTableTabActive === 1 && <TableAll teams={teams} match={match} propsTeam={propsTeam} mini={mini} tourId={tourId} />
       }
 
 
@@ -201,8 +200,6 @@ const MatchTable = ({ match, tourId, propsTeam, setIsTabActive, mini }) => {
           </table>
         </div>
       }
-
-
     </div>
   )
 }
