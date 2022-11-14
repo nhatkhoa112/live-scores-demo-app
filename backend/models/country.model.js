@@ -1,0 +1,28 @@
+
+const mongoose = require('mongoose');
+const Schema = require('mongoose').Schema;
+
+const countrySchema = new mongoose.Schema(
+    {
+        country_id: {
+            type: String,
+            unique: true,
+            trim: true,
+            required: false,
+            default: Date.now(),
+        },
+        name: { type: String, trim: true, required: true },
+        leagues: [
+            {ref: 'League', required: false, type: Schema.Types.ObjectId}
+        ],
+        imageUrl: {
+            type: String,
+            required: false,
+        }
+    },
+    {
+        timestamps: true,
+    }
+);
+
+module.exports = mongoose.model('Country', countrySchema);

@@ -1,4 +1,4 @@
-    export const players = [
+      export const players = [
   {
     id: 1,
     name: "Gordon Anthony",
