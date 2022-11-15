@@ -13,10 +13,9 @@ const countryController = {
 
     create: async (req, res) => {
         try {
-            const country_id = Date.now()
             const { name, leagues, imageUrl } = req.body
 
-            const country = await Country.findOne({ country_id });
+            const country = await Country.findOne({ name });
             if (country)
                 return res.status(400).json({ msg: 'This country is already exists.' });
             const newCountry = await new Country({

@@ -1,9 +1,11 @@
 const League = require('../models/league.model');
 const Country = require('../models/country.model')
+
+
 const leagueController = {
     getAllLeagues: async (req, res) => {
         try {
-            const leagues = await League.find().populate({path: 'seasons.country', options: {strictPopulate: false}})
+            const leagues = await League.find().populate({path: 'seasons.country', options: {strictPopulate: false}}).populate({path: 'seasons.teams', options: {strictPopulate: false}})
             res.json({ msg: 'All leagues are here:', leagues });
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -12,10 +14,9 @@ const leagueController = {
 
     create: async (req, res) => {
         try {
-            const league_id = Date.now()
             const { name, seasons } = req.body
 
-            const league = await League.findOne({ league_id });
+            const league = await League.findOne({ name });
             if (league)
                 return res.status(400).json({ msg: 'This league is already exists.' });
             const newLeague = await new League({
@@ -47,7 +48,7 @@ const leagueController = {
     deleteAll: async (req, res) => {
         try {
             const leagues = await League.findByIdAndDelete();
-            res.json({ msg: 'Deleted a league', datas: { league } });
+            res.json({ msg: 'Deleted all leagues', datas: { leagues } });
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }
@@ -55,7 +56,7 @@ const leagueController = {
 
     update: async (req, res) => {
         try {
-            const league = await league.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
+            const league = await League.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
             if (!league) return res.status(404).json({ msg: 'The league is not exists.' });
             res.status(200).json({ msg: 'Updated league successfully', leauge });
 

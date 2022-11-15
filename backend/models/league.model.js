@@ -18,7 +18,7 @@ const leagueSchema = new mongoose.Schema(
                 teams: [
                     { ref: 'Team', required: false, type: Schema.Types.ObjectId }
                 ],
-                country: { ref: 'Country', required: false, type: Schema.Types.ObjectId },
+                country: { ref: 'Country', required: true, type: Schema.Types.ObjectId },
                 matches: [
                     { ref: "Match", required: false, type: Schema.Types.ObjectId }
                 ],

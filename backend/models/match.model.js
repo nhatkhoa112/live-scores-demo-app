@@ -1,23 +1,20 @@
+const { v4: uuidv4 } = require('uuid');
+
 
 const mongoose = require('mongoose');
 const Schema = require('mongoose').Schema;
 
 const matchSchema = new mongoose.Schema(
     {
-        match_id: {
-            type: String,
-            unique: true,
-            trim: true,
-            required: false,
-            default: Date.now(),
-        },
+        
         time: {
             type: String, trim: true, required: true, default: Date.now()
         },
-        league: { ref: "League", required: false, type: Schema.Types.ObjectId }
-        ,
+        league: {
+            ref: "League", required: false, type: Schema.Types.ObjectId
+        },
         season: {
-            type: String, trim: true, required: true, default: "20/21"
+            type: String, trim: true, required: true, default: "21/22"
         },
         stadium: {
             type: String, trim: true, required: true, default: 'Goodison Park'
@@ -28,45 +25,7 @@ const matchSchema = new mongoose.Schema(
         tiket: {
             type: Number, trim: true, required: true, default: 30000
         },
-        summaryEvent: [
-            {
-                id: {
-                    type: String,
-                    unique: true,
-                    trim: true,
-                    required: false,
-                    default: Date.now(),
-                },
-                minute: {
-                    type: String,
-                    required: false,
-                },
-                team: {
-                    type: String,
-                    required: true,
-                },
-                mainPlayer: {
-                    type: String,
-                    required: false,
-                },
-                assistPlayer: {
-                    type: String,
-                    required: false,
-                },
-                event: {
-                    type: String,
-                    required: false,
-                },
-                cardType: {
-                    type: String,
-                    required: false,
-                },
-                score: {
-                    type: String,
-                    required: false,
-                },
-            }
-        ],
+       
         homeTeam:
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },
