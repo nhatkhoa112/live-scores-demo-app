@@ -11,7 +11,7 @@ const countrySchema = new mongoose.Schema(
             required: false,
             default: Date.now(),
         },
-        name: { type: String, trim: true, required: true },
+        name: { type: String,  required: true },
         leagues: [
             {ref: 'League', required: false, type: Schema.Types.ObjectId}
         ],
