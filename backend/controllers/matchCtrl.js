@@ -31,15 +31,15 @@ const matchController = {
             seasonUpdate.matches.push(newMatch._id)
             await newLeague.save();
 
-            // // Add match to team - seasons
-            // const newTeamHome = await Team.findOne(newMatch.homeTeam.team)
-            // const newTeamAway = await Team.findOne(newMatch.awayTeam.team)
-            // let seasonsUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season  )
-            // let seasonsUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season  )
-            // seasonsUpdateTeamHome.matches.push(newMatch._id)
-            // seasonsUpdateTeamAway.matches.push(newMatch._id)
-            // await newTeamHome.save()
-            // await newTeamAway.save()
+            // Add match to team - seasons
+            const newTeamHome = await Team.findOne(newMatch.homeTeam.team)
+            const newTeamAway = await Team.findOne(newMatch.awayTeam.team)
+            let seasonsUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season  )
+            let seasonsUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season  )
+            seasonsUpdateTeamHome.matches.push(newMatch._id)
+            seasonsUpdateTeamAway.matches.push(newMatch._id)
+            await newTeamHome.save()
+            await newTeamAway.save()
 
             res.json({ msg: 'Created a match', data: { match: newMatch } });
         } catch (error) {

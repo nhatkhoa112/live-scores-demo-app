@@ -14,7 +14,7 @@ const leagueController = {
 
     create: async (req, res) => {
         try {
-            const { name, seasons } = req.body
+            const { name, seasons, league_id } = req.body
 
             const league = await League.findOne({ name });
             if (league)

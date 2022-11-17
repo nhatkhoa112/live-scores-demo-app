@@ -25,7 +25,39 @@ const matchSchema = new mongoose.Schema(
         tiket: {
             type: Number, trim: true, required: true, default: 30000
         },
-       
+        summaryEvent: [
+            {
+                
+                minute: {
+                    type: String,
+                    required: false,
+                },
+                team: {
+                    type: String,
+                    required: true,
+                },
+                mainPlayer: {
+                    type: String,
+                    required: false,
+                },
+                assistPlayer: {
+                    type: String,
+                    required: false,
+                },
+                event: {
+                    type: String,
+                    required: false,
+                },
+                cardType: {
+                    type: String,
+                    required: false,
+                },
+                score: {
+                    type: String,
+                    required: false,
+                },
+            }
+        ],
         homeTeam:
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },

@@ -3,7 +3,7 @@ const Country = require('../models/country.model')
 const countryController = {
     getAllCountries: async (req, res) => {
         try {
-            const countries = await Country.find().populate({path: "leagues", model: "League"})
+            const countries = await Country.find().populate({ path: "leagues", model: "League" })
             res.json({ msg: 'All countries are here:', countries });
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -13,7 +13,7 @@ const countryController = {
 
     create: async (req, res) => {
         try {
-            const { name, leagues, imageUrl } = req.body
+            const { name, leagues, imageUrl, country_id} = req.body
 
             const country = await Country.findOne({ name });
             if (country)

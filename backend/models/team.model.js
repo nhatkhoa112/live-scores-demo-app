@@ -11,7 +11,7 @@ const teamSchema = new mongoose.Schema(
             {
                 season: { type: String, trim: true, required: false },
                 league: { ref: "League", required: true, type: Schema.Types.ObjectId },
-                matches: { ref: "Match", required: false, type: Schema.Types.ObjectId },
+                matches: [{ ref: "Match", required: false, type: Schema.Types.ObjectId }],
                 players: [{ ref: "Player", required: false, type: Schema.Types.ObjectId }],
                 played: { type: Number, trim: true, required: false },
                 wins: { type: Number, trim: true, required: false },
