@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose');
 const Schema = require('mongoose').Schema;
+const { v4: uuidv4 } = require('uuid');
 
 const playerSchema = new mongoose.Schema(
     {
@@ -9,12 +10,12 @@ const playerSchema = new mongoose.Schema(
             unique: true,
             trim: true,
             required: false,
-            default: Date.now(),
+            default: uuidv4(),
         },
+        name: { type: String, trim: true, required: true },
         seasons: [
             {
                 season: { type: String, trim: true, required: true },
-                name: { type: String, trim: true, required: true },
                 team:
                     { ref: 'Team', required: false, type: Schema.Types.ObjectId }
                 ,
