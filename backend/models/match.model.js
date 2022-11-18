@@ -25,6 +25,9 @@ const matchSchema = new mongoose.Schema(
         tiket: {
             type: Number, trim: true, required: true, default: 30000
         },
+        isFav: {
+            type: Boolean, required: true, default: false
+        },
         summaryEvent: [
             {
                 

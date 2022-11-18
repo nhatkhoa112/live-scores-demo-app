@@ -21,13 +21,13 @@ const playerController = {
             const newPlayer = await new Player({
                 player_id, name, seasons
             });
-            await Player.save();
 
             // Add player to teams - seasons
-            const newTeam = await Team.findOne(newTeam.seasons[newTeam.seasons.length - 1].team);
+            const newTeam = await Team.findOne(newPlayer.seasons[newPlayer.seasons.length - 1].team);
             const seasonUpdate = newTeam.seasons.find((season) => season.season === newPlayer.seasons[newTeam.seasons.length - 1].season)
             seasonUpdate.players.push(newPlayer._id)
             await newTeam.save();
+            await newPlayer.save();
 
            
 

@@ -12,6 +12,9 @@ const leagueSchema = new mongoose.Schema(
             default: Date.now(),
         },
         name: { type: String, trim: true, required: true },
+        isFav: {
+            type: Boolean, required: true, default: false
+        },
         seasons: [
             {
                 season: { type: String, trim: true, required: true },
