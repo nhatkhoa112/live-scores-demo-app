@@ -3,6 +3,9 @@ const countryCtl = require('../controllers/countryCtrl')
 
 router.get('', countryCtl.getAllCountries)
 
+router.get('/:id', countryCtl.getAllCountryById)
+
+
 router.post('', countryCtl.create)
 
 router.delete('/:id', countryCtl.delete)
