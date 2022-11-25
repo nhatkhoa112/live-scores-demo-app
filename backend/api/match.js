@@ -3,6 +3,8 @@ const matchCtl = require('../controllers/matchCtrl')
 
 router.get('', matchCtl.getAllMatches)
 
+router.get('/id', matchCtl.getMatchById)
+
 router.post('', matchCtl.create)
 
 router.delete('/:id', matchCtl.delete)

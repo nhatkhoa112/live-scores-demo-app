@@ -23,7 +23,21 @@ const getTeamsByLeagueId = (countryId) => async (dispatch) => {
     }
 }
 
+
+
+const getTeamById = (teamId) => async (dispatch) => {
+    dispatch({ type: types.GET_TEAM_BY_ID_REQUEST, payload: null })
+    try {
+        const data = await api.get(`team/${teamId}`)
+        dispatch({ type: types.GET_TEAM_BY_ID_SUCCESS, payload: data })
+    } catch (error) {
+        dispatch({ type: types.GET_TEAM_BY_ID_FAILURE, payload: null })
+    } 
+}
+
+
 export const countryActions = {
     getAllTeams,
-    getTeamsByLeagueId
+    getTeamsByLeagueId,
+    getTeamById
 }

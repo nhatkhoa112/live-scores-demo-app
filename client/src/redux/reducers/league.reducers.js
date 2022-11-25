@@ -4,6 +4,7 @@ const initialState = {
     leagues: [],
     leagueByCountryId: [],
     league: {},
+    leaguePicker: {},
     loading: false
 }
 
@@ -14,12 +15,13 @@ const leagueReducer = (state = initialState, action) => {
         case types.GET_ALL_LEAGUES_REQUEST:
         case types.GET_LEAGUES_BY_COUNTRYID_REQUEST:
         case types.CREATE_LEAGUE_REQUEST:
-
+        case types.GET_LEAGUE_BY_ID_REQUEST:
             return { ...state, loading: true }
 
         case types.GET_ALL_LEAGUES_FAILURE:
         case types.GET_LEAGUES_BY_COUNTRYID_FAILURE:
         case types.CREATE_LEAGUE_FAILURE:
+        case types.GET_LEAGUE_BY_ID_FAILURE:
             return { ...state, loading: false }
 
         case types.GET_ALL_LEAGUES_SUCCESS:
@@ -27,6 +29,9 @@ const leagueReducer = (state = initialState, action) => {
         case type.GET_LEAGUES_BY_COUNTRYID_SUCCESS:
             let leagueByCountryId = payload.data.filter(league =>  league.seasons[league.seasons.length - 1].country._id === payload.leagueByCountryId)
             return { ...state, leagueByCountryId: leagueByCountryId, loading: false }
+        case types.GET_LEAGUE_BY_ID_SUCCESS:
+            return {...state, leaguePicker: payload.data.league, loading: false}
+
         default:
             return state;
 

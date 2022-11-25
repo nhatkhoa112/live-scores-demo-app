@@ -14,12 +14,24 @@ const matchController = {
         }
     },
 
+    getMatchById: async (req, res) => {
+        try {
+            const matchId = req.params.id;
+            const newMatch = await Match.findOne({ matchId });
+            if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
+            res.status(500).json({ msg: 'This match is here: ', data: newMatch })
+
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+        }
+    },
+
     create: async (req, res) => {
         try {
             const {
                 time, league, season, stadium, referee, tiket, summartEvent, homeTeam, awayTeam
             } = req.body
-            
+
             const newMatch = await new Match({
                 time, league, season, stadium, referee, tiket, summartEvent, homeTeam, awayTeam
             });
@@ -34,8 +46,8 @@ const matchController = {
             // Add match to team - seasons
             const newTeamHome = await Team.findOne(newMatch.homeTeam.team)
             const newTeamAway = await Team.findOne(newMatch.awayTeam.team)
-            let seasonsUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season  )
-            let seasonsUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season  )
+            let seasonsUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season)
+            let seasonsUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season)
             seasonsUpdateTeamHome.matches.push(newMatch._id)
             seasonsUpdateTeamAway.matches.push(newMatch._id)
             await newTeamHome.save()
@@ -43,7 +55,7 @@ const matchController = {
 
             res.json({ msg: 'Created a match', data: { match: newMatch } });
         } catch (error) {
-            
+
             res.status(500).json({ msg: error.message });
         }
     },

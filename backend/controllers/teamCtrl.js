@@ -12,6 +12,19 @@ const teamController = {
         }
     },
 
+
+    getTeamById: async (req, res) => {
+        try {
+            const teamId = req.params.id;
+            const newTeam = await Team.findOne({ teamId });
+            if (!newTeam) res.status(400).json({ msg: 'the teamId is wrong' })
+            res.status(200).json({ msg: "The team is hear", data: newTeam })
+        } catch {
+            res.status(500).json({ msg: error.message });
+
+        }
+    },
+
     create: async (req, res) => {
         try {
             const { 

@@ -3,8 +3,7 @@ const countryCtl = require('../controllers/countryCtrl')
 
 router.get('', countryCtl.getAllCountries)
 
-router.get('/:id', countryCtl.getAllCountryById)
-
+router.get('/:id', countryCtl.getCountryById)
 
 router.post('', countryCtl.create)
 

@@ -11,7 +11,7 @@ const countryController = {
         }
     },
 
-    getAllCountryById: async (req, res) => {
+    getCountryById: async (req, res) => {
         try {
             const countryId = req.params.id;
             const newCountry = await Country.findOne({ countryId });

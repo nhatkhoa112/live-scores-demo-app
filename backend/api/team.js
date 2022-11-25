@@ -3,6 +3,8 @@ const teamCtl = require('../controllers/teamCtrl')
 
 router.get('', teamCtl.getAllTeams)
 
+router.get('/id', teamCtl.getTeamById)
+
 router.post('', teamCtl.create)
 
 router.delete('/:id', teamCtl.delete)

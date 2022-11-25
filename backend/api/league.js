@@ -4,6 +4,8 @@ const leagueCtl = require('../controllers/leagueCtrl')
 
 router.get('', leagueCtl.getAllLeagues)
 
+router.get('/:id', leagueCtl.getLeagueById)
+
 router.post('', leagueCtl.create)
 
 router.delete('/:id', leagueCtl.delete)

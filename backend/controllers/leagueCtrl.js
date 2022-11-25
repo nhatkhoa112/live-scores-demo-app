@@ -12,6 +12,18 @@ const leagueController = {
         }
     },
 
+    getLeagueById: async (req, res) => {
+        try {
+            const leagueId = req.params.id;
+            const newLeague = await League.findOne({ leagueId });
+            if (!newLeague) res.status(400).json({ msg: 'the leagueId is wrong' })
+            res.status(200).json({ msg: "The league is hear", data: newLeague })
+        } catch {
+            res.status(500).json({ msg: error.message });
+
+        }
+    },
+
     create: async (req, res) => {
         try {
             const { name, seasons, league_id } = req.body
