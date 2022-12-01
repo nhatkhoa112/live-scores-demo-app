@@ -19,7 +19,7 @@ const matchController = {
             const matchId = req.params.id;
             const newMatch = await Match.findOne({ matchId });
             if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
-            res.status(500).json({ msg: 'This match is here: ', data: newMatch })
+            res.status(500).json({ msg: 'This match is here: ', data: {match: newMatch} })
 
         } catch (error) {
             res.status(500).json({ msg: error.message });

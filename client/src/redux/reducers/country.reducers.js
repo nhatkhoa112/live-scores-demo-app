@@ -30,7 +30,7 @@ const countryReducer = (state = initialState, action) => {
         case types.CREATE_COUNTRY_SUCCESS:
             return { ...state, country: payload.country, loading: false }
         case type.GET_COUNTRIES_BY_QUERY_SUCCESS:
-            let countriesByQuery = payload.data.countries.filter(country => country.name.toLowerCase().includes(query.toLowerCase()))
+            let countriesByQuery = payload.countries.filter(country => country.name.toLowerCase().includes(query.toLowerCase()))
             return { ...state, countriesByQuery: countriesByQuery, loading: false }
         case types.GET_COUNTRY_BY_ID_REQUEST:
             return { ...state, countryPicker: payload.country, loading: false }

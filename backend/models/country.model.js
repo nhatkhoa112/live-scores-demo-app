@@ -11,10 +11,15 @@ const countrySchema = new mongoose.Schema(
             required: false,
             default: Date.now(),
         },
-        name: { type: String,  required: true },
+        name: { type: String, required: true },
         leagues: [
-            {ref: 'League', required: false, type: Schema.Types.ObjectId}
+            { ref: 'League', required: false, type: Schema.Types.ObjectId }
         ],
+        typeImage: {
+            type: String,
+            required: true,
+            default: "flag"
+        },
         imageUrl: {
             type: String,
             required: false,

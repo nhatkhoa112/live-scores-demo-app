@@ -5,8 +5,22 @@ const Country = require('../models/country.model')
 const leagueController = {
     getAllLeagues: async (req, res) => {
         try {
-            const leagues = await League.find().populate({path: 'seasons.country', options: {strictPopulate: false}}).populate({path: 'seasons.teams', options: {strictPopulate: false}})
+            const leagues = await League.find().populate({ path: 'seasons.country', options: { strictPopulate: false } }).populate({ path: 'seasons.teams', options: { strictPopulate: false } })
             res.json({ msg: 'All leagues are here:', leagues });
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+        }
+    },
+
+    getLeagueByCountryName: async (req, res) => {
+        const countryName = req.params.name
+        let newCountryName = countryName.split("-").join(" ")
+        try {
+            const leagues = await League.find().populate({ path: 'seasons.country', options: { strictPopulate: false } }).populate({ path: 'seasons.teams', options: { strictPopulate: false } });
+            const newLeagues = leagues.filter((league) => {
+                return league.seasons[league.seasons.length - 1].country.name === newCountryName
+            })
+            res.status(200).json({ msg: `All leagues of ${countryName} are heare:`, data: { leagues: newLeagues } })
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }
@@ -15,10 +29,10 @@ const leagueController = {
     getLeagueById: async (req, res) => {
         try {
             const leagueId = req.params.id;
-            const newLeague = await League.findOne({ leagueId });
+            const newLeague = await League.findOne({ _id: leagueId }).populate({ path: 'seasons.teams'});
             if (!newLeague) res.status(400).json({ msg: 'the leagueId is wrong' })
-            res.status(200).json({ msg: "The league is hear", data: newLeague })
-        } catch {
+            res.status(200).json({ msg: "The league is hear", data: { league: newLeague } })
+        } catch (error) {
             res.status(500).json({ msg: error.message });
 
         }
@@ -26,23 +40,19 @@ const leagueController = {
 
     create: async (req, res) => {
         try {
-            const { name, seasons, league_id } = req.body
-
-            const league = await League.findOne({ name });
-            if (league)
-                return res.status(400).json({ msg: 'This league is already exists.' });
+            const { name, seasons, isFav, isTab } = req.body
             const newLeague = await new League({
-                league_id, name, seasons
+                name, seasons, isFav, isTab
             });
             await newLeague.save();
 
-            const newCountry = await Country.findOne(newLeague.country)
+            const newCountry = await Country.findOne(newLeague.seasons[0].country)
             newCountry.leagues.push(newLeague._id);
             await newCountry.save();
             console.log(newCountry)
-            
 
-            res.json({ msg: 'Created a country', data: { league: newLeague } });
+
+            res.json({ msg: 'Created a league', data: { league: newLeague } });
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }

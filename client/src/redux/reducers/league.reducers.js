@@ -27,10 +27,10 @@ const leagueReducer = (state = initialState, action) => {
         case types.GET_ALL_LEAGUES_SUCCESS:
             return { ...state, leagues: payload }
         case type.GET_LEAGUES_BY_COUNTRYID_SUCCESS:
-            let leagueByCountryId = payload.data.filter(league =>  league.seasons[league.seasons.length - 1].country._id === payload.leagueByCountryId)
+            let leagueByCountryId = payload.countries.filter(league =>  league.seasons[league.seasons.length - 1].country._id === payload.countryId)
             return { ...state, leagueByCountryId: leagueByCountryId, loading: false }
         case types.GET_LEAGUE_BY_ID_SUCCESS:
-            return {...state, leaguePicker: payload.data.league, loading: false}
+            return {...state, leaguePicker: payload.league, loading: false}
 
         default:
             return state;

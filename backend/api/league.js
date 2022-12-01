@@ -6,6 +6,8 @@ router.get('', leagueCtl.getAllLeagues)
 
 router.get('/:id', leagueCtl.getLeagueById)
 
+router.get('/name/:name', leagueCtl.getLeagueByCountryName)
+
 router.post('', leagueCtl.create)
 
 router.delete('/:id', leagueCtl.delete)

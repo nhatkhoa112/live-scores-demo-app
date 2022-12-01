@@ -10,6 +10,7 @@ const matchSchema = new mongoose.Schema(
         time: {
             type: String, trim: true, required: true, default: Date.now()
         },
+        status: {type: String, required: true, default: "FT"},
         league: {
             ref: "League", required: false, type: Schema.Types.ObjectId
         },
@@ -28,6 +29,7 @@ const matchSchema = new mongoose.Schema(
         isFav: {
             type: Boolean, required: true, default: false
         },
+      
         summaryEvent: [
             {
                 
@@ -64,6 +66,9 @@ const matchSchema = new mongoose.Schema(
         homeTeam:
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },
+            lineUp: {
+                type: String, trim: true, required: true, default: '1-4-3-3'
+            },
             score: {
                 type: Number, trim: true, required: true, default: 0
             },
@@ -108,6 +113,9 @@ const matchSchema = new mongoose.Schema(
         awayTeam:
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },
+            lineUp: {
+                type: String, trim: true, required: true, default: '1-4-3-3'
+            },
             score: {
                 type: Number, trim: true, required: true, default: 0
             },

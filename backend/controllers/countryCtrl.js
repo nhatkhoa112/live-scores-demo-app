@@ -16,7 +16,7 @@ const countryController = {
             const countryId = req.params.id;
             const newCountry = await Country.findOne({ countryId });
             if (!newCountry) res.status(400).json({ msg: 'the countryId is wrong' })
-            res.status(200).json({ msg: "The country is hear", data: newCountry })
+            res.status(200).json({ msg: "The country is hear", data: {country: newCountry} })
         } catch {
             res.status(500).json({ msg: error.message });
 
@@ -25,7 +25,7 @@ const countryController = {
 
     create: async (req, res) => {
         try {
-            const { name, leagues, imageUrl, country_id } = req.body
+            const { name, leagues, imageUrl, country_id,  } = req.body
 
             const country = await Country.findOne({ name });
             if (country)
@@ -34,7 +34,8 @@ const countryController = {
                 country_id,
                 name,
                 leagues,
-                imageUrl
+                imageUrl,
+                
             });
             await newCountry.save();
             res.json({ msg: 'Created a country', data: { country: newCountry } });

@@ -4,20 +4,17 @@ const Schema = require('mongoose').Schema;
 
 const leagueSchema = new mongoose.Schema(
     {
-        league_id: {
-            type: String,
-            unique: true,
-            trim: true,
-            required: false,
-            default: Date.now(),
-        },
+      
         name: { type: String, trim: true, required: true },
         isFav: {
-            type: Boolean, required: true, default: false
+            type: Boolean, required: false, default: false
+        },
+        isTab: {
+            type: Boolean, required: false, default: false
         },
         seasons: [
             {
-                season: { type: String, trim: true, required: true },
+                season: { type: String, trim: true, required: true, default: "21/22" },
                 teams: [
                     { ref: 'Team', required: false, type: Schema.Types.ObjectId }
                 ],
@@ -27,14 +24,30 @@ const leagueSchema = new mongoose.Schema(
                 ],
                 championLeagueTeams: {
                     type: Number,
-                    required: false,
+                    required: true,
                     default: 0,
                 },
                 euroPaLeagueTeams: {
                     type: Number,
-                    required: false,
+                    required: true,
                     default: 0,
                 },
+                relegation: {
+                    type: Number,
+                    required: true,
+                    default: 0,
+                },
+                promotion: {
+                    type: Number,
+                    required: true,
+                    default: 0,
+                },
+                promotionPlayOff: {
+                    type: Number,
+                    required: true,
+                    default: 0,
+
+                }
             }
         ]
     },
