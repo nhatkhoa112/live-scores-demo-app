@@ -1,6 +1,5 @@
 const Team = require('../models/team.model');
 const League = require('../models/league.model')
-const ObjectId = require('mongodb').ObjectId;
 
 
 const teamController = {

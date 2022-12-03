@@ -16,8 +16,8 @@ const playerSchema = new mongoose.Schema(
         seasons: [
             {
                 season: { type: String, trim: true, required: true },
-                team:
-                    { ref: 'Team', required: false, type: Schema.Types.ObjectId }
+                teams:
+                    [{ ref: 'Team', required: false, type: Schema.Types.ObjectId }]
                 ,
                 goals: {
                     type: Number,
