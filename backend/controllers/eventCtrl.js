@@ -68,6 +68,6 @@ const eventController = {
     // getScoreHomeTeamMatch: async (req, res) => {
 
     // }
-},
+}
 
 module.exports = eventController;

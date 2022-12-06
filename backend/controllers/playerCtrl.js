@@ -38,6 +38,10 @@ const playerController = {
         }
     },
 
+    addTeamToPlayer: async (req, res) => {
+
+    },
+
     delete: async (req, res) => {
         try {
             const player = await Player.findByIdAndDelete(req.params.id);
