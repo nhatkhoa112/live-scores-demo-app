@@ -6,11 +6,11 @@ const Schema = require('mongoose').Schema;
 
 const matchSchema = new mongoose.Schema(
     {
-        
+
         time: {
             type: String, trim: true, required: true, default: Date.now()
         },
-        status: {type: String, required: true, enum:[ "FT", "Live", "Not yes"]},
+        status: { type: String, required: true, enum: ["FT", "Live", "Not yes"] },
         league: {
             ref: "League", required: false, type: Schema.Types.ObjectId
         },
@@ -29,10 +29,10 @@ const matchSchema = new mongoose.Schema(
         isFav: {
             type: Boolean, required: true, default: false
         },
-      
+
         summaryEvent: [
             {
-                
+
                 minute: {
                     type: String,
                     required: false,

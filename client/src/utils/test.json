@@ -1,0 +1,13 @@
+{
+    home_team: 
+    await_team:
+}
+
+{
+    event_id: 1,
+    updated_at: "2022-yy-22-hh:ss:ls" 
+    // player_id:
+    event_type: [ YELLOW_CARD, SCORE, ddads],
+    context: {assis_player_id: , scored_player_id: , score_type: Pennary, Sut xam  }
+
+},
