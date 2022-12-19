@@ -7,10 +7,8 @@ const Schema = require('mongoose').Schema;
 const matchSchema = new mongoose.Schema(
     {
 
-        time: {
-            type: String, trim: true, required: true, default: Date.now()
-        },
-        status: { type: String, required: true, enum: ["FT", "Live", "Not yes"] },
+        time: { type: String, required: true, default: new Date() },
+        status: { type: String, required: true, enum: ["FT", "Live", "Not yet"] },
         league: {
             ref: "League", required: false, type: Schema.Types.ObjectId
         },
@@ -30,38 +28,8 @@ const matchSchema = new mongoose.Schema(
             type: Boolean, required: true, default: false
         },
 
-        summaryEvent: [
-            {
-
-                minute: {
-                    type: String,
-                    required: false,
-                },
-                team: {
-                    type: String,
-                    required: true,
-                },
-                mainPlayer: {
-                    type: String,
-                    required: false,
-                },
-                assistPlayer: {
-                    type: String,
-                    required: false,
-                },
-                event: {
-                    type: String,
-                    required: false,
-                },
-                cardType: {
-                    type: String,
-                    required: false,
-                },
-                score: {
-                    type: String,
-                    required: false,
-                },
-            }
+        summaryEvents: [
+            { event: { ref: "Event", required: false, type: Schema.Types.ObjectId } }
         ],
         homeTeam:
         {
@@ -82,7 +50,7 @@ const matchSchema = new mongoose.Schema(
                         type: Number, trim: true, required: false
                     },
                     official: {
-                        type: Boolean, trim: true, required: false
+                        type: Boolean, trim: true, required: true, default: true
                     },
                     penaltyCard: {
                         type: Boolean, trim: true, required: false
@@ -129,7 +97,7 @@ const matchSchema = new mongoose.Schema(
                         type: Number, trim: true, required: false
                     },
                     official: {
-                        type: Boolean, trim: true, required: false
+                        type: Boolean, trim: true, required: true, default: true
                     },
                     penaltyCard: {
                         type: Boolean, trim: true, required: false
@@ -155,6 +123,19 @@ const matchSchema = new mongoose.Schema(
                 }
             ]
         },
+        teamStats: [
+            {
+                shots: [{ type: Number, required: true, defaut: 0 }],
+                shotsOnTarget: [{ type: Number, required: true, defaut: 0 }],
+                possession: [{ type: Number, required: true, defaut: 0 }],
+                passes: [{ type: Number, required: true, defaut: 0 }],
+                passAccuracy: [{ type: Number, required: true, defaut: 0 }],
+                fouls: [{ type: Number, required: true, defaut: 0 }],
+                yellowCards: [{ type: Number, required: true, defaut: 0 }],
+                redCards: [{ type: Number, required: true, defaut: 0 }],
+                offSides: [{ type: Number, required: true, defaut: 0 }],
+                cornersx: [{ type: Number, required: true, defaut: 0 }],
+            }]
     },
     {
         timestamps: true,
@@ -162,3 +143,5 @@ const matchSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Match', matchSchema);
+
+

@@ -18,23 +18,32 @@ const playerController = {
                 player_id, name, seasons
             } = req.body
 
+            const player = await Player.findOne({name})
+            if(player) res.status(400).json({msg: "This player is exist"})
+
             const newPlayer = await new Player({
                 player_id, name, seasons
             });
-
             // Add player to teams - seasons
-            const playerSeason = newPlayer.seasons[newTeam.seasons.length - 1]
-            playerSeason.teams.map(async (team) => {
-                const newTeam = await Team.findOne(newPlayer.seasons[newPlayer.seasons.length - 1].team);
-                const teamSeason = newTeam.seasons.find((teamSeason) => teamSeason.season === playerSeason.season)
-                teamSeasonLeague = teamSeason.leagues.find(league => league === playerSeason.league)
-                if (teamSeasonLeague.players.findIndex(player => player === newPlayer._id) !== -1) {
-                    teamSeasonLeague.players.push(newPlayer._id)
+
+            const playerSeason = newPlayer.seasons[newPlayer.seasons.length - 1]
+            playerSeason.leagues.map(async (league) => {
+
+                const newTeam = await Team.findOne(league.team);
+                const seasonUpdate = newTeam.seasons.find((season) => {
+                    return season.season === playerSeason.season
+                })
+                const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString() )
+
+                if(leagueUpdate.players.findIndex(player => {
+                    console.log(player, newPlayer._id)
+                }) === -1) {
+                    leagueUpdate.players.push(newPlayer._id)
                 }
                 await newTeam.save();
             })
-            await newPlayer.save();
 
+            await newPlayer.save();
             res.json({ msg: 'Created a player', data: { player: newPlayer } });
         } catch (error) {
 
@@ -44,20 +53,36 @@ const playerController = {
 
     addTeamToPlayer: async (req, res) => {
         try {
-            const playerId = req.params.id;
+            const playerId = req.params.playerId;
             const { teamId } = req.params
-
+            console.log(playerId, teamId)
             const newPlayer = await Player.findOne({ _id: playerId })
             const newTeam = await Team.findOne({ _id: teamId })
+
+            // Add player to team
             let playerSeason = newPlayer.seasons[newPlayer.seasons.length - 1]
-            let teamSeason = newTeam.seasons.find((teamSeason.season === playerSeason.season))
-            if (playerSeason.teams.findIndex(team => team === teamId) === -1) {
-                playerSeason.teams.push(teamId)
-                teamSeason.players.push(playerId)
+            playerSeason.leagues.map(async (league) => {
+                const newTeam = await Team.findOne(league.team);
+                const seasonUpdate = newTeam.seasons.find((season) => {
+                    return season.season === playerSeason.season
+                })
+                const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString() )
+                if(leagueUpdate.players.findIndex(player => {
+                    console.log(player, newPlayer._id)
+                }) === -1) {
+                    leagueUpdate.players.push(newPlayer._id)
+                }
+                // await newTeam.save();
+            })
+
+            // Add team to player
+            
+
+            // await newTeam.save()
+            res.status(200).json({ msg: 'The team is added to player,',
+             team: newTeam, player: newPlayer 
             }
-            await newPlayer.save()
-            await newTeam.save()
-            res.status(200).json({ msg: 'The team is added to player,', team: newTeam, player: newPlayer })
+            )
 
         } catch (error) {
             res.status(500).json({ msg: error.message });

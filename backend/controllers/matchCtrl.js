@@ -19,7 +19,7 @@ const matchController = {
             const matchId = req.params.id;
             const newMatch = await Match.findOne({ matchId });
             if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
-            res.status(500).json({ msg: 'This match is here: ', data: {match: newMatch} })
+            res.status(500).json({ msg: 'This match is here: ', data: { match: newMatch } })
 
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -29,13 +29,15 @@ const matchController = {
     create: async (req, res) => {
         try {
             const {
-                time, league, season, stadium, referee, tiket, summartEvent, homeTeam, awayTeam
+                time, league, season, stadium, referee, tiket, homeTeam, awayTeam, status
             } = req.body
 
+            const newTime = new Date(time[0], time[1] - 1 , time[2], time[3], time[4], time[5])
+
+            console.log(newTime)
             const newMatch = await new Match({
-                time, league, season, stadium, referee, tiket, summartEvent, homeTeam, awayTeam
+                time: newTime, league, season, stadium, referee, tiket, homeTeam, awayTeam, status
             });
-            await newMatch.save();
 
             // Add match to league - seasons
             const newLeague = await League.findOne(newMatch.league);
@@ -43,15 +45,20 @@ const matchController = {
             seasonUpdate.matches.push(newMatch._id)
             await newLeague.save();
 
-            // Add match to team - seasons
+            // // Add match to team - seasons
             const newTeamHome = await Team.findOne(newMatch.homeTeam.team)
             const newTeamAway = await Team.findOne(newMatch.awayTeam.team)
-            let seasonsUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season)
-            let seasonsUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season)
-            seasonsUpdateTeamHome.matches.push(newMatch._id)
-            seasonsUpdateTeamAway.matches.push(newMatch._id)
+            let seasonUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season)
+            let seasonUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season)
+            let seasonLeagueUpdateHome = seasonUpdateTeamHome.leagues.find((league) => league.league.toString() === newMatch.league.toString())
+            let seasonLeagueUpdateAway = seasonUpdateTeamAway.leagues.find((league) => league.league.toString() === newMatch.league.toString())
+
+            seasonLeagueUpdateHome.matches.push(newMatch._id)
+            seasonLeagueUpdateAway.matches.push(newMatch._id)
+
             await newTeamHome.save()
             await newTeamAway.save()
+            await newMatch.save();
 
             res.json({ msg: 'Created a match', data: { match: newMatch } });
         } catch (error) {

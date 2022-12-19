@@ -13,6 +13,7 @@ const teamSchema = new mongoose.Schema(
                 leagues: [{
                     league: { ref: "League", required: true, type: Schema.Types.ObjectId },
                     players: [{ ref: "Player", required: false, type: Schema.Types.ObjectId }],
+                    matches: [{ ref: "Player", required: false, type: Schema.Types.ObjectId }],
                     played: { type: Number, trim: true, required: false },
                     wins: { type: Number, trim: true, required: false },
                     draws: { type: Number, trim: true, required: false },

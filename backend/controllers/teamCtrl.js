@@ -5,7 +5,7 @@ const League = require('../models/league.model')
 const teamController = {
     getAllTeams: async (req, res) => {
         try {
-            const teams = await Team.find().populate({ path: "seasons.league" }).populate({ path: "seasons.matches" })
+            const teams = await Team.find().populate({ path: "seasons.leagues.league" }).populate({ path: "seasons.leagues.matches" }).populate({ path: "seasons.leagues.players" })
             res.json({ msg: 'All teams are here:', teams });
         } catch (error) {
             res.status(500).json({ msg: error.message });
