@@ -14,3 +14,4 @@ router.delete('/:id', playerCtl.delete)
 router.patch('/:id', playerCtl.update);
 
 module.exports = router;
+
