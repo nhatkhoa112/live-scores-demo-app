@@ -1,4 +1,5 @@
 const Event = require('../models/event.model')
+const Match = require('../models/match.model')
 
 const eventController = {
     getAllEvents: async (req, res) => {
@@ -24,13 +25,21 @@ const eventController = {
 
     createEvent: async (req, res) => {
         try {
-            const { event_id, timeAt, match, eventAtMinute, foul, ballContext } = req.body;
-            const event = await Event.findOne({ event_id });
-            if (event) res.status(400).json({ msg: "This eventId is exist" })
+            const { match, eventAtMinute, foul, ballContext, penaltyShootout } = req.body;
             const newEvent = await new Event({
-                event_id, timeAt, match, eventAtMinute, foul, ballContext
+                match, eventAtMinute, foul, ballContext, penaltyShootout
             })
-            res.status(200).json({ msg: "The event is created: ", event: newEvent })
+
+
+            const newMatch = await Match.findOne({ _id: match })
+            newMatch.summaryEvents.push( newEvent._id)
+
+            await newMatch.save()
+            await newEvent.save()
+
+            res.status(200).json({ msg: "The event is created: ", event: newEvent})
+
+
         } catch (error) {
             res.status(500).json({ msg: error.message })
         }
@@ -39,9 +48,9 @@ const eventController = {
     deleteEvent: async (req, res) => {
         try {
             const id = req.params.id
-            const events = await Event.findByIdAndDelete({_id: id});
-            res.status(200).json({msg: "The event is removed", events})
-         
+            const events = await Event.findByIdAndDelete({ _id: id });
+            res.status(200).json({ msg: "The event is removed", events })
+
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }
@@ -50,16 +59,16 @@ const eventController = {
     updateEvent: async (req, res) => {
         try {
             const id = req.params.id
-            const events = await Event.findByIdAndUpdate({_id: id}, {...req.body}, {timestamps: true});
-            res.status(200).json({msg: "The event is removed", events})
-         
+            const events = await Event.findByIdAndUpdate({ _id: id }, { ...req.body }, { timestamps: true });
+            res.status(200).json({ msg: "The event is removed", events })
+
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }
     },
-      
 
-    
+
+
 
     // getScoreHomeTeamMatch: async (req, res) => {
 

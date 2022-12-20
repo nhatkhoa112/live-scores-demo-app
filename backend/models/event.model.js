@@ -6,21 +6,41 @@ const { v4: uuidv4 } = require('uuid');
 
 const eventSchema = new mongoose.Schema(
     {
-        event_id: { type: String, trim: true, required: true, default: uuidv4() },
-        timeAt: { type: String, trim: true, required: true, default: new Date() },
-        match: {ref: "Match", required: true, type: Schema.Types.ObjectId},
+        match: { ref: "Match", required: true, type: Schema.Types.ObjectId },
         eventAtMinute: { type: String, trim: true, required: true },
         foul: {
-            type: String, required: false, enum: ["yellow card", "red card"]
+            player: { ref: "Player", required: false, type: Schema.Types.ObjectId },
+            cardType: {
+                type: String, required: false, enum: ["yellow card", "red card", "yellow douple"]
+            }
         },
         ballContext: {
-            mainPlayer: { ref: "Player", required: true, type: Schema.Types.ObjectId },
+            mainPlayer: { ref: "Player", required: false, type: Schema.Types.ObjectId },
             assistPlayer: { ref: "Player", required: false, type: Schema.Types.ObjectId },
-            ballSituation: { type: String, trim: true, required: true },
-            score: { 
-                team: {ref: "Team", required: true, type: Schema.Types.ObjectId}
+            ballSituation: { type: String, required: false },
+            scoreStatus: {
+                score: { type: Boolean, required: false },
+                unAllow: { type: String, required: false },
+                penatyScore: { type: Boolean, required: false },
+                team: { ref: "Team", required: false, type: Schema.Types.ObjectId }
             }
-        }
+        },
+        penaltyShootout: [
+            {
+                round: { type: Number, required: false },
+                homePlayer: {
+                    player: { ref: "Player", required: false, type: Schema.Types.ObjectId },
+                    score: { type: Boolean, required: false },
+                },
+                awayPlayer: {
+                    player: { ref: "Player", required: false, type: Schema.Types.ObjectId },
+                    score: { type: Boolean, required: false },
+                }
+
+            }
+        ]
+
+
     },
     {
         timestamps: true,

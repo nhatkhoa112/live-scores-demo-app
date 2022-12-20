@@ -17,7 +17,14 @@ const matchController = {
     getMatchById: async (req, res) => {
         try {
             const matchId = req.params.id;
-            const newMatch = await Match.findOne({ matchId });
+            const newMatch = await Match.findOne({ _id: matchId })
+            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+
             if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
             res.status(500).json({ msg: 'This match is here: ', data: { match: newMatch } })
 
@@ -39,7 +46,7 @@ const matchController = {
             });
 
             // // Add match to league - seasons
-            const newLeague = await League.findOne({_id: newMatch.league});
+            const newLeague = await League.findOne({ _id: newMatch.league });
             const seasonUpdate = newLeague.seasons.find((season) => { return season.season === newMatch.season })
             seasonUpdate.matches.push(newMatch._id)
 
@@ -60,7 +67,7 @@ const matchController = {
             await newTeamAway.save()
             await newTeamHome.save()
 
-            res.json({ msg: 'Created a match', data: { match: newMatch, league: newLeague },  });
+            res.json({ msg: 'Created a match', data: { match: newMatch, league: newLeague }, });
         } catch (error) {
 
             res.status(500).json({ msg: error.message });
@@ -72,9 +79,17 @@ const matchController = {
             const { playerId, matchId } = req.params
             const { position, number, official, fouls, goal, changeStatus } = req.body;
 
-            const newMatch = await Match.findOne({ matchId })
+            const newMatch = await Match.findOne({ _id: matchId })
+            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+
             if (!newMatch) res.json({ msg: "The match is not existed" })
             newMatch.homeTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })
+
 
             await newMatch.save()
 
@@ -91,14 +106,21 @@ const matchController = {
             const { playerId, matchId } = req.params
             const { position, number, official, fouls, goal, changeStatus } = req.body;
 
-            const newMatch = await Match.findOne({ matchId })
+            const newMatch = await Match.findOne({ _id: matchId })
+            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+
             if (!newMatch) res.json({ msg: "The match is not existed" })
             newMatch.awayTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })
 
 
             await newMatch.save()
-            res.status(200).json({ msg: "the player added in home team:", match: newMatch, })
 
+            res.status(200).json({ msg: "the player added in away team:", match: newMatch, })
         } catch (error) {
             res.status(500).json({ msg: error.message })
         }

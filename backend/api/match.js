@@ -7,10 +7,9 @@ router.get('/:id', matchCtl.getMatchById)
 
 router.post('', matchCtl.create)
 
-router.post('/home/:matchId/:playerId', matchCtl.addPlayerToHomeTeam)
+router.post('/home/:matchId/player/:playerId', matchCtl.addPlayerToHomeTeam)
 
-router.post('/away/:matchId/:playerId', matchCtl.addPlayerToAwayTeam)
-
+router.post('/away/:matchId/player/:playerId', matchCtl.addPlayerToAwayTeam)
 
 router.delete('/:id', matchCtl.delete)
 

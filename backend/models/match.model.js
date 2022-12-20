@@ -29,7 +29,7 @@ const matchSchema = new mongoose.Schema(
         },
 
         summaryEvents: [
-            { event: { ref: "Event", required: false, type: Schema.Types.ObjectId } }
+            { ref: "Event", required: false, type: Schema.Types.ObjectId }
         ],
         homeTeam:
         {
@@ -56,9 +56,9 @@ const matchSchema = new mongoose.Schema(
                         foul: {
                             type: Boolean, trim: true, required: true, default: false
                         },
-                        cardNumber: {type: Number, required: true, default: 0},
+                        cardNumber: { type: Number, required: true, default: 0 },
                         cardType: {
-                            type: String, trim: true, required: false, enum: ["", "red card", "yellow card"]
+                            type: String, trim: true, required: false, enum: ["", "red", "yellow"]
                         },
                     },
                     goal: {
@@ -66,13 +66,13 @@ const matchSchema = new mongoose.Schema(
                     },
                     changeStatus: {
                         change: {
-                            type: Boolean, trim: true, required: true, default: false
+                            type: Boolean, trim: true, required: false, default: false
                         },
-                       
+
                         changeTime: {
-                            type: String, trim: true, required: true, default: ""
+                            type: String, trim: true, required: false, default: ""
                         },
-                        changePlayer: { ref: "Player", required: true, type: Schema.Types.ObjectId }
+                        changePlayer: { ref: "Player", required: false, type: Schema.Types.ObjectId }
                     }
                 }
             ]
@@ -104,9 +104,9 @@ const matchSchema = new mongoose.Schema(
                         foul: {
                             type: Boolean, trim: true, required: true, default: false
                         },
-                        cardNumber: {type: Number, required: true, default: 0},
+                        cardNumber: { type: Number, required: true, default: 0 },
                         cardType: {
-                            type: String, trim: true, required: false, enum: ["", "red card", "yellow card"], default: ""
+                            type: String, trim: true, required: false, enum: ["", "red", "yellow"], default: ""
                         },
                     },
                     goal: {
@@ -114,12 +114,13 @@ const matchSchema = new mongoose.Schema(
                     },
                     changeStatus: {
                         change: {
-                            type: Boolean, trim: true, required: true, default: false
+                            type: Boolean, trim: true, required: false, default: false
                         },
+
                         changeTime: {
-                            type: String, trim: true, required: true, default: ""
+                            type: String, trim: true, required: false, default: ""
                         },
-                        changePlayer: { ref: "Player", required: true, type: Schema.Types.ObjectId }
+                        changePlayer: { ref: "Player", required: false, type: Schema.Types.ObjectId }
                     }
                 }
             ]

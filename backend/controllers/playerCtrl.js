@@ -12,6 +12,21 @@ const playerController = {
         }
     },
 
+    getPlayerByName: async (req, res) => {
+        try {
+            const playerName = req.params.name
+            let newPlayerName = playerName.split("-").join(" ")
+            const newPlayer = await Player.findOne({ name: newPlayerName })
+            if (!newPlayer) res.status(400).json({ msg: "This player name is wrong" })
+            else {
+                res.status(200).json({ msg: "This player is here: ", player: newPlayer })
+            }
+
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+        }
+    },
+
     create: async (req, res) => {
         try {
             const {
