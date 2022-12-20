@@ -16,7 +16,7 @@ const leagueController = {
         const countryName = req.params.name
         let newCountryName = countryName.split("-").join(" ")
         try {
-            const leagues = await League.find().populate({ path: 'seasons.country', options: { strictPopulate: false } }).populate({ path: 'seasons.teams', options: { strictPopulate: false } });
+            const leagues = await League.find().populate({ path: 'seasons.country', options: { strictPopulate: false } }).populate({ path: 'seasons.teams', options: { strictPopulate: false } }).populate({ path: 'seasons.matches', options: { strictPopulate: false } });
             const newLeagues = leagues.filter((league) => {
                 return league.seasons[league.seasons.length - 1].country.name === newCountryName
             })

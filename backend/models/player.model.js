@@ -5,13 +5,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const playerSchema = new mongoose.Schema(
     {
-        player_id: {
-            type: String,
-            unique: true,
-            trim: true,
-            required: false,
-            default: uuidv4(),
-        },
         name: { type: String, trim: true, required: true },
         seasons: [
             {

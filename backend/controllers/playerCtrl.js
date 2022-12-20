@@ -15,36 +15,37 @@ const playerController = {
     create: async (req, res) => {
         try {
             const {
-                player_id, name, seasons
+                name, seasons
             } = req.body
 
-            const player = await Player.findOne({name})
-            if(player) res.status(400).json({msg: "This player is exist"})
+            const player = await Player.findOne({ name })
+            if (player) res.status(400).json({ msg: "This player is exist" })
+            else {
+                const newPlayer = await new Player({
+                    name, seasons
+                });
+                // Add player to teams - seasons
 
-            const newPlayer = await new Player({
-                player_id, name, seasons
-            });
-            // Add player to teams - seasons
+                const playerSeason = newPlayer.seasons[newPlayer.seasons.length - 1]
+                playerSeason.leagues.map(async (league) => {
 
-            const playerSeason = newPlayer.seasons[newPlayer.seasons.length - 1]
-            playerSeason.leagues.map(async (league) => {
+                    const newTeam = await Team.findOne(league.team);
+                    const seasonUpdate = newTeam.seasons.find((season) => {
+                        return season.season === playerSeason.season
+                    })
+                    const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString())
 
-                const newTeam = await Team.findOne(league.team);
-                const seasonUpdate = newTeam.seasons.find((season) => {
-                    return season.season === playerSeason.season
+                    if (leagueUpdate.players.findIndex(player => {
+                    }) === -1) {
+                        leagueUpdate.players.push(newPlayer._id)
+                    }
+                    await newTeam.save();
                 })
-                const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString() )
 
-                if(leagueUpdate.players.findIndex(player => {
-                    console.log(player, newPlayer._id)
-                }) === -1) {
-                    leagueUpdate.players.push(newPlayer._id)
-                }
-                await newTeam.save();
-            })
+                await newPlayer.save();
+                res.json({ msg: 'Created a player', data: { player: newPlayer } });
+            }
 
-            await newPlayer.save();
-            res.json({ msg: 'Created a player', data: { player: newPlayer } });
         } catch (error) {
 
             res.status(500).json({ msg: error.message });
@@ -55,7 +56,6 @@ const playerController = {
         try {
             const playerId = req.params.playerId;
             const { teamId } = req.params
-            console.log(playerId, teamId)
             const newPlayer = await Player.findOne({ _id: playerId })
             const newTeam = await Team.findOne({ _id: teamId })
 
@@ -63,24 +63,27 @@ const playerController = {
             let playerSeason = newPlayer.seasons[newPlayer.seasons.length - 1]
             playerSeason.leagues.map(async (league) => {
                 const newTeam = await Team.findOne(league.team);
+                // Find the season object will change in array seasons
                 const seasonUpdate = newTeam.seasons.find((season) => {
                     return season.season === playerSeason.season
                 })
-                const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString() )
-                if(leagueUpdate.players.findIndex(player => {
-                    console.log(player, newPlayer._id)
+                // Find the league object will change in array leagues
+                const leagueUpdate = seasonUpdate.leagues.find((newLeague) => newLeague.league.toString() === league.league.toString())
+                // Add player to array player of league obj if player is not exists
+                if (leagueUpdate.players.findIndex(player => {
                 }) === -1) {
                     leagueUpdate.players.push(newPlayer._id)
                 }
-                // await newTeam.save();
+                await newTeam.save();
             })
 
             // Add team to player
-            
 
-            // await newTeam.save()
-            res.status(200).json({ msg: 'The team is added to player,',
-             team: newTeam, player: newPlayer 
+
+            await newTeam.save()
+            res.status(200).json({
+                msg: 'The team is added to player,',
+                team: newTeam, player: newPlayer
             }
             )
 

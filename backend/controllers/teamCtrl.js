@@ -16,6 +16,7 @@ const teamController = {
         try {
             const teamId = req.params.teamId
             const { 
+                season,
                 leagueId,
                 played,
                 wins,
@@ -45,7 +46,9 @@ const teamController = {
             const newTeam = await Team.findOne({ _id: teamId })
             if (!newTeam) res.status(400).json({ msg: "The team is not exist" })
            
-            const seasonUpdate = newTeam.seasons.find((season) => season.season === req.body.season)
+            const seasonUpdate = newTeam.seasons.find((season) => { return season.season === req.body.season})
+            console.log(seasonUpdate)
+
             seasonUpdate.leagues.push({
                 league: leagueId,
                 played,
@@ -77,7 +80,6 @@ const teamController = {
             const seasonUpdateLeauge = newLeague.seasons.find((season) => season.season === req.body.season)
             
             seasonUpdateLeauge.teams.push(teamId)
-            console.log(seasonUpdateLeauge.teams)
             await newLeague.save();
             await newTeam.save()
             
@@ -86,6 +88,7 @@ const teamController = {
             res.status(500).json({ msg: error.message });
         }
     },
+
 
 
     getTeamByName: async (req, res) => {

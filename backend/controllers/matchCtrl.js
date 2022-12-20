@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const matchController = {
     getAllMatches: async (req, res) => {
         try {
-            const matches = await Match.find()
+            const matches = await Match.find().populate({ path: "homeTeam.team", model: "Team" }).populate({ path: "awayTeam.team", model: "Team" })
             res.json({ msg: 'All matches are here:', matches });
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -29,41 +29,78 @@ const matchController = {
     create: async (req, res) => {
         try {
             const {
-                time, league, season, stadium, referee, tiket, homeTeam, awayTeam, status
+                day, league, season, stadium, referee, tiket, homeTeam, awayTeam, status, teamStats
             } = req.body
 
-            const newTime = new Date(time[0], time[1] - 1 , time[2], time[3], time[4], time[5])
+            const newDate = new Date(day[0], day[1] - 1, day[2], day[3], day[4], day[5])
 
-            console.log(newTime)
             const newMatch = await new Match({
-                time: newTime, league, season, stadium, referee, tiket, homeTeam, awayTeam, status
+                day: newDate, league, season, stadium, referee, tiket, homeTeam, awayTeam, status, teamStats
             });
 
-            // Add match to league - seasons
-            const newLeague = await League.findOne(newMatch.league);
-            const seasonUpdate = newLeague.seasons.find((season) => season.season === newMatch.season)
+            // // Add match to league - seasons
+            const newLeague = await League.findOne({_id: newMatch.league});
+            const seasonUpdate = newLeague.seasons.find((season) => { return season.season === newMatch.season })
             seasonUpdate.matches.push(newMatch._id)
-            await newLeague.save();
 
-            // // Add match to team - seasons
+            // Add match to team - seasons
             const newTeamHome = await Team.findOne(newMatch.homeTeam.team)
             const newTeamAway = await Team.findOne(newMatch.awayTeam.team)
-            let seasonUpdateTeamHome = newTeamHome.seasons.find((season) => season.season === newMatch.season)
-            let seasonUpdateTeamAway = newTeamAway.seasons.find((season) => season.season === newMatch.season)
+            let seasonUpdateTeamHome = newTeamHome.seasons.find((seasonF) => seasonF.season === newMatch.season)
+            let seasonUpdateTeamAway = newTeamAway.seasons.find((seasonF) => seasonF.season === newMatch.season)
             let seasonLeagueUpdateHome = seasonUpdateTeamHome.leagues.find((league) => league.league.toString() === newMatch.league.toString())
             let seasonLeagueUpdateAway = seasonUpdateTeamAway.leagues.find((league) => league.league.toString() === newMatch.league.toString())
+            console.log(seasonLeagueUpdateHome, seasonLeagueUpdateAway)
 
             seasonLeagueUpdateHome.matches.push(newMatch._id)
             seasonLeagueUpdateAway.matches.push(newMatch._id)
 
-            await newTeamHome.save()
-            await newTeamAway.save()
             await newMatch.save();
+            await newLeague.save();
+            await newTeamAway.save()
+            await newTeamHome.save()
 
-            res.json({ msg: 'Created a match', data: { match: newMatch } });
+            res.json({ msg: 'Created a match', data: { match: newMatch, league: newLeague },  });
         } catch (error) {
 
             res.status(500).json({ msg: error.message });
+        }
+    },
+
+    addPlayerToHomeTeam: async (req, res) => {
+        try {
+            const { playerId, matchId } = req.params
+            const { position, number, official, fouls, goal, changeStatus } = req.body;
+
+            const newMatch = await Match.findOne({ matchId })
+            if (!newMatch) res.json({ msg: "The match is not existed" })
+            newMatch.homeTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })
+
+            await newMatch.save()
+
+            res.status(200).json({ msg: "the player added in home team:", match: newMatch, })
+
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+
+        }
+    },
+
+    addPlayerToAwayTeam: async (req, res) => {
+        try {
+            const { playerId, matchId } = req.params
+            const { position, number, official, fouls, goal, changeStatus } = req.body;
+
+            const newMatch = await Match.findOne({ matchId })
+            if (!newMatch) res.json({ msg: "The match is not existed" })
+            newMatch.awayTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })
+
+
+            await newMatch.save()
+            res.status(200).json({ msg: "the player added in home team:", match: newMatch, })
+
+        } catch (error) {
+            res.status(500).json({ msg: error.message })
         }
     },
 

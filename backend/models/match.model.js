@@ -7,7 +7,7 @@ const Schema = require('mongoose').Schema;
 const matchSchema = new mongoose.Schema(
     {
 
-        time: { type: String, required: true, default: new Date() },
+        day: { type: String, required: true, default: new Date() },
         status: { type: String, required: true, enum: ["FT", "Live", "Not yet"] },
         league: {
             ref: "League", required: false, type: Schema.Types.ObjectId
@@ -35,44 +35,45 @@ const matchSchema = new mongoose.Schema(
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },
             lineUp: {
-                type: String, trim: true, required: true, default: '1-4-3-3'
+                type: String, trim: true, required: false, default: '1-4-3-3'
             },
             score: {
-                type: Number, trim: true, required: true, default: 0
+                type: Number, trim: true, required: false, default: 0
             },
             players: [
                 {
                     player: { ref: "Player", required: false, type: Schema.Types.ObjectId },
                     position: {
-                        type: String, trim: true, required: false
+                        type: String, trim: true, required: true, default: ""
                     },
                     number: {
-                        type: Number, trim: true, required: false
+                        type: Number, trim: true, required: true, default: 0
                     },
                     official: {
                         type: Boolean, trim: true, required: true, default: true
                     },
-                    penaltyCard: {
-                        type: Boolean, trim: true, required: false
-                    },
-                    cardType: {
-                        type: String, trim: true, required: false
+                    fouls: {
+                        foul: {
+                            type: Boolean, trim: true, required: true, default: false
+                        },
+                        cardNumber: {type: Number, required: true, default: 0},
+                        cardType: {
+                            type: String, trim: true, required: false, enum: ["", "red card", "yellow card"]
+                        },
                     },
                     goal: {
-                        type: Boolean, trim: true, required: false
+                        type: Boolean, trim: true, required: true, default: false
                     },
-                    change: {
-                        type: Boolean, trim: true, required: false
-                    },
-                    changeType: {
-                        type: String, trim: true, required: false
-                    },
-                    changeTime: {
-                        type: String, trim: true, required: false
-                    },
-                    changePlayer: {
-                        type: String, trim: true, required: false
-                    },
+                    changeStatus: {
+                        change: {
+                            type: Boolean, trim: true, required: true, default: false
+                        },
+                       
+                        changeTime: {
+                            type: String, trim: true, required: true, default: ""
+                        },
+                        changePlayer: { ref: "Player", required: true, type: Schema.Types.ObjectId }
+                    }
                 }
             ]
 
@@ -82,59 +83,59 @@ const matchSchema = new mongoose.Schema(
         {
             team: { ref: "League", required: false, type: Schema.Types.ObjectId },
             lineUp: {
-                type: String, trim: true, required: true, default: '1-4-3-3'
+                type: String, trim: true, required: false, default: '1-4-3-3'
             },
             score: {
-                type: Number, trim: true, required: true, default: 0
+                type: Number, trim: true, required: false, default: 0
             },
             players: [
                 {
                     player: { ref: "Player", required: false, type: Schema.Types.ObjectId },
                     position: {
-                        type: String, trim: true, required: false
+                        type: String, trim: true, required: true, default: ""
                     },
                     number: {
-                        type: Number, trim: true, required: false
+                        type: Number, trim: true, required: true, default: 0
                     },
                     official: {
                         type: Boolean, trim: true, required: true, default: true
                     },
-                    penaltyCard: {
-                        type: Boolean, trim: true, required: false
-                    },
-                    cardType: {
-                        type: String, trim: true, required: false
+                    fouls: {
+                        foul: {
+                            type: Boolean, trim: true, required: true, default: false
+                        },
+                        cardNumber: {type: Number, required: true, default: 0},
+                        cardType: {
+                            type: String, trim: true, required: false, enum: ["", "red card", "yellow card"], default: ""
+                        },
                     },
                     goal: {
-                        type: Boolean, trim: true, required: false
+                        type: Boolean, trim: true, required: true, default: false
                     },
-                    change: {
-                        type: Boolean, trim: true, required: false
-                    },
-                    changeType: {
-                        type: String, trim: true, required: false
-                    },
-                    changeTime: {
-                        type: String, trim: true, required: false
-                    },
-                    changePlayer: {
-                        type: String, trim: true, required: false
-                    },
+                    changeStatus: {
+                        change: {
+                            type: Boolean, trim: true, required: true, default: false
+                        },
+                        changeTime: {
+                            type: String, trim: true, required: true, default: ""
+                        },
+                        changePlayer: { ref: "Player", required: true, type: Schema.Types.ObjectId }
+                    }
                 }
             ]
         },
         teamStats: [
             {
-                shots: [{ type: Number, required: true, defaut: 0 }],
-                shotsOnTarget: [{ type: Number, required: true, defaut: 0 }],
-                possession: [{ type: Number, required: true, defaut: 0 }],
-                passes: [{ type: Number, required: true, defaut: 0 }],
-                passAccuracy: [{ type: Number, required: true, defaut: 0 }],
-                fouls: [{ type: Number, required: true, defaut: 0 }],
-                yellowCards: [{ type: Number, required: true, defaut: 0 }],
-                redCards: [{ type: Number, required: true, defaut: 0 }],
-                offSides: [{ type: Number, required: true, defaut: 0 }],
-                cornersx: [{ type: Number, required: true, defaut: 0 }],
+                shots: { type: Number, required: true, defaut: 0 },
+                shotsOnTarget: { type: Number, required: true, defaut: 0 },
+                possession: { type: Number, required: true, defaut: 0 },
+                passes: { type: Number, required: true, defaut: 0 },
+                passAccuracy: { type: Number, required: true, defaut: 0 },
+                fouls: { type: Number, required: true, defaut: 0 },
+                yellowCards: { type: Number, required: true, defaut: 0 },
+                redCards: { type: Number, required: true, defaut: 0 },
+                offSides: { type: Number, required: true, defaut: 0 },
+                cornersx: { type: Number, required: true, defaut: 0 },
             }]
     },
     {
@@ -143,5 +144,4 @@ const matchSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Match', matchSchema);
-
 
