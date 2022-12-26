@@ -4,7 +4,7 @@ const leagueCtl = require('../controllers/leagueCtrl')
 
 router.get('', leagueCtl.getAllLeagues)
 
-router.get('/:id', leagueCtl.getLeagueById)
+router.get('/:leagueId', leagueCtl.getLeagueById)
 
 router.get('/name/:name', leagueCtl.getLeagueByCountryName)
 

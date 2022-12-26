@@ -26,7 +26,7 @@ function App() {
             <Route exact path="/:index" index element={<Scores />} />
             <Route exact path="favorite" element={<Favorite />} />
             <Route exact path="news" element={<News />} />
-            <Route exact path='football/:countryId/:tourId' element={<TournamentDetail />} />
+            <Route exact path='football/:countryId/:leagueId' element={<TournamentDetail />} />
             <Route path='football/:countryId/:tourId/:matchId' element={<FootballMatchDetail />} exact />
             <Route path='football/team/:tourId/:teamId' element={<TeamDetail />} exact />
           </Route>

@@ -14,7 +14,7 @@ const countryController = {
     getCountryById: async (req, res) => {
         try {
             const countryId = req.params.id;
-            const newCountry = await Country.findOne({ countryId });
+            const newCountry = await Country.findOne({ _id: countryId }).populate({path: "leagues", model: "League"})
             if (!newCountry) res.status(400).json({ msg: 'the countryId is wrong' })
             res.status(200).json({ msg: "The country is hear", data: {country: newCountry} })
         } catch {

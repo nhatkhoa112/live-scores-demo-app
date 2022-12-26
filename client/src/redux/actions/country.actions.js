@@ -5,7 +5,7 @@ import * as types from '../constants/country.constants'
 const getAllCountries = () => async (dispatch) => {
     dispatch({ type: types.GET_ALL_COUNTRIES_REQUEST, payload: null })
     try {
-        const { data } = await api.get('country')
+        const {data} = await api.get('country')
         dispatch({ type: types.GET_ALL_COUNTRIES_SUCCESS, payload: data })
     } catch (error) {
         dispatch({ type: types.GET_ALL_COUNTRIES_FAILURE, payload: null })
@@ -35,7 +35,7 @@ const createCountry = (country) => async (dispatch) => {
 const getCountryById = (countryId) => async (dispatch) => {
     dispatch({ type: types.GET_COUNTRY_BY_ID_REQUEST, payload: null })
     try {
-        const data = await api.get(`country/${countryId}`)
+        const {data} = await api.get(`country/${countryId}`)
         dispatch({ type: types.GET_COUNTRY_BY_ID_SUCCESS, payload: data })
     } catch (error) {
         dispatch({ type: types.GET_COUNTRY_BY_ID_FAILURE, payload: null })

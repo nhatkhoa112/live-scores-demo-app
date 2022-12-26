@@ -1,7 +1,6 @@
 const Match = require('../models/match.model');
 const Team = require('../models/team.model')
 const League = require('../models/league.model')
-const { v4: uuidv4 } = require('uuid');
 
 
 const matchController = {
@@ -14,19 +13,53 @@ const matchController = {
         }
     },
 
+    getMatches: async (req, res) => {
+        try {
+            const matches = await Match.find()
+                .populate({ path: "homeTeam.team", model: "Team" })
+                .populate({ path: "awayTeam.team", model: "Team" })
+                .populate({
+                    path: "league", model: "League", populate: {
+                        path: 'seasons.country',
+                        model: 'Country',
+                    }
+                })
+                .sort({ "createdAt": -1 }).limit(20)
+            res.json({ msg: 'All matches are here:', matches });
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+        }
+    },
+
+    getMatchesByDay: async (req, res) => {
+        try {
+            const matches = await Match.find()
+            let day = req.query.day
+            let matchesByDay = matches.filter((match) => match.day.includes(day))
+            res.status(200).json({msg:  `All matches in ${day}: `, matches: matchesByDay  })
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
+
+        }
+
+    },
+
+
     getMatchById: async (req, res) => {
         try {
             const matchId = req.params.id;
             const newMatch = await Match.findOne({ _id: matchId })
-            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
 
             if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
-            res.status(500).json({ msg: 'This match is here: ', data: { match: newMatch } })
+            else {
+                res.status(500).json({ msg: 'This match is here: ', data: { match: newMatch } })
+            }
 
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -57,7 +90,6 @@ const matchController = {
             let seasonUpdateTeamAway = newTeamAway.seasons.find((seasonF) => seasonF.season === newMatch.season)
             let seasonLeagueUpdateHome = seasonUpdateTeamHome.leagues.find((league) => league.league.toString() === newMatch.league.toString())
             let seasonLeagueUpdateAway = seasonUpdateTeamAway.leagues.find((league) => league.league.toString() === newMatch.league.toString())
-            console.log(seasonLeagueUpdateHome, seasonLeagueUpdateAway)
 
             seasonLeagueUpdateHome.matches.push(newMatch._id)
             seasonLeagueUpdateAway.matches.push(newMatch._id)
@@ -80,12 +112,12 @@ const matchController = {
             const { position, number, official, fouls, goal, changeStatus } = req.body;
 
             const newMatch = await Match.findOne({ _id: matchId })
-            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
 
             if (!newMatch) res.json({ msg: "The match is not existed" })
             newMatch.homeTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })
@@ -107,12 +139,12 @@ const matchController = {
             const { position, number, official, fouls, goal, changeStatus } = req.body;
 
             const newMatch = await Match.findOne({ _id: matchId })
-            .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
-            .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
-            .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
-            .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
+                .populate({ path: "homeTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.changeStatus.changePlayer", model: "Player", select: "-seasons" })
+                .populate({ path: "homeTeam.players.player", model: "Player", select: "-seasons" })
+                .populate({ path: "awayTeam.players.player", model: "Player", select: "-seasons" })
 
             if (!newMatch) res.json({ msg: "The match is not existed" })
             newMatch.awayTeam.players.push({ player: playerId, position, number, official, fouls, goal, changeStatus })

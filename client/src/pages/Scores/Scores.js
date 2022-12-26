@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Baseball from './Baseball/Baseball';
 import Basketball from './Basketball/Basketball';
 import Football from './Football/Football';
+import { useDispatch } from 'react-redux';
 import './scores.css';
 import Tennis from './Tennis/Tennis';
 import FixtureSlider from '../../components/Slider/FixtureSlider';
-import {Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import {matchActions} from '../../redux/actions'
+
 
 
 const sportList = [
@@ -17,21 +20,29 @@ const sportList = [
 
 
 const Scores = () => {
-  const {index} = useParams();
-  const [isSportItemActive, setIsSportItemActive] = useState(index ? parseInt(index): 0)
+  const { index } = useParams();
+  const [isSportItemActive, setIsSportItemActive] = useState(index ? parseInt(index) : 0)
+  const [limit, setLimit] = useState(20);
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(matchActions.getMatches(limit))
+  }, [limit, dispatch])
+
   return (
     <div className="scores-page">
       <div className="sportlist">
         {sportList.map((s) =>
-         <Link to="/" key={s.index}
-          className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
-          onClick={() => setIsSportItemActive(s.index)}
-        >
-          {s.name}
-        </Link>
+          <Link to="/" key={s.index}
+            className={s.index === isSportItemActive ? 'sportlist-item isActive' : 'sportlist-item'}
+            onClick={() => setIsSportItemActive(s.index)}
+          >
+            {s.name}
+          </Link>
         )}
       </div>
-     <FixtureSlider />
+      <FixtureSlider />
       {isSportItemActive === 0 && <Football isTimeNav={true} />}
       {isSportItemActive === 1 && <Baseball />}
       {isSportItemActive === 2 && <Basketball />}

@@ -4,7 +4,6 @@ const initialState = {
     leagues: [],
     leagueByCountryId: [],
     league: {},
-    leaguePicker: {},
     loading: false
 }
 
@@ -30,7 +29,7 @@ const leagueReducer = (state = initialState, action) => {
             let leagueByCountryId = payload.countries.filter(league =>  league.seasons[league.seasons.length - 1].country._id === payload.countryId)
             return { ...state, leagueByCountryId: leagueByCountryId, loading: false }
         case types.GET_LEAGUE_BY_ID_SUCCESS:
-            return {...state, leaguePicker: payload.league, loading: false}
+            return {...state, league: payload.data.league, loading: false}
 
         default:
             return state;

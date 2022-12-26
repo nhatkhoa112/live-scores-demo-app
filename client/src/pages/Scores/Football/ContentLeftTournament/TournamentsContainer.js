@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { countries } from '../footballDb';
 import './tournamentsContainer.css'
 import { Link } from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux';
+import {countryActions} from '../../../../redux/actions'
 
 const TournamentsContainer = ({countryId,tourId}) => {
+    const dispatch = useDispatch()
+    const countries = useSelector((state) => state.country.countries)
     const [tournamentQuery, setTournamentQuery] = useState('')
-    const [tournamentSelect, setTournamentSelect] = useState('')
+    const [countrySelect, setCountrySelect] = useState('')
 
+    useEffect(() => {
+        dispatch(countryActions.getAllCountries())
+    }, [dispatch])
 
     useEffect(() => {
         if(countryId){
-            let newTournamentSelect = countries.find((country) => country.countryId === parseInt(countryId));   
-            if(Object.keys(newTournamentSelect).length !== 0 ) {setTournamentSelect(newTournamentSelect)}
+            let newCountrySelect = countries.find((country) => country._id === countryId);   
+            if(newCountrySelect && Object.keys(newCountrySelect).length !== 0)  {setCountrySelect(newCountrySelect)}
         }
-    },[countryId])
+    },[countryId, countries])
+
+
     
     return (
         <div className="content-left tournaments">
-            {/* Tournament */}
-            {Object.keys(tournamentSelect).length === 0 &&
+            {Object.keys(countrySelect).length === 0 &&
                 (<div className="content-title">
                     <div className="icon">
                         <i className="fa-solid fa-magnifying-glass"></i>
@@ -34,38 +41,39 @@ const TournamentsContainer = ({countryId,tourId}) => {
                 </div>)}
 
             {/* Tournament by country */}
-            {Object.keys(tournamentSelect).length !== 0 &&
+            {Object.keys(countrySelect).length !== 0 &&
                 (<div className="content-title">
                     <div className="icon">
                         <i onClick={() => {
-                            setTournamentSelect({});
+                            setCountrySelect({});
                             setTournamentQuery("")
                         }
                         } className="fa-solid fa-xmark"></i>
                     </div>
                     <div className="tourname">
                         <div className="text">
-                            {tournamentSelect.name}
+                            {countrySelect.name}
                         </div>
                     </div>
                 </div>)}
 
 
+
             {/* Tournament */}
             {
-                Object.keys(tournamentSelect).length === 0 && (<div className="tournament-list">
+                Object.keys(countrySelect).length === 0 && (<div className="tournament-list">
                     {tournamentQuery === "" && countries.map((country) =>
                      {   
-                        return( <li onClick={(e) => setTournamentSelect(country)} className="tournament-item" key={country.countryId}>
-                            <span className={country.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={country.image} alt="" /></span>
+                        return( <li onClick={(e) => setCountrySelect(country)} className="tournament-item" key={country._id}>
+                            <span className={country.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={country.imageUrl} alt="" /></span>
                             <span className="name"><span className="text">{country.name}</span></span>
                         </li>)}
                         
                         )
                     }
                     {tournamentQuery !== "" && countries.filter((country) => country.name.toLowerCase().includes(tournamentQuery)).map((country) =>
-                        <li key={country.countryId} onClick={() => setTournamentSelect(country)} className="tournament-item" >
-                            <span className={country.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={country.image} alt="" /></span>
+                        <li key={country.countryId} onClick={() => setCountrySelect(country)} className="tournament-item" >
+                            <span className={country.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={country.imageUrl} alt="" /></span>
                             <span className="name"><span className="text">{country.name}</span></span>
                         </li>)
                     }
@@ -73,12 +81,12 @@ const TournamentsContainer = ({countryId,tourId}) => {
             }
 
             {
-                Object.keys(tournamentSelect).length !== 0 && (<div className="tournament-by-country-list">
+                Object.keys(countrySelect).length !== 0 && (<div className="tournament-by-country-list">
                     {
-                        tournamentSelect.content.map((tournament) => {
-                            return(<Link  to={`/football/${tournamentSelect.countryId}/${tournament.id}`} className={(parseInt(tourId) === tournament.id && tournamentSelect.countryId === parseInt(countryId))  ? "tournament-item active-effect" : "tournament-item" } key={tournament.id}>
-                                    <span className={tournamentSelect.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={tournamentSelect.image} alt="" /></span>
-                                    <span className="name"><span className="text">{tournament.tourName}</span></span>
+                        countrySelect.leagues.map((league) => {
+                            return(<Link  to={`/football/${countrySelect._id}/${league._id}`}  className={(tourId === league._id && countrySelect._id === countryId)  ? "tournament-item active-effect" : "tournament-item" }  key={league._id}>
+                                    <span className={countrySelect.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={countrySelect.imageUrl} alt="" /></span>
+                                    <span className="name"><span className="text">{league.name}</span></span>
                                 </Link>
                             )
                         })

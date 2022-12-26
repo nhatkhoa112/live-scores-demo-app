@@ -36,7 +36,7 @@ const getTeamById = (teamId) => async (dispatch) => {
 }
 
 
-export const countryActions = {
+export const teamActions = {
     getAllTeams,
     getTeamsByLeagueId,
     getTeamById

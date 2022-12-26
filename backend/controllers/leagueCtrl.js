@@ -28,10 +28,12 @@ const leagueController = {
 
     getLeagueById: async (req, res) => {
         try {
-            const leagueId = req.params.id;
-            const newLeague = await League.findOne({ _id: leagueId }).populate({ path: 'seasons.teams'});
+            const {leagueId} = req.params;
+            const newLeague = await League.findOne({_id: leagueId}).populate({ path: "seasons.teams", model: "Team" }).populate({ path: "seasons.country", model: "Country" }).populate({ path: "seasons.matches", model: "Match" })
             if (!newLeague) res.status(400).json({ msg: 'the leagueId is wrong' })
-            res.status(200).json({ msg: "The league is hear", data: { league: newLeague } })
+            else {
+                res.status(200).json({ msg: "The league is hear", data: { league: newLeague } })
+            }
         } catch (error) {
             res.status(500).json({ msg: error.message });
 
@@ -49,7 +51,6 @@ const leagueController = {
             const newCountry = await Country.findOne(newLeague.seasons[0].country)
             newCountry.leagues.push(newLeague._id);
             await newCountry.save();
-            console.log(newCountry)
 
 
             res.json({ msg: 'Created a league', data: { league: newLeague } });
@@ -70,7 +71,7 @@ const leagueController = {
     deleteAll: async (req, res) => {
         try {
             const leagues = await League.findByIdAndDelete();
-            res.json({ msg: 'Deleted all leagues', datas: { leagues } });
+            res.json({ msg: 'Deleted all leagues', data: { leagues } });
         } catch (error) {
             res.status(500).json({ msg: error.message });
         }
@@ -80,7 +81,7 @@ const leagueController = {
         try {
             const league = await League.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
             if (!league) return res.status(404).json({ msg: 'The league is not exists.' });
-            res.status(200).json({ msg: 'Updated league successfully', leauge });
+            res.status(200).json({ msg: 'Updated league successfully', data: { league } });
 
         } catch (error) {
             res.status(500).json({ msg: error.message });

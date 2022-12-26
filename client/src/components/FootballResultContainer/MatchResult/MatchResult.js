@@ -1,39 +1,50 @@
 import React, { useState } from 'react'
 import './matchResult.css';
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
-
-const MatchResult = ({ match, result }) => {
+const MatchResult = ({ match, country, leagueId }) => {
+    const getDayMatch = (day) => {
+        let dayArray = day.split(" ")
+        return dayArray[1] + " " + dayArray[2]
+    }
+    const getTimeMatch = (day) => {
+        let dayArray = day.split(" ")
+        let timeArray = dayArray[4].split(":")
+        return timeArray[0] + " " + timeArray[1]
+    }
 
     const [isFavoriteChoose, setIsFavoriteChoose] = useState(false)
     return (
         <div className="match-row" key={match.matchId}>
             <div className="match-link">
                 <div className="match-container">
-                    <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`} className="status-time">
-                        <span className="text-center">{match.day && match.day}</span>
-                        <span>{match.status === 'fulltime' ? "FT" : match.status === 'not yet' ? match.time : 'Live'}</span>
-                    </Link>
-                    <Link to={`/football/${result.countryId}/${result.tourId}/${match.matchId}`}  className="match-infor">
+                    <div  className="status-time">
+                        <span className="text-center">{
+                            getDayMatch(match.day)
+                        }</span>
+                        <span>{match.status === 'FT' ? "FT" : match.status === 'Not yet' ? getTimeMatch(match.day) : 'Live'}</span>
+                    </div>
+                 <Link to={`/football/${country._id}/${match.league._id}/${match._id}`}  className="match-infor">
                         <div className="home-team">
                             <div className="team-infor">
-                                <span className="team-flag"><img src={match.homeTeam.flag} alt="" /></span>
-                                <span className="team-name">{match.homeTeam.name}</span>
+                                <span className="team-flag"><img src={match.homeTeam.team.flagUrl} alt="" /></span>
+                                <span className="team-name">{match.homeTeam.team.name}</span>
                             </div>
-                            <span className='team-scores'>{match.status !== 'not yet' ? match.homeTeam.scores : ''}</span>
+                            <span className='team-scores'>{match.status !== 'Not yet' ? match.homeTeam.score : ''}</span>
                         </div>
                         <div className="away-team">  <div className="team-infor">
-                            <span className="team-flag"><img src={match.awayTeam.flag} alt="" /></span>
-                            <span className="team-name">{match.awayTeam.name}</span>
+                            <span className="team-flag"><img src={match.awayTeam.team.flagUrl} alt="" /></span>
+                            <span className="team-name">{match.awayTeam.team.name}</span>
                         </div>
-                            <span className='team-scores'>{match.status !== 'not yet' ? match.awayTeam.scores : ''}</span>
+                            <span className='team-scores'>{match.status !== 'Not yet' ? match.awayTeam.score : ''}</span>
                         </div>
-                    </Link>
+                    </Link> 
                     <div className="favorite-icon">
                         <i onClick={() => setIsFavoriteChoose(!isFavoriteChoose)}
-                            className={match.status === 'not yet' && !isFavoriteChoose ?
+                            className={match.status === 'Not yet' && !isFavoriteChoose ?
                                 'fa-regular fa-star icon-unhide' :
-                                match.status === 'not yet' && isFavoriteChoose ?
+                                match.status === 'Not yet' && isFavoriteChoose ?
                                     "fa-solid fa-star icon-unhide" : 'fa-regular fa-star'}>
                         </i>
                     </div>

@@ -47,7 +47,6 @@ const teamController = {
             if (!newTeam) res.status(400).json({ msg: "The team is not exist" })
            
             const seasonUpdate = newTeam.seasons.find((season) => { return season.season === req.body.season})
-            console.log(seasonUpdate)
 
             seasonUpdate.leagues.push({
                 league: leagueId,
