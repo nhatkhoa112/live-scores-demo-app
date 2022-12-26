@@ -35,6 +35,7 @@ const matchReducer = (state = initialState, action) => {
         case types.GET_MATCH_BY_ID_SUCCESS:
             return { ...state, matchPicker: payload.match, loading: false }
         case fTypes.ADD_MATCH_TO_FAVORITE_REQUEST:
+            return { ...state, matches: payload.matches, loading: false }
         case fTypes.DELETE_MATCH_REQUEST:
             return { ...state, matches: payload.matches, loading: false }
         default:

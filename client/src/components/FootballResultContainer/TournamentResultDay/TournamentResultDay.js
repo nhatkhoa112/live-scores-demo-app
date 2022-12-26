@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MatchResult from '../MatchResult/MatchResult';
 import { Link } from 'react-router-dom'
 import './tournamentResultDay.css'
-import { useSelector } from 'react-redux'
 import TourOverview from './TourOverview/TourOverview';
 import TourMatches from './TourMatches/TourMatches';
 import MatchTable from '../MatchDetailContent/MatchTable/MatchTable';
@@ -22,7 +21,7 @@ const tabs = [
     }
 ]
 
-const TournamentResultDay = ({ league, overview, leagueId, matches }) => {
+const TournamentResultDay = ({ league, overview, leagueId, matches, country }) => {
     const [isTabActive, setIsTabActive] = useState(1)
     const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isFavotite, setIsFavorite] = useState(false)
@@ -34,11 +33,15 @@ const TournamentResultDay = ({ league, overview, leagueId, matches }) => {
 
 
 
+
+    let matchesLeague = league && league.seasons && league.seasons.reverse()[0].matches
+
+
     return (
 
         <div className="tournament-matches-in-day">
 
-            {/* {!match && <div className="tour-header" >
+            {!matches && seasonLeague && <div className="tour-header" >
                 <div className="tour-header-link">
                     <Link to={`/football/${seasonLeague.country._id}/${leagueId}`} className="country-flag"><img src={seasonLeague.country.imageUrl} alt="" /></Link>
                     <Link to={`/football/${seasonLeague.country._id}/${leagueId}`} className="tour-infor">
@@ -47,21 +50,22 @@ const TournamentResultDay = ({ league, overview, leagueId, matches }) => {
                     </Link>
                 </div>
                 <div className="wrappe-icon" ><i onClick={() => setIsFavorite(!isFavotite)} className={isFavotite ? "fa-regular fa-star icon-unhide icon__active" : "fa-regular fa-star icon-unhide"}></i></div>
-            </div>} */}
+            </div>}
 
             {
                 overview && <div className="tour-results-tabs__container">
-                    {tabs.map(tab => <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>)}
+                    {tabs.map((tab, index) => league.isTab ? (index < 3 && <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>)
+                    : (index < 2 && <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>))}
                 </div>
             }
 
 
 
-            {/* {overview && isTabActive === 1 && <TourOverview league={league} setIsTabActive={setIsTabActive} setIsMatchesTabActive={setIsMatchesTabActive} />}
+            {overview && isTabActive === 1 && <TourOverview league={league} setIsTabActive={setIsTabActive} setIsMatchesTabActive={setIsMatchesTabActive} />}
 
-            {overview && isTabActive === 2 && <TourMatches league={league} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive} />}
+            {overview && isTabActive === 2 && <TourMatches country={country} league={league} matches={matchesLeague} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive} />}
 
-            {overview && isTabActive === 3 && <MatchTable leagueId={leagueId} />} */}
+            {overview && isTabActive === 3 && <MatchTable league={league} leagueId={league._id} />}
 
 
 
@@ -73,7 +77,7 @@ const TournamentResultDay = ({ league, overview, leagueId, matches }) => {
                     matches.map((match, index) => {
                         const country = match && match.league.seasons.reverse()[0].country
                         const leagueIndex = match && match.league
-                        const prevMatch = index > 0 && matches[index - 1] 
+                        const prevMatch = index > 0 && matches[index - 1]
                         const prevLeague = prevMatch && prevMatch.league
 
                         return (
@@ -92,7 +96,7 @@ const TournamentResultDay = ({ league, overview, leagueId, matches }) => {
                                     </div>)
                                 }
                                 <div className="tour-matches">
-                                    <MatchResult match={match} country={country}  leagueId={leagueId} />
+                                    <MatchResult match={match} country={country} league={league} />
                                 </div>
                             </div>)
 

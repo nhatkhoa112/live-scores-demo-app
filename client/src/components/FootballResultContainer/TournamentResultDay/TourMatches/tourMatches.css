@@ -1,7 +1,10 @@
-.tour-matches__container{
+.tour-matches__container {
     width: 100%;
     height: auto;
     min-height: 100px;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
 }
 
 
@@ -11,4 +14,18 @@
     display: flex;
     align-items: center;
     padding: 0 15px;
+
+
+}
+
+.match_message {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    border-radius: 7.5px;
+    color:var(--secondary-color);
+    border: 1.5px solid #555
 }

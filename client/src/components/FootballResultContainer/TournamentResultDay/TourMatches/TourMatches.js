@@ -9,7 +9,12 @@ const tabs = [
 ]
 
 
-const TourMatches = ({ result, isMatchesTabActive, setIsMatchesTabActive }) => {
+
+const TourMatches = ({ matches, isMatchesTabActive, setIsMatchesTabActive, league, country }) => {
+
+  const fixturesMatches = matches && matches.reverse().filter(match => match.status === "Not yet")
+  const resultsMatches = matches && matches.reverse().filter(match => match.status !== "Not yet")
+
   return (
     <div className="tour-matches__container">
       <div className="tour-tabs__container">
@@ -17,13 +22,17 @@ const TourMatches = ({ result, isMatchesTabActive, setIsMatchesTabActive }) => {
       </div>
 
 
-      {isMatchesTabActive === 1 && result.matches.filter(match => match.status === "not yet").map((match, index) =>
-        <MatchResult key={index} match={match} result={result} />
-      )}
+      {(isMatchesTabActive === 1 && fixturesMatches?.length > 0 ) ? fixturesMatches?.map((match, index) =>
+        <MatchResult key={index} match={match} league={league} />)
+        : isMatchesTabActive === 1 && <div className="match_message">There are no games available</div>
+      }
 
-      {isMatchesTabActive === 2 && result.matches.filter(match => match.status !== "not yet").map((match, index) =>
-        <MatchResult key={index} match={match} result={result} />
-      )}
+
+
+      {(isMatchesTabActive === 2 && resultsMatches?.length > 0) ? resultsMatches?.map((match, index) =>
+        <MatchResult key={index} match={match} league={league} />)
+        : isMatchesTabActive === 2 &&  <div className="match_message">There are no games available</div>
+        }
 
     </div>
   )

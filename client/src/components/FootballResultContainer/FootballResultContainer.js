@@ -8,9 +8,9 @@ import { countryActions, leagueActions } from '../../redux/actions'
 
 const FootballResultContainer = ({ leagueId, countryId }) => {
     const dispatch = useDispatch()
-    const { countries } = useSelector((state) => state.country)
     const { league } = useSelector((state) => state.league)
     const { matches } = useSelector((state) => state.match)
+    const { country } = useSelector((state) => state.country)
 
     useEffect(() => {
         countryId && dispatch(countryActions.getCountryById(countryId))
@@ -25,7 +25,7 @@ const FootballResultContainer = ({ leagueId, countryId }) => {
         <div className='fb-result-container'>
             <div className="tour-results__overview">
                 {leagueId && countryId && [league].map((league, index) =>
-                    <TournamentResultDay key={index} league={league} overview={1} leagueId={leagueId}  />
+                    <TournamentResultDay key={index} league={league} overview={1} leagueId={leagueId} country={country}  />
                 )
                 }
 

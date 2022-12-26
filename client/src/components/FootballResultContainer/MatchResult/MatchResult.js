@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState  } from 'react'
 import './matchResult.css';
 import { Link } from 'react-router-dom'
-import moment from 'moment'
 
-const MatchResult = ({ match, country, leagueId }) => {
+const MatchResult = ({ match, country, league }) => {
     const getDayMatch = (day) => {
         let dayArray = day.split(" ")
         return dayArray[1] + " " + dayArray[2]
@@ -13,6 +12,9 @@ const MatchResult = ({ match, country, leagueId }) => {
         let timeArray = dayArray[4].split(":")
         return timeArray[0] + " " + timeArray[1]
     }
+
+    const countryLeague = league && league.seasons &&  league.seasons.reverse()[0].country
+    
 
     const [isFavoriteChoose, setIsFavoriteChoose] = useState(false)
     return (
@@ -25,7 +27,7 @@ const MatchResult = ({ match, country, leagueId }) => {
                         }</span>
                         <span>{match.status === 'FT' ? "FT" : match.status === 'Not yet' ? getTimeMatch(match.day) : 'Live'}</span>
                     </div>
-                 <Link to={`/football/${country._id}/${match.league._id}/${match._id}`}  className="match-infor">
+                 <Link to={`/football/${country ? country._id : countryLeague._id}/${match.league._id}/${match._id}`}  className="match-infor">
                         <div className="home-team">
                             <div className="team-infor">
                                 <span className="team-flag"><img src={match.homeTeam.team.flagUrl} alt="" /></span>

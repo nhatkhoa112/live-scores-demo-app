@@ -252,6 +252,10 @@ span.league-table__tab-tag::before{
     cursor: help;
 }
 
+.promotion{
+    position: relative;
+    cursor: help;
+}
 
 .europaleague-tour{
     position: relative;
@@ -274,6 +278,16 @@ span.league-table__tab-tag::before{
     border-radius: 4px;
 }
 
+.promotion::before{
+    content: "";
+    position: relative;
+    width: 4px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: green;
+    border-radius: 4px;
+}
 
 .europaleague-tour::before{
     content: "";
@@ -296,4 +310,8 @@ span.league-table__tab-tag::before{
     left: 0;
     background: darkred;
     border-radius: 4px;
+}
+
+.promotion:hover > .league-table__tab-tag{
+    display: flex !important;
 }

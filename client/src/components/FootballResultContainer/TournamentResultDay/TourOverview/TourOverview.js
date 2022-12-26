@@ -4,35 +4,42 @@ import MatchResult from '../../MatchResult/MatchResult';
 import MatchTable from '../../MatchDetailContent/MatchTable/MatchTable';
 
 
-const TourOverview = ({ result, setIsMatchesTabActive, setIsTabActive }) => {
+const TourOverview = ({ league, setIsMatchesTabActive, setIsTabActive }) => {
+    const matches = league && league.seasons && league.seasons.reverse()[0].matches
+    const matchesFixtures = matches && matches.filter(match => match.status === "Not yet")
+    const matchesResult = matches && matches.filter(match => match.status === "FT")
+
+    console.log({
+        msg: "hello"
+        , matchesResult
+    })
+
     return (
         <div className="tour-matches">
-            <div className="tour-match__header">
+            { matchesFixtures?.length !== 0 && (<div className="tour-match__header">
                 <span className="tour-match__header-title">Fixtures</span>
                 <span onClick={() => {
                     setIsMatchesTabActive(1);
                     setIsTabActive(2)
                 }} className="tour-match__header-icon">
                     <i className="fa-solid fa-chevron-right"></i>
-
                 </span>
-            </div>
-            {result.matches.filter(match => match.status === "not yet").map((match, index) =>
-                index < 5 && <MatchResult key={index} match={match} result={result} />
+            </div>)}
+            { matchesFixtures?.reverse().map((match, index) =>
+                index < 5 && <MatchResult key={index} match={match} league={league} />
             )}
-            <div className="tour-match__header">
+            {matchesResult?.length !== 0  && (<div className="tour-match__header">
                 <span className="tour-match__header-title">Results</span>
                 <span onClick={() => {
                     setIsMatchesTabActive(2);
                     setIsTabActive(2)
                 }} className="tour-match__header-icon">
                     <i className="fa-solid fa-chevron-right"></i>
-
                 </span>
 
-            </div>
-            {result.matches.filter(match => match.status !== "not yet").map((match, index) =>
-                index < 5 && <MatchResult key={index} match={match} result={result} />
+            </div>)}
+            {matchesResult?.reverse().map((match, index) =>
+                index < 5 && <MatchResult key={index} match={match} league={league} />
             )}
 
             <div className="tour-match__header">
@@ -41,11 +48,9 @@ const TourOverview = ({ result, setIsMatchesTabActive, setIsTabActive }) => {
                     setIsTabActive(3)
                 }} className="tour-match__header-icon">
                     <i className="fa-solid fa-chevron-right"></i>
-
                 </span>
-
             </div>
-            <MatchTable mini={true} tourId={result.tourId} />
+            <MatchTable mini={true} leagueId={league._id} league={league} />
         </div>
     )
 }

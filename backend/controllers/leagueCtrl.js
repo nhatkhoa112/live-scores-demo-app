@@ -28,8 +28,18 @@ const leagueController = {
 
     getLeagueById: async (req, res) => {
         try {
-            const {leagueId} = req.params;
-            const newLeague = await League.findOne({_id: leagueId}).populate({ path: "seasons.teams", model: "Team" }).populate({ path: "seasons.country", model: "Country" }).populate({ path: "seasons.matches", model: "Match" })
+            const { leagueId } = req.params;
+            const newLeague = await League.findOne({ _id: leagueId })
+                .populate({ path: "seasons.teams", model: "Team" })
+                .populate({ path: "seasons.country", model: "Country" })
+                .populate({
+                    path: "seasons.matches",
+                    populate: { path: "homeTeam.team awayTeam.team", model: "Team" },
+                })
+
+
+
+
             if (!newLeague) res.status(400).json({ msg: 'the leagueId is wrong' })
             else {
                 res.status(200).json({ msg: "The league is hear", data: { league: newLeague } })
