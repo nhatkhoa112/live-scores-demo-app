@@ -48,6 +48,7 @@ const matchController = {
     getMatchById: async (req, res) => {
         try {
             const matchId = req.params.id;
+
             const newMatch = await Match.findOne({ _id: matchId })
                 .populate({ path: "homeTeam.team", model: "Team", select: "-seasons" })
                 .populate({ path: "awayTeam.team", model: "Team", select: "-seasons" })
@@ -58,7 +59,7 @@ const matchController = {
 
             if (!newMatch) res.status(400).json({ msg: 'The matchId is wrong' })
             else {
-                res.status(500).json({ msg: 'This match is here: ', data: { match: newMatch } })
+                res.status(200).json({ msg: 'This match is here: ', data: { match: newMatch } })
             }
 
         } catch (error) {
