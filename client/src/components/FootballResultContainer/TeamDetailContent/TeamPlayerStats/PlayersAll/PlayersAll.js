@@ -15,7 +15,7 @@ const PlayersAll = ({ tabs, setIsTabActive, team, playersSorted }) => {
                 <div className="player-all__content">
                   {tab.id === 1 && playersSorted.byGoals.map((player, index) => (index < 5 && <div className="player-all__row" key={player.id}>
                     <div className="player-position">{player.playerIdx}</div>
-                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                     <div className="player-infor">
                       <div className="player-infor__name">{player.name}</div>
                       <div className="player-infor__team">{team.name}</div>
@@ -24,7 +24,7 @@ const PlayersAll = ({ tabs, setIsTabActive, team, playersSorted }) => {
                   </div>))}
                   {tab.id === 2 && playersSorted.byAssists.map((player, index) => (index < 5 && <div className="player-all__row" key={player.id}>
                     <div className="player-position">{player.playerAssistsIdx}</div>
-                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                     <div className="player-infor">
                       <div className="player-infor__name">{player.name}</div>
                       <div className="player-infor__team">{team.name}</div>
@@ -33,7 +33,7 @@ const PlayersAll = ({ tabs, setIsTabActive, team, playersSorted }) => {
                   </div>))}
                   {tab.id === 3 && playersSorted.byShootsOnTarget.map((player, index) => (index < 5 && <div className="player-all__row" key={player.id}>
                     <div className="player-position">{player.playerShootsOnTargetIdx}</div>
-                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                     <div className="player-infor">
                       <div className="player-infor__name">{player.name}</div>
                       <div className="player-infor__team">{team.name}</div>
@@ -42,7 +42,7 @@ const PlayersAll = ({ tabs, setIsTabActive, team, playersSorted }) => {
                   </div>))}
                   {tab.id === 4 && playersSorted.byYellowCard.map((player, index) => (index < 5 && <div className="player-all__row" key={player.id}>
                     <div className="player-position">{player.playerYellowCardIdx}</div>
-                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                     <div className="player-infor">
                       <div className="player-infor__name">{player.name}</div>
                       <div className="player-infor__team">{team.name}</div>
@@ -51,7 +51,7 @@ const PlayersAll = ({ tabs, setIsTabActive, team, playersSorted }) => {
                   </div>))}
                   {tab.id === 5 && playersSorted.byRedCard.map((player, index) => (index < 5 && <div className="player-all__row" key={player.id}>
                     <div className="player-position">{player.playerRedCardIdx}</div>
-                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                     <div className="player-infor">
                       <div className="player-infor__name">{player.name}</div>
                       <div className="player-infor__team">{team.name}</div>

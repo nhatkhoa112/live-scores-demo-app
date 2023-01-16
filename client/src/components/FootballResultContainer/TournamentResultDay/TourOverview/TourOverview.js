@@ -9,14 +9,9 @@ const TourOverview = ({ league, setIsMatchesTabActive, setIsTabActive }) => {
     const matchesFixtures = matches && matches.filter(match => match.status === "Not yet")
     const matchesResult = matches && matches.filter(match => match.status === "FT")
 
-    console.log({
-        msg: "hello"
-        , matchesResult
-    })
-
     return (
         <div className="tour-matches">
-            { matchesFixtures?.length !== 0 && (<div className="tour-match__header">
+            {matchesFixtures?.length !== 0 && (<div className="tour-match__header">
                 <span className="tour-match__header-title">Fixtures</span>
                 <span onClick={() => {
                     setIsMatchesTabActive(1);
@@ -25,10 +20,10 @@ const TourOverview = ({ league, setIsMatchesTabActive, setIsTabActive }) => {
                     <i className="fa-solid fa-chevron-right"></i>
                 </span>
             </div>)}
-            { matchesFixtures?.reverse().map((match, index) =>
+            {matchesFixtures?.reverse().map((match, index) =>
                 index < 5 && <MatchResult key={index} match={match} league={league} />
             )}
-            {matchesResult?.length !== 0  && (<div className="tour-match__header">
+            {matchesResult?.length !== 0 && (<div className="tour-match__header">
                 <span className="tour-match__header-title">Results</span>
                 <span onClick={() => {
                     setIsMatchesTabActive(2);
@@ -42,15 +37,17 @@ const TourOverview = ({ league, setIsMatchesTabActive, setIsTabActive }) => {
                 index < 5 && <MatchResult key={index} match={match} league={league} />
             )}
 
-            <div className="tour-match__header">
+            {league.isTab && (<div className="tour-match__header">
                 <span className="tour-match__header-title">Table</span>
                 <span onClick={() => {
                     setIsTabActive(3)
                 }} className="tour-match__header-icon">
                     <i className="fa-solid fa-chevron-right"></i>
                 </span>
-            </div>
-            <MatchTable mini={true} leagueId={league._id} league={league} />
+            </div>)}
+            {league.isTab &&
+                <MatchTable mini={true} leagueId={league._id} league={league} />
+            }
         </div>
     )
 }

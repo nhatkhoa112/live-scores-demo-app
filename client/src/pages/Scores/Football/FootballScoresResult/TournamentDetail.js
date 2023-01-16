@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TournamentsContainer from '../ContentLeftTournament/TournamentsContainer';
 import './tournamentDetail.css'
 import { useParams, Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import Basketball from '../../Basketball/Basketball';
 import Tennis from '../../Tennis/Tennis';
 import FlashNews from '../ContentRightFlashNews/FlashNews';
 import ScoresShedule from '../ContentCenter/ScoresShedule';
-import {matchActions} from '../../../../redux/actions'
 
 
 
@@ -25,7 +24,7 @@ const TournamentDetail = () => {
     const [isSportItemActive, setIsSportItemActive] = useState(0);
     const [hiddenResult, setHiddenResult] = useState(false)
     const [isTimeNav, setIsTimeNav] = useState(false)
-   
+
 
 
 
@@ -51,7 +50,7 @@ const TournamentDetail = () => {
 
             {!hiddenResult && (
                 <div className="football-layout-container">
-                    <TournamentsContainer countryId ={countryId} leagueId={leagueId} />
+                    <TournamentsContainer countryId={countryId} leagueId={leagueId} />
                     <ScoresShedule isTimeNav={isTimeNav} leagueId={leagueId} countryId={countryId} />
                     <FlashNews />
                 </div>

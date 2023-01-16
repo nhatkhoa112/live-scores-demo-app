@@ -1,519 +1,103 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import './teamMatches.css';
-import TournamentResultDay from '../../TournamentResultDay/TournamentResultDay';
+import TournamentResultDay from '../../TournamentResultDay/TournamentResultDay'
 
-const fixtures = [
-  {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "Premire League",
-    tourId: 1,
-    matches: [
-      {
-        status: "not yet",
-        matchId: 1,
-        day: " 10 Oct",
-        time: "01:00",
-        homeTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          name: "Manchester United",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10260.png"
-        }
-      },
-      {
-        status: "not yet",
-        matchId: 2,
-        day: " 15 Oct",
-        time: "23:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Tottenham Hotspur",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8586.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 3,
-        day: " 20 Oct",
-        time: "01:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Newcastle United",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10261.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 4,
-        day: " 22 Oct",
-        time: "21:00",
-        homeTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          name: "Crystal Palace",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9826.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 5,
-        day: " 29 Oct",
-        time: "23:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Fulham",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 5,
-        day: " 06 Nov",
-        time: "00:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Leicester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
-        }
-      },
-    ]
-  }, {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "EFL Cup",
-    tourId: 4,
-    matches: [
-      {
-        status: "not yet",
-        matchId: 1,
-        day: " 09 Nov",
-        time: "02:45",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "AFC Bournemouth",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
+
+const TeamMatches = ({ isMatchesTabActive, setIsMatchesTabActive, team, league }) => {
+  const matchesSortedByDay = (matches) => {
+    return matches.sort((a, b) => {
+      let aDay = new Date(a.day).getDate()
+      let bDay = new Date(b.day).getDate()
+      let aMonth = new Date(a.day).getMonth()
+      let bMonth = new Date(b.day).getMonth()
+      let aYear = new Date(a.day).getFullYear()
+      let bYear = new Date(b.day).getFullYear()
+
+      if (aYear > bYear) { return -1 }
+      else if (aYear < bYear) { return 1 }
+      else {
+        if (aMonth > bMonth) { return -1 }
+        else if (aMonth < bMonth) { return 1 }
+        else {
+          if (aDay > bDay) { return -1 }
+          else if (aDay < bDay) { return 1 }
         }
       }
-    ]
-  },
-  {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "Premire League",
-    tourId: 1,
-    matches: [
-      {
-        status: "not yet",
-        matchId: 1,
-        day: " 12 Nov",
-        time: "22:00",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "AFC Bournemouth",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
-        }
-      },
-      {
-        status: "not yet",
-        matchId: 2,
-        day: " 26 Dec",
-        time: "22:30",
-        homeTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          name: "Wolverhampton Wanderers",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8602.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 3,
-        day: " 31 Dec",
-        time: "22:00",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Mancester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8556.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 4,
-        day: " 02 Jan",
-        time: "22:00",
-        homeTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          name: "Brighton & Hove Albion",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10204.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 5,
-        day: " 29 Oct",
-        time: "23:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Fulham",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
-        }
-      }, {
-        status: "not yet",
-        matchId: 5,
-        day: " 06 Nov",
-        time: "00:30",
-        awayTeam: {
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          name: "Leicester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
-        }
-      },
-    ]
+    })
   }
-]
-
-
-const results = [
-  {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "Premire League",
-    tourId: 1,
-    matches: [
-      {
-        status: "fulltime",
-        matchId: 1,
-        day: " 10 Aug",
-        time: "01:00",
-        homeTeam: {
-          scores: 1,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          scores: 0,
-          name: "Manchester United",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10260.png"
-        }
-      },
-      {
-        status: "fulltime",
-        matchId: 2,
-        day: " 15 Aug",
-        time: "23:30",
-        awayTeam: {
-          scores: 4,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 3,
-          name: "Tottenham Hotspur",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8586.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 3,
-        day: " 20 Aug",
-        time: "01:30",
-        awayTeam: {
-          scores: 2,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 1,
-          name: "Newcastle United",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10261.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 4,
-        day: " 22 Aug",
-        time: "21:00",
-        homeTeam: {
-          scores: 1,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          scores: 1,
-          name: "Crystal Palace",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9826.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 5,
-        day: " 29 Aug",
-        time: "23:30",
-        awayTeam: {
-          scores: 2,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 0,
-          name: "Fulham",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 5,
-        day: " 06 Sep",
-        time: "00:30",
-        awayTeam: {
-          scores: 0,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 1,
-          name: "Leicester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
-        }
-      },
-    ]
-  }, {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "EFL Cup",
-    tourId: 4,
-    matches: [
-      {
-        status: "fulltime",
-        matchId: 1,
-        day: " 09 Sep",
-        time: "02:45",
-        awayTeam: {
-          scores: 0,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 0,
-          name: "AFC Bournemouth",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
-        }
-      }
-    ]
-  },
-  {
-    country: "England",
-    countryId: 1,
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-    tournament: "Premire League",
-    tourId: 1,
-    matches: [
-      {
-        status: "fulltime",
-        matchId: 1,
-        day: " 12 Sep",
-        time: "22:00",
-        awayTeam: {
-          scores: 2,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 2,
-          name: "AFC Bournemouth",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8678.png"
-        }
-      },
-      {
-        status: "fulltime",
-        matchId: 2,
-        day: " 26 Sep",
-        time: "22:30",
-        homeTeam: {
-          scores: 1,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          scores: 0,
-          name: "Wolverhampton Wanderers",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8602.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 3,
-        day: " 31 Sep",
-        time: "22:00",
-        awayTeam: {
-          scores: 2,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 1,
-          name: "Mancester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8556.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 4,
-        day: " 02 Oct",
-        time: "22:00",
-        homeTeam: {
-          scores: 4,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        awayTeam: {
-          scores: 2,
-          name: "Brighton & Hove Albion",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/10204.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 5,
-        day: " 07 Oct",
-        time: "23:30",
-        awayTeam: {
-          scores: 3,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 1,
-          name: "Fulham",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/9879.png"
-        }
-      }, {
-        status: "fulltime",
-        matchId: 5,
-        day: " 07 Oct",
-        time: "00:30",
-        awayTeam: {
-          scores: 2,
-          name: "Everton",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-        },
-        homeTeam: {
-          scores: 3,
-          name: "Leicester City",
-          flag: "https://lsm-static-prod.livescore.com/medium/enet/8197.png"
-        }
-      },
-    ]
-  }
-
-]
-
-const tours = [
-  {
-    name: "All Competition",
-    chooseString: "",
-    flag: "https://www.livescore.com/ls-web-assets/images/global-fb4143ccfed4377df5947292f2479be5.svg",
-  },
-  {
-    name: "Premire League",
-    chooseString: "Premire League",
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-
-  },
-  {
-    name: "EFL Cup",
-    chooseString: "EFL Cup",
-    flag: "https://static.livescore.com/i2/fh/england.jpg",
-
-  }
-]
-
-
-const TeamMatches = ({isMatchesTabActive, setIsMatchesTabActive}) => {
-  const [tourChoose, setTourChoose] = useState(tours[0])
   const [darkMarkShow, setDarkMarkShow] = useState(false)
+  let arrayLeaguesName = []
+  let allMatches = []
+  team && team?.seasons.reverse()[0].leagues.map((league) => {
+    allMatches = allMatches.concat(league.matches)
+    arrayLeaguesName.push({ name: league.league.name, _id: league.league._id })
+  }
+  )
+  let matchesSort = matchesSortedByDay(allMatches)
+  const matchFixtures = matchesSort?.filter((match) => match.status === "Not yet")
+  const matchResults = matchesSort?.filter((match) => match.status !== "Not yet")
+  const [matchesFixture, setMatchesFixture] = useState(matchFixtures)
+  const [matchesResult, setMatchesResult] = useState(matchResults)
+
+
+  arrayLeaguesName.unshift({ name: "All Competions" })
+  const [leagueChoose, setLeagueChoose] = useState(arrayLeaguesName[0])
+  const { leagues } = useSelector((state) => state.league.leagues)
+
+
+
   return (
     <div className='team-matches__container'>
-      <div className="tabs-container summary-tabs">
+      <div className="tabs-container summary-tabs border-bottom">
         <div className="tab-inner summary-tab__inner">
           <div onClick={() => setIsMatchesTabActive(1)} className={isMatchesTabActive === 1 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Fixtures</div>
           <div onClick={() => setIsMatchesTabActive(2)} className={isMatchesTabActive === 2 ? "sumarry-tab summary-tab-active" : "sumarry-tab"}>Results</div>
         </div>
       </div>
 
-      <div className="tour-choose">
-        <div className="tour__row">
-          <span onClick={() => setDarkMarkShow(true)} className="tour__row-icon">
-            <i className="fa-regular fa-futbol"></i>
-            <i className="fa-sharp fa-solid fa-caret-down"></i>
-          </span>
-          <span onClick={() => setDarkMarkShow(true)} className="tour__row-text">{tourChoose.name}</span>
-          {darkMarkShow && <div onClick={() => setDarkMarkShow(!darkMarkShow)} className="dark-mask"></div>}
-          {darkMarkShow && <div className="tour-dropdown-menu">
-            {tours.map((tour, index) => <div key={index} className="tour-choose__row">
-            <img className="image-height" src={tour.flag} alt="" />
-              <span onClick={() => {
-               setDarkMarkShow(false);
-               setTourChoose(tour);
-              }}>{tour.name}</span>
-            </div>)}
-          </div>}
-        </div>
+      {
+        arrayLeaguesName?.length > 2 && (
+          <div className="tour-choose">
+            <div className="tour__row">
+              <span onClick={() => setDarkMarkShow(true)} className="tour__row-icon">
+                <i className="fa-regular fa-futbol"></i>
+                <i className="fa-sharp fa-solid fa-caret-down"></i>
+              </span>
+              <span onClick={() => setDarkMarkShow(true)} className="tour__row-text">{leagueChoose.name}</span>
+              {darkMarkShow && <div onClick={() => setDarkMarkShow(!darkMarkShow)} className="dark-mask"></div>}
+              {darkMarkShow && <div className="tour-dropdown-menu">
+                {arrayLeaguesName.map((league, index) => <div key={index} className="tour-choose__row">
+                  <span onClick={() => {
+                    setDarkMarkShow(false);
+                    setLeagueChoose(league);
+                    setMatchesFixture(league._id ? matchFixtures.filter((match) => match.league === league._id) : matchFixtures)
+                    setMatchesResult(league._id ? matchResults.filter((match) => match.league === league._id) : matchResults)
+                  }}>{league.name}</span>
+                </div>)}
+              </div>}
+            </div>
+          </div>)
+      }
 
 
-      </div>
 
+      {
+        isMatchesTabActive === 1 && < div className='fixtures__container'>
+          {
+            matchesFixture?.lenth > 0
+              ? <TournamentResultDay matches={matchesFixture} league={league} leagues={leagues} />
+              : <div className="match_message">There are no games available</div>
 
-      {isMatchesTabActive === 1 && < div className='fixtures__container'>
-        {tourChoose.chooseString && fixtures.filter((fixture) => fixture.tournament === tourChoose.chooseString).map((result, index) =>
-          <TournamentResultDay key={index} result={result} />
-        )
-        }
-
-        {!tourChoose.chooseString && fixtures.map((result, index) =>
-          <TournamentResultDay key={index} result={result} />
-        )
-        }
-      </div>}
+          }
+        </div>}
 
 
       {isMatchesTabActive === 2 && < div className='fixtures__container'>
-        {tourChoose.chooseString && results.filter((fixture) => fixture.tournament === tourChoose.chooseString).map((result, index) =>
-          <TournamentResultDay key={index} result={result} />
-        )
-        }
-
-        {!tourChoose.chooseString && results.map((result, index) =>
-          <TournamentResultDay key={index} result={result} />
-        )
+        {
+          matchesResult?.length > 0
+            ? <TournamentResultDay matches={matchesResult} league={league} leagues={leagues} />
+            : <div className="match_message">There are no games available</div>
         }
       </div>}
 

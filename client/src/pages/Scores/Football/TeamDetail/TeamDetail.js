@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+git aimport React, { useState, useEffect } from 'react';
 import './teamDetail.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { teamActions, leagueActions } from '../../../../redux/actions';
 import TournamentsContainer from '../ContentLeftTournament/TournamentsContainer';
 import { useParams } from 'react-router-dom';
 import Football from '../Football';
@@ -7,7 +9,7 @@ import Baseball from '../../Baseball/Baseball';
 import Basketball from '../../Basketball/Basketball';
 import Tennis from '../../Tennis/Tennis';
 import FlashNews from '../ContentRightFlashNews/FlashNews';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TeamDetailContent from '../../../../components/FootballResultContainer/TeamDetailContent/TeamDetailContent';
 
 
@@ -21,9 +23,24 @@ const sportList = [
 
 
 const TeamDetail = () => {
-    let { countryId, tourId } = useParams();
+    const dispatch = useDispatch()
+    let { leagueId, teamId } = useParams();
     const [isSportItemActive, setIsSportItemActive] = useState(0);
     const [hiddenResult, setHiddenResult] = useState(false);
+    const { team } = useSelector((state) => state.team)
+    const { league } = useSelector((state) => state.league)
+
+    useEffect(() => {
+        dispatch(teamActions.getTeamById(teamId))
+        dispatch(leagueActions.getLeagueById(leagueId))
+        dispatch(leagueActions.getAllLeague())
+
+    }, [dispatch, teamId])
+
+
+    const countryId = league && league.seasons?.reverse()[0].country._id
+
+
 
     return (
 
@@ -47,8 +64,8 @@ const TeamDetail = () => {
 
             {!hiddenResult && (
                 <div className="football-layout-container">
-                    <TournamentsContainer countryId={countryId} tourId={tourId} />
-                    <TeamDetailContent  />
+                    <TournamentsContainer countryId={countryId} leagueId={leagueId} />
+                    <TeamDetailContent team={team} leagueId={league._id} league={league}/>
                     <FlashNews />
                 </div>
             )}

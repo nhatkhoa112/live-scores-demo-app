@@ -109,7 +109,19 @@
     padding: 0 70px;
     background: var(--third-color);
     position: relative;
+    text-align: center !important;
 }
+
+
+.tab-content__text > 
+.tab-content__text-content{
+    width: 100%;
+    text-align: center;
+    font-size: 13.5px;
+
+}
+
+
 
 .tab-content__text::before{
    content: "";

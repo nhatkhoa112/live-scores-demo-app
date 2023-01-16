@@ -27,7 +27,7 @@ const MatchResult = ({ match, country, league }) => {
                         }</span>
                         <span>{match.status === 'FT' ? "FT" : match.status === 'Not yet' ? getTimeMatch(match.day) : 'Live'}</span>
                     </div>
-                 <Link to={`/football/${country ? country._id : countryLeague._id}/${match.league._id}/${match._id}`}  className="match-infor">
+                 <Link to={`/football/${country ? country._id : countryLeague._id}/${match.league}/${match._id}`}  className="match-infor">
                         <div className="home-team">
                             <div className="team-infor">
                                 <span className="team-flag"><img src={match.homeTeam.team.flagUrl} alt="" /></span>

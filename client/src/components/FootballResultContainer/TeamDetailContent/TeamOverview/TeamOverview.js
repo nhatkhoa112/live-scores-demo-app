@@ -2,65 +2,7 @@ import React from 'react'
 import './teamOverview.css'
 import MatchResult from '../../MatchResult/MatchResult'
 import News from '../../MatchDetailContent/News/News'
-import {Link} from 'react-router-dom'
-
-let awayTeam = {
-  flag: "https://lsm-static-prod.livescore.com/high/enet/10260.png",
-  name: "Manchester United",
-  teamId: 5,
-}
-
-let result = {
-  countryId: 1,
-  tourId: 1
-}
-
-let matches = [
-
-  {
-    matchId: 1,
-    status: "fulltime",
-    homeTeam: {
-      name: "Southampton",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/8466.png",
-      scores: 1,
-    },
-    awayTeam: {
-      name: "Everton",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-      scores: 2,
-    }
-  },
-  {
-    matchId: 2,
-    status: "fulltime",
-    awayTeam: {
-      name: "West Ham United",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/8654.png",
-      scores: 1,
-    },
-    homeTeam: {
-      name: "Everton",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-      scores: 0,
-    }
-  },
-  {
-    matchId: 3,
-    status: "fulltime",
-    awayTeam: {
-      name: "Asernal",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/9825.png",
-      scores: 3,
-    },
-    homeTeam: {
-      name: "Everton",
-      flag: "https://lsm-static-prod.livescore.com/medium/enet/8668.png",
-      scores: 0,
-    }
-  },
-]
-
+import { Link } from 'react-router-dom'
 
 let news = [
   {
@@ -95,7 +37,52 @@ let news = [
   },]
 
 
-const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive }) => {
+const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive, leagueId, league }) => {
+
+  let leagueOfTeamNewestSeason = team.seasons && team.seasons.reverse()[0].leagues.find((league) => {
+    return league.league._id === leagueId
+  })
+
+  console.log(leagueId)
+
+  const matches = leagueOfTeamNewestSeason && leagueOfTeamNewestSeason.matches
+
+  const matchesSortedByDay = (matches) => {
+    return matches?.sort((a, b) => {
+      let aDay = new Date(a.day).getDate()
+      let bDay = new Date(b.day).getDate()
+      let aMonth = new Date(a.day).getMonth()
+      let bMonth = new Date(b.day).getMonth()
+      let aYear = new Date(a.day).getFullYear()
+      let bYear = new Date(b.day).getFullYear()
+
+      if (aYear > bYear) { return -1 }
+      else if (aYear < bYear) { return 1 }
+      else {
+        if (aMonth > bMonth) { return -1 }
+        else if (aMonth < bMonth) { return 1 }
+        else {
+          if (aDay > bDay) { return -1 }
+          else if (aDay < bDay) { return 1 }
+        }
+      }
+    })
+  }
+
+  let homeTeam = matches && matchesSortedByDay(matches)[0] && matchesSortedByDay(matches)[0].homeTeam.team
+  let awayTeam = matches && matchesSortedByDay(matches)[0] && matchesSortedByDay(matches)[0].awayTeam.team
+
+  console.log({msg: "hello", a:  matches})
+
+  if (!awayTeam)
+    awayTeam = {
+      flagUrl: "https://lsm-static-prod.livescore.com/high/enet/10260.png",
+      name: "Manchester United",
+      _id: "6387249b29932092ea03437f"
+    }
+
+
+
   return (
     <div className='team-overview__container'>
       <div className="team-overview__scoreboard">
@@ -104,8 +91,8 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive }) => {
       <div className="team-overview__next">
         <div className="team-overview__next-inner">
           <div className="next__home">
-            <Link to={`/football/team/1/${team.teamId}`} className="next__home-flag"><img src={team.flag} alt="" /></Link>
-            <Link to={`/football/team/1/${team.teamId}`} className="next__home-name">{team.name}</Link>
+            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-flag"><img src={homeTeam && homeTeam.flagUrl} alt="" /></Link>
+            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-name">{homeTeam && homeTeam.name}</Link>
           </div>
           <div className="next__infor">
             <div className="next__infor-time">
@@ -116,14 +103,14 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive }) => {
             <div className="next__infor-place">Goodison Park</div>
           </div>
           <div className="next__away">
-            <Link  to={`/football/team/1/${awayTeam.teamId}`} className="next__away-flag"><img src={awayTeam.flag} alt="" /></Link>
-            <Link to={`/football/team/1/${awayTeam.teamId}`} className="next__away-name">{awayTeam.name}</Link>
+            <Link  to={`/football/team/${leagueId}/${awayTeam._id}`} className="next__away-flag"><img src={awayTeam.flagUrl} alt="" /></Link>
+            <Link to={`/football/team/${leagueId}/${awayTeam._id}`} className="next__away-name">{awayTeam.name}</Link>
           </div>
         </div>
       </div>
       <div className="team-overview__results">
         <div className="results__title">Form</div>
-        {matches.map((match, index) => <MatchResult key={index} match={match} result={result} />)}
+        {matches?.map((match, index) => <MatchResult key={index} match={match} league={league}  />)}
         <button onClick={() => {
           setIsTabActive(2)
           setIsMatchesTabActive(2)

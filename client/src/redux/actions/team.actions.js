@@ -17,7 +17,7 @@ const getTeamsByLeagueId = (leagueId) => async (dispatch) => {
     dispatch ({type: types.GET_TEAMS_BY_LEAGUEID_REQUEST, payload: null})
     try {
         const {data} = await api.get('team')
-        dispatch({type: types.GET_TEAMS_BY_LEAGUEID_SUCCESS, payload: {data, leagueId }})
+    dispatch({type: types.GET_TEAMS_BY_LEAGUEID_SUCCESS, payload: {data: data, leagueId }})
     } catch (error) {
         dispatch({type: types.GET_TEAMS_BY_LEAGUEID_FAILURE, payload: null})
     }

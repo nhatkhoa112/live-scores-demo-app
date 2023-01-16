@@ -21,7 +21,7 @@ const tabs = [
     }
 ]
 
-const TournamentResultDay = ({ league, overview, leagueId, matches, country }) => {
+const TournamentResultDay = ({ league, overview, leagueId, matches, country, leagues }) => {
     const [isTabActive, setIsTabActive] = useState(1)
     const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isFavotite, setIsFavorite] = useState(false)
@@ -32,8 +32,6 @@ const TournamentResultDay = ({ league, overview, leagueId, matches, country }) =
     }
 
 
-
-
     let matchesLeague = league && league.seasons && league.seasons.reverse()[0].matches
 
 
@@ -41,7 +39,7 @@ const TournamentResultDay = ({ league, overview, leagueId, matches, country }) =
 
         <div className="tournament-matches-in-day">
 
-            {!matches && seasonLeague && <div className="tour-header" >
+            {!leagues && !matches && seasonLeague && <div className="tour-header" >
                 <div className="tour-header-link">
                     <Link to={`/football/${seasonLeague.country._id}/${leagueId}`} className="country-flag"><img src={seasonLeague.country.imageUrl} alt="" /></Link>
                     <Link to={`/football/${seasonLeague.country._id}/${leagueId}`} className="tour-infor">
@@ -55,7 +53,7 @@ const TournamentResultDay = ({ league, overview, leagueId, matches, country }) =
             {
                 overview && <div className="tour-results-tabs__container">
                     {tabs.map((tab, index) => league.isTab ? (index < 3 && <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>)
-                    : (index < 2 && <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>))}
+                        : (index < 2 && <div onClick={() => setIsTabActive(tab.id)} key={tab.id} className={isTabActive === tab.id ? "tour-results-tab tour-results-tab__active" : "tour-results-tab"}>{tab.title}</div>))}
                 </div>
             }
 
@@ -66,16 +64,16 @@ const TournamentResultDay = ({ league, overview, leagueId, matches, country }) =
             {overview && isTabActive === 2 && <TourMatches country={country} league={league} matches={matchesLeague} setIsMatchesTabActive={setIsMatchesTabActive} isMatchesTabActive={isMatchesTabActive} />}
 
             {overview && isTabActive === 3 && <MatchTable league={league} leagueId={league._id} />}
+ 
 
 
 
 
 
-
-            {matches && matches.length > 0 && <>
+            {!leagues && matches && matches.length > 0 && <>
                 {
                     matches.map((match, index) => {
-                        const country = match && match.league.seasons.reverse()[0].country
+                        const country = match && match.league.seasons?.reverse()[0].country
                         const leagueIndex = match && match.league
                         const prevMatch = index > 0 && matches[index - 1]
                         const prevLeague = prevMatch && prevMatch.league
@@ -95,6 +93,41 @@ const TournamentResultDay = ({ league, overview, leagueId, matches, country }) =
                                         <div className="wrappe-icon" ><i onClick={() => setIsFavorite(!isFavotite)} className={isFavotite ? "fa-regular fa-star icon-unhide icon__active" : "fa-regular fa-star icon-unhide"}></i></div>
                                     </div>)
                                 }
+
+                                <div className="tour-matches">
+                                    <MatchResult match={match} country={country} league={league} />
+                                </div>
+                            </div>)
+
+                    })
+                }
+            </>
+            }
+
+            {leagues && matches && matches.length > 0 && <>
+                {
+                    matches.map((match, index) => {
+                        const leagueOfMatch = leagues?.find((league) => league._id === match.league)
+                        const country = leagueOfMatch.seasons?.reverse()[0].country
+                        const leagueIndex = match && match.league
+                        const prevMatch = index > 0 && matches[index - 1]
+                        const prevLeague = prevMatch && prevMatch.league
+                        return (
+                            <div key={index}>
+                                {
+                                    (leagueIndex._id !== prevLeague._id) ||  (leagueIndex !== prevLeague)  &&
+                                    (<div className="tour-header">
+                                        <div className="tour-header-link">
+                                            <Link to={`/football/${country._id}/${leagueId}`} className="country-flag"><img src={country.imageUrl} alt="" /></Link>
+                                            <Link to={`/football/${country._id}/${leagueId}`} className="tour-infor">
+                                                <div className="tour-name">{match.league.name}</div>
+                                                <div className="country-name">{country.name}</div>
+                                            </Link>
+                                        </div>
+                                        <div className="wrappe-icon" ><i onClick={() => setIsFavorite(!isFavotite)} className={isFavotite ? "fa-regular fa-star icon-unhide icon__active" : "fa-regular fa-star icon-unhide"}></i></div>
+                                    </div>)
+                                }
+
                                 <div className="tour-matches">
                                     <MatchResult match={match} country={country} league={league} />
                                 </div>

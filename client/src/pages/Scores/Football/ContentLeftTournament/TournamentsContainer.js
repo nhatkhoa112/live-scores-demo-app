@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import {countryActions} from '../../../../redux/actions'
 
-const TournamentsContainer = ({countryId,tourId}) => {
+const TournamentsContainer = ({countryId,leagueId}) => {
     const dispatch = useDispatch()
     const countries = useSelector((state) => state.country.countries)
     const [tournamentQuery, setTournamentQuery] = useState('')
@@ -84,7 +84,7 @@ const TournamentsContainer = ({countryId,tourId}) => {
                 Object.keys(countrySelect).length !== 0 && (<div className="tournament-by-country-list">
                     {
                         countrySelect.leagues.map((league) => {
-                            return(<Link  to={`/football/${countrySelect._id}/${league._id}`}  className={(tourId === league._id && countrySelect._id === countryId)  ? "tournament-item active-effect" : "tournament-item" }  key={league._id}>
+                            return(<Link  to={`/football/${countrySelect._id}/${league._id}`}  className={(leagueId === league._id && countrySelect._id === countryId)  ? "tournament-item active-effect" : "tournament-item" }  key={league._id}>
                                     <span className={countrySelect.typeImage === 'flag' ? 'logo flag' : 'logo cup'}><img className='image' src={countrySelect.imageUrl} alt="" /></span>
                                     <span className="name"><span className="text">{league.name}</span></span>
                                 </Link>

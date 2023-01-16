@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PlayersAll from './PlayersAll/PlayersAll'
 import PlayersItem from './PlayersItem/PlayerItem'
 import './teamPlayerStats.css'
-import { players } from '../../../../utils/players'
 
 const tabs = [
   {
@@ -30,20 +29,36 @@ const tabs = [
   }
 ]
 
-let playersSorted = {
-  byGoals: [],
-  byAssists: [],
-  byShootsOnTarget: [],
-  byYellowCard: [],
-  byRedCard: [],
 
-};
 
-playersSorted.byGoals = [...(players.sort((a, b) => b.goals - a.goals).map(player => player))]
-playersSorted.byAssists = [...(players.sort((a, b) => b.assists - a.assists).map(player => player))]
-playersSorted.byShootsOnTarget = [...(players.sort((a, b) => b.shootsOnTarget - a.shootsOnTarget).map(player => player))]
-playersSorted.byYellowCard = [...(players.sort((a, b) => b.yellowCard - a.yellowCard).map(player => player))]
-playersSorted.byRedCard = [...(players.sort((a, b) => b.redCard - a.redCard).map(player => player))]
+const TeamPlayerStats = ({ team }) => {
+  let arrayLeaguesName = []
+  let allMatches = []
+  team && team?.seasons.reverse()[0].leagues.map((league) => {
+    allMatches = allMatches.concat(league.matches)
+    arrayLeaguesName.push({ name: league.league.name, _id: league.league._id })
+  }
+  )
+  let playersStat = []
+  const [darkMarkShow, setDarkMarkShow] = useState(false)
+  const [isTabActive, setIsTabActive] = useState(6)
+  const [leagueChoose, setLeagueChoose] = useState(arrayLeaguesName[0])
+  const leagues = team.seasons?.reverse()[0].leagues
+  const [playersOfLeague, setPlayersOfLeague] = useState(leagues.find((league) => league.league._id === leagueChoose._id).players)
+  playersOfLeague.map((player) => {
+    const stat = player.seasons?.reverse()[0].leagues.find((league) => league.league === leagueChoose._id)
+    playersStat.push({ name: player.name, goals: stat.goals, assists: stat.assists, shootsOnTarget: stat.shootsOnTarget, yellowCard: stat.yellowCard, redCard: stat.redCard, injuryStatus: stat.injuryStatus })
+  })
+
+  let playersSorted = {byGoals: [], byAssists:[] , byShootsOnTarget: [], byYellowCard: [], byRedCard: [], playerIdx:0 }
+
+
+
+playersSorted.byGoals = [...(playersStat.sort((a, b) => b.goals - a.goals))]
+playersSorted.byAssists = [...(playersStat.sort((a, b) => b.assists - a.assists))]
+playersSorted.byShootsOnTarget = [...(playersStat.sort((a, b) => b.shootsOnTarget - a.shootsOnTarget))]
+playersSorted.byYellowCard = [...(playersStat.sort((a, b) => b.yellowCard - a.yellowCard))]
+playersSorted.byRedCard = [...(playersStat.sort((a, b) => b.redCard - a.redCard))]
 
 for (let idx = 0; idx < playersSorted.byGoals.length; idx++) {
   if (idx === 0) {
@@ -119,13 +134,38 @@ for (let idx = 0; idx < playersSorted.byRedCard.length; idx++) {
 }
 
 
-const TeamPlayerStats = ({ team }) => {
-  const [isTabActive, setIsTabActive] = useState(6)
+
   return (
     <div className='team-playerStats__container'>
       <div className="players-stat-tabs__container">
         {tabs.map(tab => <div key={tab.id} onClick={() => setIsTabActive(tab.id)} className={isTabActive === tab.id ? "players-stat-tab players-stat-tab__active" : "players-stat-tab"}>{tab.name}</div>)}
       </div>
+
+      {
+        arrayLeaguesName?.length > 1 && (
+          <div className="tour-choose">
+            <div className="tour__row">
+              <span onClick={() => setDarkMarkShow(true)} className="tour__row-icon">
+                <i className="fa-regular fa-futbol"></i>
+                <i className="fa-sharp fa-solid fa-caret-down"></i>
+              </span>
+              <span onClick={() => setDarkMarkShow(true)} className="tour__row-text">{leagueChoose.name}</span>
+              {darkMarkShow && <div onClick={() => setDarkMarkShow(!darkMarkShow)} className="dark-mask"></div>}
+              {darkMarkShow && <div className="tour-dropdown-menu">
+                {arrayLeaguesName.map((league, index) => <div key={index} className="tour-choose__row">
+                  <span onClick={() => {
+                    setDarkMarkShow(false);
+                    setLeagueChoose(league);
+                    setPlayersOfLeague(leagues.find((newLeague) => newLeague.league._id === league._id).players)
+                  }}>{league.name}</span>
+                </div>)}
+              </div>}
+            </div>
+          </div>)
+      }
+
+
+
 
       {
         isTabActive === 6 && <PlayersAll setIsTabActive={setIsTabActive} tabs={tabs} team={team} playersSorted={playersSorted} />

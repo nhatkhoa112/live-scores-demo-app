@@ -8,7 +8,7 @@ import Basketball from '../../Basketball/Basketball';
 import Tennis from '../../Tennis/Tennis';
 import FlashNews from '../ContentRightFlashNews/FlashNews';
 import MatchDetailContent from '../../../../components/FootballResultContainer/MatchDetailContent/MatchDetailContent';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const sportList = [
@@ -21,7 +21,7 @@ const sportList = [
 
 
 const FootballMatchDetail = () => {
-    let { countryId, tourId, matchId } = useParams();
+    let { countryId, leagueId, matchId } = useParams();
     const [isSportItemActive, setIsSportItemActive] = useState(0);
     const [hiddenResult, setHiddenResult] = useState(false);
 
@@ -47,8 +47,8 @@ const FootballMatchDetail = () => {
 
             {!hiddenResult && (
                 <div className="football-layout-container">
-                    <TournamentsContainer countryId={countryId} tourId={tourId} />
-                    <MatchDetailContent countryId={countryId} tourId={tourId} matchId={matchId} />
+                    <TournamentsContainer countryId={countryId} leagueId={leagueId} />
+                    <MatchDetailContent countryId={countryId} leagueId={leagueId} matchId={matchId} />
                     <FlashNews />
                 </div>
             )}

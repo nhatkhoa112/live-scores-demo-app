@@ -27,8 +27,8 @@ function App() {
             <Route exact path="favorite" element={<Favorite />} />
             <Route exact path="news" element={<News />} />
             <Route exact path='football/:countryId/:leagueId' element={<TournamentDetail />} />
-            <Route path='football/:countryId/:tourId/:matchId' element={<FootballMatchDetail />} exact />
-            <Route path='football/team/:tourId/:teamId' element={<TeamDetail />} exact />
+            <Route path='football/:countryId/:leagueId/:matchId' element={<FootballMatchDetail />} exact />
+          <Route path='football/team/:leagueId/:teamId' element={<TeamDetail />} exact />
           </Route>
         </Routes>
       </div>

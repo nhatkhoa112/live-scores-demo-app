@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './matchDetailContent.css'
-import { results } from '../../../utils/result';
+import { useDispatch, useSelector } from 'react-redux';
+import { leagueActions, matchActions, countryActions } from '../../../redux/actions';
 import soccerField from '../../../assets/images/soccer-field.svg';
 import MatchInfor from './MatchInfor/MatchInfor';
 import MatchSummary from './MatchSummary/MatchSummary';
@@ -10,7 +11,6 @@ import MatchTable from './MatchTable/MatchTable';
 import MatchNews from './MatchNews/MatchNews';
 import MatchH2H from './H2H/MatchH2H';
 import { Link } from 'react-router-dom'
-import { teams } from '../../../utils/table'
 
 
 const tabs = [
@@ -24,15 +24,29 @@ const tabs = [
 ]
 
 
-const MatchDetailContent = ({ tourId, countryId, matchId }) => {
-    const tour = results.find((result => result.countryId === parseInt(countryId) && result.tourId === parseInt(tourId)));
-    const match = tour.matches.find(match => match.matchId === parseInt(matchId))
+const MatchDetailContent = ({ leagueId, countryId, matchId }) => {
+    const dispatch = useDispatch()
     const [isStreamingShow, setIsStreamingShow] = useState(false)
     const [isTrackerShow, setIsTrackerShow] = useState(false)
     const [isTabActive, setIsTabActive] = useState(2)
-    let homeTeam = teams.find(team => team.name === match.homeTeam.name) || teams[13]
-    let awayTeam = teams.find(team => team.name === match.awayTeam.name) || teams[18]
-    
+    const {country} = useSelector((state) => state.country)
+    const {match} = useSelector((state) => state.match)
+    const {league} = useSelector((state) => state.league)
+
+
+    let homeTeam = match.homeTeam
+    let awayTeam = match.awayTeam
+
+
+    useEffect(() => {
+        dispatch(matchActions.getMatchById(matchId))
+        dispatch(leagueActions.getLeagueById(leagueId))
+        dispatch(countryActions.getCountryById(countryId))
+    }, [dispatch, countryId, leagueId, matchId])
+
+
+    const leagueSeason = league &&  league.seasons && league?.seasons.reverse()[0]
+
 
 
     return (
@@ -40,11 +54,11 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
             <div className="tour-header">
                 <div className="tour-infor">
                     <div className="country-flag">
-                        <img src={tour.flag} alt="" />
+                        <img src={leagueSeason && leagueSeason.country.imageUrl} alt="" />
                     </div>
                     <div className="tour-infor">
-                        <div className="tour-name">{tour.tournament}</div>
-                        <div className="country-name">{tour.country}</div>
+                        <div className="tour-name">{ league && league.name}</div>
+                        <div className="country-name">{leagueSeason && leagueSeason.country.name}</div>
                     </div>
                 </div>
                 <div className="tour-icon-wrapper">
@@ -70,26 +84,26 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
             </div>}
             <div className="match-result">
                 <div className="home-team">
-                    <Link to={`/football/team/1/${homeTeam.teamId}`} className="match-team-infor">
-                        <div className="team-name">{match.homeTeam.name}</div>
-                        <div className="team-flag"><img src={match.homeTeam.flag} alt="" /></div>
+                <Link to={`/football/team/${league._id}/${homeTeam && homeTeam.team._id}`} className="match-team-infor">
+                        <div className="team-name">{homeTeam && homeTeam.team.name}</div>
+                        <div className="team-flag"><img src={homeTeam && homeTeam.team.flagUrl} alt="" /></div>
                     </Link>
 
 
                     {
-                        match.status !== "not yet" && <div className="team-scores-1">{match.homeTeam.scores}</div>
+                        match.status !== "Not yet" && <div className="team-scores-1">{homeTeam && homeTeam.score}</div>
                     }
                 </div>
                 <span>VS</span>
                 <div className="away-team">
 
-                    <Link to={`/football/team/1/${awayTeam.teamId}`} className="match-team-infor">
-                        <div id="flag-team"><img src={match.awayTeam.flag} alt="" /></div>
-                        <div id="name-team">{match.awayTeam.name}</div>
+                    <Link to={`/football/team/${league._id}/${awayTeam && awayTeam.team._id}`} className="match-team-infor">
+                        <div id="flag-team"><img src={awayTeam && awayTeam.team.flagUrl} alt="" /></div>
+                        <div id="name-team">{awayTeam && awayTeam.team.name}</div>
                     </Link>
 
                     {
-                        match.status !== "not yet" && <div className="team-scores-1">{match.awayTeam.scores}</div>
+                        match.status !== "Not yet" && <div className="team-scores-1">{ awayTeam && awayTeam.score}</div>
                     }
                 </div>
             </div>
@@ -117,7 +131,7 @@ const MatchDetailContent = ({ tourId, countryId, matchId }) => {
 
             {/* Match ttable */}
 
-            {isTabActive === 5 && <MatchTable match={match} tourId={tourId} />}
+            {isTabActive === 5 && <MatchTable match={match} leagueId={leagueId} />}
 
             {/* Match News */}
 

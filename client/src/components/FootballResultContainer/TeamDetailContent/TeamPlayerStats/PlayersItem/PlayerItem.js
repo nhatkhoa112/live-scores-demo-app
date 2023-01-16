@@ -2,6 +2,7 @@ import React from 'react'
 import './playersItem.css'
 
 const PlayerItem = ({ playersGoals, playersAssists, playersShootsOnTarget, playersYellowCard, playersRedCard, tabs, isTabActive, team }) => {
+    console.log(playersGoals)
     return (
 
         <div className="players-all__container">
@@ -18,7 +19,7 @@ const PlayerItem = ({ playersGoals, playersAssists, playersShootsOnTarget, playe
                                     {tab.id === 3 && <div className="player-position">{player.playerShootsOnTargetIdx}</div>}
                                     {tab.id === 4 && <div className="player-position">{player.playerYellowCardIdx}</div>}
                                     {tab.id === 5 && <div className="player-position">{player.playerRedCardIdx}</div>}
-                                    <div className="player-flag"><img src={team.flag} alt="" /></div>
+                                    <div className="player-flag"><img src={team.flagUrl} alt="" /></div>
                                     <div className="player-infor">
                                         <div className="player-infor__name">{player.name}</div>
                                         <div className="player-infor__team">{team.name}</div>

@@ -12,10 +12,11 @@ const teamController = {
         }
     },
 
+
     addLeagueToTeam: async (req, res) => {
         try {
             const teamId = req.params.teamId
-            const { 
+            const {
                 season,
                 leagueId,
                 played,
@@ -45,8 +46,8 @@ const teamController = {
             } = req.body
             const newTeam = await Team.findOne({ _id: teamId })
             if (!newTeam) res.status(400).json({ msg: "The team is not exist" })
-           
-            const seasonUpdate = newTeam.seasons.find((season) => { return season.season === req.body.season})
+
+            const seasonUpdate = newTeam.seasons.find((season) => { return season.season === req.body.season })
 
             seasonUpdate.leagues.push({
                 league: leagueId,
@@ -77,11 +78,11 @@ const teamController = {
             })
             const newLeague = await League.findOne({ _id: leagueId })
             const seasonUpdateLeauge = newLeague.seasons.find((season) => season.season === req.body.season)
-            
+
             seasonUpdateLeauge.teams.push(teamId)
             await newLeague.save();
             await newTeam.save()
-            
+
             res.status(200).json({ msg: "This team is update: ", data: { team: newTeam, league: newLeague } })
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -106,10 +107,22 @@ const teamController = {
     getTeamById: async (req, res) => {
         try {
             const teamId = req.params.id;
-            const newTeam = await Team.findOne({ teamId });
+            const newTeam = await Team.findOne({ _id: teamId })
+                .populate({ path: "seasons.leagues.players" })
+                .populate({ path: "seasons.leagues.league", model: "League" , 
+                    populate: {path: "seasons.country", model: "Country"}    
+            })
+                .populate({
+                    path: "seasons.leagues.matches", model: "Match",
+                    populate: { path: "awayTeam.team homeTeam.team", model: "Team" },
+
+                })
+
             if (!newTeam) res.status(400).json({ msg: 'the teamId is wrong' })
-            res.status(200).json({ msg: "The team is hear", data: { team: newTeam } })
-        } catch {
+            else {
+                res.status(200).json({ msg: "The team is here", data: { team: newTeam } })
+            }
+        } catch (error) {
             res.status(500).json({ msg: error.message });
 
         }
