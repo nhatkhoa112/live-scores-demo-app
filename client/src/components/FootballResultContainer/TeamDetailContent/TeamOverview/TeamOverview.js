@@ -43,7 +43,6 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive, leagueId, l
     return league.league._id === leagueId
   })
 
-  console.log(leagueId)
 
   const matches = leagueOfTeamNewestSeason && leagueOfTeamNewestSeason.matches
 
@@ -69,10 +68,12 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive, leagueId, l
     })
   }
 
-  let homeTeam = matches && matchesSortedByDay(matches)[0] && matchesSortedByDay(matches)[0].homeTeam.team
+  let homeTeam = matches && matchesSortedByDay(matches)[0] && matchesSortedByDay(matches)[0].homeTeam.team 
   let awayTeam = matches && matchesSortedByDay(matches)[0] && matchesSortedByDay(matches)[0].awayTeam.team
 
-  console.log({msg: "hello", a:  matches})
+
+
+
 
   if (!awayTeam)
     awayTeam = {
@@ -80,6 +81,7 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive, leagueId, l
       name: "Manchester United",
       _id: "6387249b29932092ea03437f"
     }
+
 
 
 
@@ -91,8 +93,8 @@ const TeamOverview = ({ team, setIsTabActive, setIsMatchesTabActive, leagueId, l
       <div className="team-overview__next">
         <div className="team-overview__next-inner">
           <div className="next__home">
-            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-flag"><img src={homeTeam && homeTeam.flagUrl} alt="" /></Link>
-            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-name">{homeTeam && homeTeam.name}</Link>
+            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-flag"><img src={homeTeam ? homeTeam.flagUrl : team.flagUrl} alt="" /></Link>
+            <Link to={`/football/team/${leagueId}/${homeTeam && homeTeam._id}`} className="next__home-name">{homeTeam && homeTeam.name || team.name}</Link>
           </div>
           <div className="next__infor">
             <div className="next__infor-time">

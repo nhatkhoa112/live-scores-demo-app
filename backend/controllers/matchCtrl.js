@@ -6,7 +6,7 @@ const League = require('../models/league.model')
 const matchController = {
     getAllMatches: async (req, res) => {
         try {
-            const matches = await Match.find().populate({ path: "homeTeam.team", model: "Team" }).populate({ path: "awayTeam.team", model: "Team" })
+            const matches = await Match.find().populate({ path: "homeTeam.team", model: "Team" }).populate({ path: "awayTeam.team", model: "Team" }).limit(20)
             res.json({ msg: 'All matches are here:', matches });
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -15,6 +15,7 @@ const matchController = {
 
     getMatches: async (req, res) => {
         try {
+            const limit = req.query
             const matches = await Match.find()
                 .populate({ path: "homeTeam.team", model: "Team" })
                 .populate({ path: "awayTeam.team", model: "Team" })
@@ -24,7 +25,7 @@ const matchController = {
                         model: 'Country',
                     }
                 })
-                .sort({ "createdAt": -1 }).limit(20)
+                .sort({ "createdAt": -1 }).limit(limit)
             res.json({ msg: 'All matches are here:', matches });
         } catch (error) {
             res.status(500).json({ msg: error.message });
@@ -33,8 +34,18 @@ const matchController = {
 
     getMatchesByDay: async (req, res) => {
         try {
-            const matches = await Match.find()
             let day = req.query.day
+            const matches = await Match.find().populate({ path: "homeTeam.team", model: "Team" })
+            .populate({ path: "awayTeam.team", model: "Team" })
+            .populate({
+                path: "league", model: "League", populate: {
+                    path: 'seasons.country',
+                    model: 'Country',
+                }
+            })
+
+            console.log(day, matches)
+
             let matchesByDay = matches.filter((match) => match.day.includes(day))
             res.status(200).json({msg:  `All matches in ${day}: `, matches: matchesByDay  })
         } catch (error) {

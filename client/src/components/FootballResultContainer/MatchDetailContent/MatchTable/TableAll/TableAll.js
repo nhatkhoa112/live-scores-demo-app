@@ -3,9 +3,7 @@ import './tableAll.css'
 import { Link } from 'react-router-dom'
 
 const TableAll = ({ teams, match, propsTeam, mini, leagueId, league }) => {
-    console.log(teams?.sort((a, b) => {
-        return b.seasons.reverse()[0].leagues[0].goalsDiff - a.seasons.reverse()[0].leagues[0].goalsDiff
-    }).sort((a, b) => b.seasons.reverse()[0].leagues[0].points - a.seasons.reverse()[0].leagues[0].points))
+   
     return (
         <div className="table-all__container">
             <table width="100%" className="table-all__inner">

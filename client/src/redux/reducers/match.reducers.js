@@ -16,6 +16,7 @@ const matchReducer = (state = initialState, action) => {
         case types.CREATE_MATCH_REQUEST:
         case types.GET_MATCH_BY_ID_REQUEST:
         case fTypes.ADD_MATCH_TO_FAVORITE_REQUEST:
+        case types.GET_MATCHES_BY_DAY_REQUEST:
         case fTypes.DELETE_MATCH_REQUEST:
             return { ...state, loading: true }
 
@@ -24,6 +25,7 @@ const matchReducer = (state = initialState, action) => {
         case types.CREATE_MATCH_FAILURE:
         case types.GET_MATCH_BY_ID_FAILURE:
         case fTypes.DELETE_MATCH_FAILURE:
+        case types.GET_MATCHES_BY_DAY_FAILURE:
         case fTypes.ADD_MATCH_TO_FAVORITE_FAILURE:
             return { ...state, loading: false }
 
@@ -37,6 +39,10 @@ const matchReducer = (state = initialState, action) => {
             return { ...state, matches: payload.matches, loading: false }
         case fTypes.DELETE_MATCH_REQUEST:
             return { ...state, matches: payload.matches, loading: false }
+        case types.GET_MATCHES_BY_DAY_SUCCESS:
+            console.log("payload", payload )
+            return { ...state, matches: payload.matches, loading: false }
+
         default:
             return state;
 

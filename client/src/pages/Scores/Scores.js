@@ -25,11 +25,6 @@ const Scores = () => {
   const [limit, setLimit] = useState(20);
   const dispatch = useDispatch()
 
-
-  useEffect(() => {
-    dispatch(matchActions.getMatches(limit))
-  }, [limit, dispatch])
-
   return (
     <div className="scores-page">
       <div className="sportlist">

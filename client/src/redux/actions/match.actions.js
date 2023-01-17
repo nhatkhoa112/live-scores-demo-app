@@ -15,7 +15,7 @@ const getAllMatches = () => async (dispatch) => {
 const getMatches = (limit) => async (dispatch) => {
     dispatch({ type: types.GET_MATCHES_REQUEST, payload: null })
     try {
-        const { data } = await api.get(`match/limit?limit=${limit}`)
+        const { data } = await api.get(`match/limit?limit=${limit || 20}`)
         dispatch({ type: types.GET_MATCHES_SUCCESS, payload: data })
     } catch (error) {
         dispatch({ type: types.GET_MATCHES_FAILURE, payload: null })
@@ -35,9 +35,23 @@ const getMatchById = (matchId) => async (dispatch) => {
 
 }
 
+const getMatchesByDay = (day) => async (dispatch) => {
+    dispatch({ type: types.GET_MATCHES_BY_DAY_REQUEST, payload: null })
+    try {
+        const { data } = await api.get(`match/day?day=${day}`)
+        dispatch({ type: types.GET_MATCHES_BY_DAY_SUCCESS, payload: data })
+
+    } catch (error) {
+        dispatch({ type: types.GET_MATCHES_BY_DAY_FAILURE, payload: null })
+        console.log(error)
+    }
+}
+
+
 
 export const matchActions = {
     getAllMatches,
     getMatchById,
-    getMatches
+    getMatches,
+    getMatchesByDay
 }

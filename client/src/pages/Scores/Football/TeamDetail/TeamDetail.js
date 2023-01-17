@@ -1,4 +1,4 @@
-git aimport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './teamDetail.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { teamActions, leagueActions } from '../../../../redux/actions';

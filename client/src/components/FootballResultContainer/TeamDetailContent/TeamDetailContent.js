@@ -24,8 +24,7 @@ const TeamDetailContent = ({team, leagueId, league}) => {
     const [isMatchesTabActive, setIsMatchesTabActive] = useState(1)
     const [isTabActive, setIsTabActive] = useState(1)
     
-
-
+    
     return (
         <div className="content-center team-detail-content">
             <div className="team-header">

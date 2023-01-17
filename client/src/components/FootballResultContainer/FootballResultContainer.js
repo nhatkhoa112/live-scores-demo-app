@@ -15,8 +15,8 @@ const FootballResultContainer = ({ leagueId, countryId }) => {
     useEffect(() => {
         countryId && dispatch(countryActions.getCountryById(countryId))
         leagueId && dispatch(leagueActions.getLeagueById(leagueId))
-
     }, [dispatch, countryId, leagueId])
+
 
 
 

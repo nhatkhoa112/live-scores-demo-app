@@ -15,7 +15,6 @@ const MatchResult = ({ match, country, league }) => {
 
     const countryLeague = league && league.seasons &&  league.seasons.reverse()[0].country
     
-
     const [isFavoriteChoose, setIsFavoriteChoose] = useState(false)
     return (
         <div className="match-row" key={match.matchId}>
