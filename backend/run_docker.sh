@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-IMAGE_NAME=live-scores-api
-CONTAINER_NAME=live-scores-api-container
+IMAGE_NAME=live-scores-api-backend
+CONTAINER_NAME=live-scores-api-container-backend
 
 
 sudo docker build --network=host --rm=true --force-rm=true -t ${IMAGE_NAME} .
